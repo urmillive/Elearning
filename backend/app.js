@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 
-const dbConnect = require("../db/connectDB");
+const dbConnect = require("./db/connectDB");
 
 //routes
 const userRoutes = require("./routes/user");
