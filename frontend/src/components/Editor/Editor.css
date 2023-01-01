@@ -1,0 +1,12 @@
+.editor{
+    height: auto;
+    background-color: lightblue;
+}
+.ace_editor{
+    height: auto;
+    width: 100%!important;
+}
+
+.outputArea{
+    height: auto;
+}

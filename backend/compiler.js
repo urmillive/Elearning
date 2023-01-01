@@ -1,99 +1,60 @@
-// const request = require('request');
-
-// compiler_api_endpoint = "";
-// const languages = [ 'Python', 'Node JS', 'Php', 'Java', 'C', 'Cpp', 'Cpp14', 'Csharp' ];
-
-// const EditorAPI = (callback) =>
-// {
-//     request("https://ide.geeksforgeeks.org", { json: true }, (err, res, body) =>
-//     {
-//         if (err)
-//         {
-//             return callback(err);
-//         }
-//         return callback(body);
-//     })
-// }
-
-
-// module.exports.callAPI = EditorAPI;
-
-// GPT converted code 
-
-// const https = require('https');
-
-// const gfgCompilerApiEndpoint = 'https://ide.geeksforgeeks.org/main.php';
-
-// const languages = [ 'C', 'Cpp', 'Cpp14', 'Java', 'Python', 'Python3', 'Scala', 'Php', 'Perl', 'Csharp' ];
-
-// async function gfgCompile(lang, code, input = null)
-// {
-//     const data = {
-//         lang,
-//         code,
-//         input
-//     };
-
-//     const options = {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-//     };
-
-//     const response = await https.request(gfgCompilerApiEndpoint, options, res =>
-//     {
-//         let data = '';
-//         res.on('data', chunk =>
-//         {
-//             data += chunk;
-//         });
-//         res.on('end', () =>
-//         {
-//             return JSON.parse(data);
-//         });
-//     });
-
-//     // response.write(data);
-//     console.log(data.json)
-//     response.end();
-// }
-
-// if (require.main === module)
-// {
-//     const lang = 'Python3';
-//     const code = `
-//     a = input()
-//     print(a)
-//     `;
-//     const input = 'hello ji';
-//     gfgCompile(lang, code, input).then(result =>
-//     {
-//         console.log(result);
-//     });
-// }    
-
-
 
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const { response } = require('express');
+const API_KEY = '7084eecd5bmsh74a242975252cc5p134c73jsne8432e550977';
 
-axios.get('https://ide.geeksforgeeks.org/main.php')
-    .then(response =>
-    {
-        console.log(response.data);
-    })
-    .catch(error =>
-    {
-        console.log(error);
-    });
-
-app.post("/editor", (req, res) =>
+const getAPI = () =>
 {
-    res.send("hello coder");
-    res.send(response.data);
+    const options = {
+        method: 'POST',
+        url: 'https://judge0-ce.p.rapidapi.com/submissions',
+        params: { base64_encoded: 'true', fields: '*' },
+        headers: {
+            'content-type': 'application/json',
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': '7084eecd5bmsh74a242975252cc5p134c73jsne8432e550977',
+            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+        },
+        data: '{"language_id":52,"source_code":"hello"}'
+    };
+
+    axios.request(options).then((response) =>
+    {
+        console.info(response.data);
+    }).catch(function (error)
+    {
+        console.error("->", error);
+    });
+}
+// <ge></ge>tAPI();
+
+
+app.get("/editor", (req, res) =>
+{
+    const option = {
+        method: 'GET',
+        url: 'https://judge0-ce.p.rapidapi.com/languages/',
+        headers: {
+            'X-RapidAPI-Key': API_KEY,
+            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+        }
+    };
+
+    axios.request(option).then((response) =>
+    {
+        console.log("Language showing....")
+        console.log(response.data);
+
+    }).catch((err) =>
+    {
+        console.log(err)
+    });
+    res.send(lang);
 })
 
 app.listen(8000, () =>
 {
-    console.log("running express")
+    console.log("running express...");
 })
