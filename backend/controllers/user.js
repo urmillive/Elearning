@@ -3,12 +3,10 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-exports.postRegisterUser = (req, res, next) =>
-{
+exports.postRegisterUser = (req, res, next) => {
   bcrypt
     .hash(req.body.password, 15)
-    .then((hashedPassword) =>
-    {
+    .then((hashedPassword) => {
       const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -19,23 +17,20 @@ exports.postRegisterUser = (req, res, next) =>
 
       user
         .save()
-        .then((result) =>
-        {
+        .then((result) => {
           res.status(201).send({
             message: "Registered Successfully",
             result,
           });
         })
-        .catch((err) =>
-        {
+        .catch((err) => {
           res.status(500).send({
             message: "Error while creating user",
             err,
           });
         });
     })
-    .catch((err) =>
-    {
+    .catch((err) => {
       res.status(500).send({
         message: "Something went wrong!",
         err,
@@ -43,24 +38,20 @@ exports.postRegisterUser = (req, res, next) =>
     });
 };
 
-exports.postLoginUser = (req, res, next) =>
-{
+exports.postLoginUser = (req, res, next) => {
   // check if email exists
   User.findOne({ email: req.body.email })
 
     // if email exists
-    .then((user) =>
-    {
+    .then((user) => {
       // compare the password entered and the hashed password found
       bcrypt
         .compare(req.body.password, user.password)
 
         // if the passwords match
-        .then((passwordCheck) =>
-        {
+        .then((passwordCheck) => {
           // check if password matches
-          if (!passwordCheck)
-          {
+          if (!passwordCheck) {
             return res.status(400).send({
               message: "Passwords does not match",
               error,
@@ -85,8 +76,7 @@ exports.postLoginUser = (req, res, next) =>
           });
         })
         // catch error if password does not match
-        .catch((error) =>
-        {
+        .catch((error) => {
           res.status(400).send({
             message: "Passwords does not match",
             error,
@@ -94,8 +84,7 @@ exports.postLoginUser = (req, res, next) =>
         });
     })
     // catch error if email does not exist
-    .catch((err) =>
-    {
+    .catch((err) => {
       res.status(404).send({
         message: "Email not found",
         err,

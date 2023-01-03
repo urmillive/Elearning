@@ -1,5 +1,5 @@
 {
-  "name": "flopcoders",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,8 +14,10 @@
     "react-ace": "^10.1.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.5",
+    "react-monaco-editor": "^0.51.0",
+    "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -43,8 +45,6 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4"
   }
 }

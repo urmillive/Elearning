@@ -1,12 +1,28 @@
 
 const express = require('express');
 const app = express();
+const cors = require("cors");
 const axios = require('axios');
-const { response } = require('express');
-const API_KEY = '7084eecd5bmsh74a242975252cc5p134c73jsne8432e550977';
+const { Buffer } = require('buffer');
+const config = require('./config.json');
 
-const getAPI = () =>
+app.use(cors());
+app.use(express.json());
+
+// console.log("DEBUG💕");
+app.post("/editor/submit", (req, res) =>
 {
+    // process of code
+
+    // const data = 'print("hello world"';
+    const data = req.body.code;
+    const encodedData = Buffer.from(data).toString('base64');
+
+    const dataJson = {
+        language_id: 71,
+        source_code: encodedData,
+        stdin: 'STRING'
+    };
     const options = {
         method: 'POST',
         url: 'https://judge0-ce.p.rapidapi.com/submissions',
@@ -14,45 +30,70 @@ const getAPI = () =>
         headers: {
             'content-type': 'application/json',
             'Content-Type': 'application/json',
-            'X-RapidAPI-Key': '7084eecd5bmsh74a242975252cc5p134c73jsne8432e550977',
+            'X-RapidAPI-Key': config.apiToken,
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
         },
-        data: '{"language_id":52,"source_code":"hello"}'
+        data: JSON.stringify(dataJson)
     };
 
-    axios.request(options).then((response) =>
+    axios.request(options).then(function (response)
     {
-        console.info(response.data);
+        const token = response.data.token;
+        const options2 = {
+            method: 'GET',
+            url: 'https://judge0-ce.p.rapidapi.com/submissions/' + token,
+            params: { base64_encoded: 'true', fields: '*' },
+            headers: {
+                'X-RapidAPI-Key': config.apiToken,
+                'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
+            }
+        };
+        axios.request(options2).then(function (response2)
+        {
+            if (response2.data.stderr == null)
+            {
+                const encodedData = response2.data.stdout;
+                const data = Buffer.from(encodedData, 'base64').toString();
+                res.send(data);
+            }
+            else
+            {
+                const encodedData = response2.data.stderr;
+                const data = Buffer.from(encodedData, 'base64').toString();
+                res.send(data);
+            }
+        }).catch((err) =>
+        {
+            res.send(err);
+        });
+
     }).catch(function (error)
     {
-        console.error("->", error);
+        console.error(error);
     });
-}
-// <ge></ge>tAPI();
+});
 
 
-app.get("/editor", (req, res) =>
+
+app.get("editor/languages", (req, res) =>
 {
-    const option = {
+    const languagesOption = {
         method: 'GET',
-        url: 'https://judge0-ce.p.rapidapi.com/languages/',
+        url: 'https://judge0-ce.p.rapidapi.com/languages',
         headers: {
-            'X-RapidAPI-Key': API_KEY,
+            'X-RapidAPI-Key': config.apiToken,
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
         }
     };
 
-    axios.request(option).then((response) =>
+    axios.request(languagesOption).then((response) =>
     {
-        console.log("Language showing....")
-        console.log(response.data);
-
-    }).catch((err) =>
+        console.log("🚀 ~ file: compiler.js:90 ~ response", response.data)
+    }).catch(function (error)
     {
-        console.log(err)
+        console.error(error);
     });
-    res.send(lang);
-})
+});
 
 app.listen(8000, () =>
 {
