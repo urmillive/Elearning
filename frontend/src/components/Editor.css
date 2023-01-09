@@ -3,13 +3,11 @@
     background-color: lightblue;
 }
 .ace_editor{
-    height: auto;
+    height: 650px !important;
     width: 100%!important;
 }
-
-.outputArea{
-    height: auto;
-}
-body{
-    /* background-color: #282c34 !important; */
+.outputBlock{
+    height: 100%;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

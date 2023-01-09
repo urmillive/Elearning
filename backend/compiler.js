@@ -1,4 +1,3 @@
-
 const express = require('express');
 const app = express();
 const cors = require("cors");
@@ -16,10 +15,11 @@ app.post("/editor/submit", (req, res) =>
 
     // const data = 'print("hello world"';
     const data = req.body.code;
+    const languageID = req.body.langId;
     const encodedData = Buffer.from(data).toString('base64');
 
     const dataJson = {
-        language_id: 71,
+        language_id: languageID,
         source_code: encodedData,
         stdin: 'STRING'
     };
@@ -73,9 +73,7 @@ app.post("/editor/submit", (req, res) =>
     });
 });
 
-
-
-app.get("editor/languages", (req, res) =>
+app.post("/editor/languages", (req, res) =>
 {
     const languagesOption = {
         method: 'GET',
@@ -86,9 +84,9 @@ app.get("editor/languages", (req, res) =>
         }
     };
 
-    axios.request(languagesOption).then((response) =>
+    axios.request(languagesOption).then((lang) =>
     {
-        console.log("🚀 ~ file: compiler.js:90 ~ response", response.data)
+        res.send(lang.data);
     }).catch(function (error)
     {
         console.error(error);
