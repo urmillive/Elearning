@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Dropdown, DropdownButton, Button } from "react-bootstrap";
+import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
 import axios from 'axios';
 import AceEditor from "react-ace";
 import 'ace-builds/src-noconflict/ace';
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/theme-monokai";
+import './CSS/Editor.css';
 // import "ace-builds/src-noconflict/mode-c_cpp";
 // import "ace-builds/src-noconflict/mode-javascript";
 // import "ace-builds/src-noconflict/mode-java";
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/theme-monokai";
-
-import { Spinner } from 'react-bootstrap';
-import { BounceLoader } from 'react-spinners';
-import './Editor.css';
+// import { Spinner } from 'react-bootstrap';
+// import { BounceLoader } from 'react-spinners';
 
 const EditorSection = () => 
 {
-    const [ theme, setTheme ] = useState("monokai");
     const [ code, setCode ] = useState("print('hello world!')");
     const [ output, setOutput ] = useState();
     const [ language, setLanguage ] = useState([]);
@@ -79,7 +77,7 @@ const EditorSection = () =>
                         <AceEditor
                             placeholder="//Write your code here"
                             mode="python"
-                            theme={ theme }
+                            theme="monokai"
                             name="editorX"
                             fontSize={ 20 }
                             showPrintMargin={ true }

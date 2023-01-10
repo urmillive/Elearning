@@ -33,10 +33,14 @@ const Login = () =>
               </Button>
             </Form>
           </Col>
+          <Col md={ 6 }>
+            
+          </Col>
         </Row>
       </Container>
     </>
   )
 }
 
-export default Login
+export default Login;
+

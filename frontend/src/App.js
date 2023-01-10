@@ -1,15 +1,29 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import EditorSection from "./Components/EditorSection";
+import Header from "./Components/Header";
+import Main from "./Components/Main";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import About from "./Components/About.js";
+import Contact from "./Components/Contact.js";
+import Footer from "./Components/Footer";
 import "./App.css";
 
-import { Routes, Route } from "react-router-dom";
 const App = () =>
 {
   return (
-    <div className="App"> 
+    <div className="App">
+      <Header />
       <Routes>
+        <Route path="/" element={ <Main /> } />
+        <Route path="/login" element={ <Login /> } />
+        <Route path="/register" element={ <Register /> } />
         <Route path="/editor" element={ <EditorSection /> } />
+        <Route path="/about" element={ <About /> } />
+        <Route path="/contact" element={ <Contact /> } />
       </Routes>
+      <Footer />
     </div>
   );
 };
