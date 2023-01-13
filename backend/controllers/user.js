@@ -1,11 +1,10 @@
-const User = require("../db/models/User");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 exports.postRegisterUser = (req, res, next) => {
   bcrypt
-    .hash(req.body.password, 15)
+    .hash(req.body.password, 12)
     .then((hashedPassword) => {
       const user = new User({
         firstName: req.body.firstName,
@@ -41,7 +40,6 @@ exports.postRegisterUser = (req, res, next) => {
 exports.postLoginUser = (req, res, next) => {
   // check if email exists
   User.findOne({ email: req.body.email })
-
     // if email exists
     .then((user) => {
       // compare the password entered and the hashed password found

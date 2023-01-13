@@ -6,11 +6,6 @@ import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 import './CSS/Editor.css';
-// import "ace-builds/src-noconflict/mode-c_cpp";
-// import "ace-builds/src-noconflict/mode-javascript";
-// import "ace-builds/src-noconflict/mode-java";
-// import { Spinner } from 'react-bootstrap';
-// import { BounceLoader } from 'react-spinners';
 
 const EditorSection = () => 
 {

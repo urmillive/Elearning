@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Nav, NavDropdown, Navbar, Button } from "react-bootstrap";
+import { Container, Nav, NavDropdown, Navbar, Button } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 import "./CSS/Header.css";
@@ -7,9 +7,12 @@ const Header = () =>
 {
 	return (
 		<>
-			<Navbar bg="" className="bg-slate-900	" variant='dark' expand="lg">
+			<Navbar bg="" className="bg-slate-900" variant='dark' expand="lg">
 				<Container fluid>
-					<Navbar.Brand href="/" className='text-4xl tracking-tight font-extrabold'>E-learning</Navbar.Brand>
+					<Navbar.Brand href="/">
+						<img src="/images/logo-white.png" alt="E-Learning logo" className="h-12" />
+					</Navbar.Brand>
+
 					<Navbar.Toggle aria-controls="navbarScroll" />
 					<Navbar.Collapse id="navbarScroll">
 						<Nav
@@ -17,11 +20,13 @@ const Header = () =>
 							style={ { maxHeight: '100px' } }
 							navbarScroll
 						>
-							<Link to="/" className="nav-link dropdon-item">Home</Link>
+							<Link to="/" className="nav-link dropdown-item">Home</Link>
+							<Link to="/learning" className="nav-link dropdown-item">Learning</Link>
+							<Link to="/course" className="nav-link dropdown-item">Courses</Link>
 							<Link to="/editor" className="nav-link dropdown-item">Editor</Link>
+							<Link to="/certificate" className="nav-link dropdown-item">Certificate</Link>
 							<Link to="/about" className="nav-link dropdown-item">About</Link>
 							<Link to="/contact" className="nav-link dropdown-item">Contact</Link>
-							<Link to="/certificate" className="nav-link dropdown-item">Certificate</Link>
 							<NavDropdown title="Link" id="navbarScrollingDropdown">
 								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
 								<NavDropdown.Item href="#action4">
@@ -33,7 +38,7 @@ const Header = () =>
 								</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
-						<Button variant="light" className="">Logout</Button>
+						<Link to="/login" className='text-decoration-none'><Button variant="" className="bg-white">Login</Button></Link>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 
-const dbConnect = require("./db/connectDB");
+const dbConnect = require("./connectDB");
 
 //routes
 const userRoutes = require("./routes/user");
@@ -15,6 +15,7 @@ dbConnect();
 
 app.use(cors());
 
+// body parser for exchange json between mongo and node
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
