@@ -1,0 +1,60 @@
+.code-block {
+  position: relative; /* Enable positioning of the copy button */
+  background-color: #f6f8fa; /* Light gray background color */
+  font-family: "Courier New", Courier, monospace; /* Fixed-width font for the code */
+  font-size: 18px; /* Small font size */
+  margin: 16px 0; /* Add some margin */
+  border-radius: 4px; /* Rounded edges */
+}
+
+.code-block-header {
+  position: absolute; /* Position the copy button */
+  top: 0; /* Stick it to the top */
+  right: 0; /* Stick it to the right */
+  padding: 4px 8px; /* Small padding */
+  transition: visibility 0.2s ease-in-out;
+  visibility: hidden;
+}
+
+.code-block-content {
+  padding: 12px; /* Add some padding */
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.code-block-content code {
+  background-color: transparent; /* Remove default background color */
+  color: #333; /* Dark gray text color */
+  white-space: pre-wrap; /* Preserve whitespace */
+}
+
+.code-block:hover .code-block-header {
+  visibility: visible;
+}
+
+.copy-btn {
+  color: #fff; /* White */
+  padding: 0.2em 0.5em; /* Small padding */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded edges */
+  font-size: 14px; /* Small font size */
+  cursor: pointer; /* Cursor changes to pointer when hovered */
+  transition: background-color 0.2s ease-in-out; /* Smooth background color transition */
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn:hover {
+  background-color: #0069d9; /* Darker blue on hover */
+}
+
+.copy-btn svg {
+  margin-right: 6px;
+}
+
+.copy-btn.success {
+  background-color: #28a745; /* Green */
+}
+
+.copy-btn.error {
+  background-color: #dc3545; /* Red */
+}

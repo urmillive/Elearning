@@ -27,16 +27,6 @@ const Header = () =>
 							<Link to="/certificate" className="nav-link dropdown-item">Certificate</Link>
 							<Link to="/about" className="nav-link dropdown-item">About</Link>
 							<Link to="/contact" className="nav-link dropdown-item">Contact</Link>
-							<NavDropdown title="Link" id="navbarScrollingDropdown">
-								<NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-								<NavDropdown.Item href="#action4">
-									Another action
-								</NavDropdown.Item>
-								<NavDropdown.Divider />
-								<NavDropdown.Item href="#action5">
-									Something else here
-								</NavDropdown.Item>
-							</NavDropdown>
 						</Nav>
 						<Link to="/login" className='text-decoration-none'><Button variant="" className="bg-white">Login</Button></Link>
 					</Navbar.Collapse>

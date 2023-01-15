@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
-import { Container, Row, Col} from 'react-bootstrap';
-import CodeBlock from "./UI/CodeBlock"
+import { Container, Row, Col } from 'react-bootstrap';
 import Readmore from "./UI/Readmore";
 
 const Main = () =>
@@ -13,18 +12,33 @@ const Main = () =>
 				<Row>
 					<Col md={ 12 }>
 						<section className="bg-white dark:bg-gray-900">
-							<div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+							<div className="py-6 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
 								<h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Teach you in Easy way</h1>
 								<p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 decoration-slate-900	">We provide simple & smart contexts for your reading, so your learning experience will be smooth.</p>
 								<div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-									<Link to="/topics" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border bg-grey-500 border-gray-500 hover:bg-yellow-500 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
+									<Link to="/topics" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border bg-grey-500 border-gray-500 hover:bg-red-700 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
 										Learn Coding
 									</Link>
 									<Link to="/about" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 no-underline">
 										Learn more
 										<svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 									</Link>
-
+								</div>
+							</div>
+						</section>
+					</Col>
+				</Row>
+				<Row>
+					<Col md={ 12 }>
+						<section className="bg-white dark:bg-gray-900">
+							<div className="gap-16 items-center py-4 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
+								<div className="grid grid-cols-2 gap-4 mt-8">
+									<img className="w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" alt="office content 1" />
+									<img className="mt-4 w-full lg:mt-10 rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png" alt="office content 2" />
+								</div>
+								<div className=" text-gray-500 sm:text-lg dark:text-gray-400">
+									<h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Unlock the power of wisdom with E-learning.</h2>
+									<p className="mb-4">Our online platform offers a variety of courses and resources to help you learn coding in a fun and interactive way. Our tutorials and exercises are designed to cater to all levels of experience, from beginners to advanced programmers. Learn the latest technologies and programming languages such as Python, JavaScript, and more.</p>
 								</div>
 							</div>
 						</section>
@@ -36,106 +50,154 @@ const Main = () =>
 							<div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
 								<div className="max-w-screen-md mb-8 lg:mb-16">
 									<h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-										Designed for business teams like yours
+										Start Exploring our Educational Content 💻
 									</h2>
 									<p className="text-gray-500 sm:text-xl dark:text-gray-400">
-										Here at Flowbite we focus on markets where technology, innovation, and
-										capital can unlock long-term value and drive economic growth.
+										With our expert instructors and community support, you'll have everything you need to succeed in coding. Start your coding journey now!
 									</p>
 								</div>
-								<div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+								<Col md={ 12 }>
+									<Row>
+										<Col md={ 4 } className='my-5'>
+											<Readmore readmoreTitle='Certification' readmoreDesc='After learning you can go for certificate by just given 1 test which actually check your practical knowledge' readmorebuttonText='Get your Certificate'></Readmore>
+										</Col>
+										<Col md={ 4 } className='my-5'>
+											<Readmore readmoreTitle='Certification' readmoreDesc='After learning you can go for certificate by just given 1 test which actually check your practical knowledge' readmorebuttonText='Get your Certificate'></Readmore>
+										</Col>
+										<Col md={ 4 } className='my-5'>
+											<Readmore readmoreTitle='Paid Courses' readmoreDesc='Here we provide solo guided courses where you actually learn how to make projects and experiments with your knowledge.' readmorebuttonText='Get some Paid Experience'></Readmore>
+										</Col>
+									</Row>
+								</Col>
+							</div>
+						</section>
+					</Col>
+				</Row>
 
-									<div>
-										<div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-											<svg
-												className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													fillRule="evenodd"
-													d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z"
-													clipRule="evenodd"
-												/>
-											</svg>
+				<Row>
+					<Col md={ 12 }>
+						<section className="bg-white dark:bg-gray-900">
+							<div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+								<div className="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+									<h2 className="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Content like this	</h2>
+									<p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">We provide simple and easy Solutions like our UI</p>
+								</div>
+								<div className="grid gap-8 lg:grid-cols-2">
+									<article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+										<div className="flex justify-between items-center mb-5 text-gray-500">
+											<span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+												<svg className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
+												Tutorial
+											</span>
+											<span className="text-sm">10 days ago</span>
 										</div>
-										<h3 className="mb-2 text-xl font-bold dark:text-white">Marketing</h3>
-										<p className="text-gray-500 dark:text-gray-400">
-											Plan it, create it, launch it. Collaborate seamlessly with all the
-											organization and hit your marketing goals every month with our
-											marketing plan.
-										</p>
-									</div>
-
-									<div>
-										<div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-											<svg
-												className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-											</svg>
+										<h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">How to quickly deploy a static website</h2>
+										<p className="mb-5 font-light text-gray-500 dark:text-gray-400">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
+										<div className="flex justify-between items-center">
+											<div className="flex items-center space-x-4">
+												<img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
+												<span className="font-medium dark:text-white">
+													Urmil Rupareliya
+												</span>
+											</div>
+											<Link to="/learning" className="no-underline inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+												Read more
+												<svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+											</Link>
 										</div>
-										<h3 className="mb-2 text-xl font-bold dark:text-white">Legal</h3>
-										<p className="text-gray-500 dark:text-gray-400">
-											Protect your organization, devices and stay compliant with our
-											structured workflows and custom permissions made for you.
-										</p>
-									</div>
-
-									<div>
-										<div className="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-primary-100 lg:h-12 lg:w-12 dark:bg-primary-900">
-											<svg
-												className="w-5 h-5 text-primary-600 lg:w-6 lg:h-6 dark:text-primary-300"
-												fill="currentColor"
-												viewBox="0 0 20 20"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-												<path
-													fillRule="evenodd"
-													d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-													clipRule="evenodd"
-												/>
-											</svg>
+									</article>
+									<article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+										<div className="flex justify-between items-center mb-5 text-gray-500">
+											<span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+												<svg className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path><path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path></svg>
+												Article
+											</span>
+											<span className="text-sm">14 days ago</span>
 										</div>
-										<h3 className="mb-2 text-xl font-bold dark:text-white">
-											Business Automation
-										</h3>
-										<p className="text-gray-500 dark:text-gray-400">
-											Auto-assign tasks, send Slack messages, and much more. Now power up
-											with hundreds of new templates to help you get started.
-										</p>
-									</div>
-
+										<h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Our first project with React</h2>
+										<p className="mb-5 font-light text-gray-500 dark:text-gray-400">Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers influence both web designers and developers.</p>
+										<div className="flex justify-between items-center">
+											<div className="flex items-center space-x-4">
+												<img className="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png" alt="Bonnie Green avatar" />
+												<span className="font-medium dark:text-white">
+													Pritam Prakash
+												</span>
+											</div>
+											<Link to="/learning" className="no-underline inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+												Read more
+												<svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+											</Link>
+										</div>
+									</article>
 								</div>
 							</div>
 						</section>
 					</Col>
 				</Row>
 				<Row>
-					<Col md={ 4 } className='my-5'>
-						<Readmore></Readmore>
-					</Col>
-					<Col md={ 4 } className='my-5'>
-						<Readmore></Readmore>
-					</Col>
-					<Col md={ 4 } className='my-5'>
-						<Readmore></Readmore>
-					</Col>
-				</Row>
-				<Row>
-					<Col className="" md={ 12 }>
-						<CodeBlock code='#include <stdio.h>
-						int main() {
-						// printf() displays the string inside quotation
-						printf("Hello, World!");
-						return 0;
-						}'
-							language='javascript' />
+					<Col md={ 12 }>
+						<section className="bg-white dark:bg-gray-900">
+							<div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+								<h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Frequently asked questions</h2>
+								<div className="grid pt-8 text-left border-t border-gray-700 md:gap-16 dark:border-gray-700 md:grid-cols-2">
+									<div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												What types of courses do you offer?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">We offer a wide range of coding courses and tutorials, including web development, data science, machine learning, and more. We also have courses for different levels of experience, from complete beginners to advanced programmers.</p>
+										</div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												Do I need any prior coding experience to take your courses?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">Not necessarily. We have courses for all levels of experience, from complete beginners to advanced programmers. So, you can start with the basics and work your way up.</p>
+										</div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												Are your courses taught by industry experts?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">Yes, our courses are designed and taught by industry experts who have years of experience in their respective fields.</p>
+										</div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												Are your courses self-paced or do they have a set schedule?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">Our courses are self-paced, so you can learn at your own pace and on your own schedule.</p>
+											<p className="text-gray-500 dark:text-gray-400">Find out more information by <Link to="/about" className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline">reading about us</Link></p>
+										</div>
+									</div>
+									<div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												Do you offer any certifications for your courses?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">Yes, we offer certifications for many of our courses, which can be used to demonstrate your skills and knowledge to potential employers.</p>
+										</div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												Is there a community of learners I can interact with?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">Yes, we have a community of learners that you can interact with and get help from. You can also ask questions and share your experience with others</p>
+										</div>
+										<div className="mb-10">
+											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
+												<svg className="flex-shrink-0 mr-2 w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+												What is the cost of your courses?
+											</h3>
+											<p className="text-gray-500 dark:text-gray-400">The cost of our courses varies depending on the course. We have both free and paid courses available. You can check the cost of each course on the course page.</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</section>
 					</Col>
 				</Row>
 			</Container>

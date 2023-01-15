@@ -1,32 +1,22 @@
 const express = require("express");
+const path = require('path');
+const cors = require('cors');
+require('dotenv').config();
 const app = express();
-require("dotenv").config();
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const jwt = require("jsonwebtoken");
-const path = require("path");
-
-const dbConnect = require("./connectDB");
-
-//routes
-const userRoutes = require("./routes/user");
-
-dbConnect();
-
 app.use(cors());
 
-// body parser for exchange json between mongo and node
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
+const dbConnect = require('./connectDB');
+dbConnect();
+
+const authRouter = require("./routes/authRoute");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(userRoutes.routes);
+app.use(authRouter);
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running at ${process.env.PORT}`);
+app.listen(process.env.PORT, () =>
+{
+    console.log(`listening on port ${ process.env.PORT }`);
 });
