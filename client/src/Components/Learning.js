@@ -14,7 +14,7 @@ const Learning = () =>
 						printf("Hello, World!");
 						return 0;
 						}'
-                            language='javascript' />
+                            language='cpp' />
                     </Col>
                 </Row>
             </Container>

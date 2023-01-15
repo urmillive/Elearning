@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { setAuth } from "../Contexts/authContext";
 import axios from "axios";
+
+
 
 const Login = () =>
 {
@@ -16,12 +19,14 @@ const Login = () =>
     setUser({ ...user, [ name ]: value });
   }
 
+
   const submitLogin = () =>
   {
     axios.post('http://localhost:9999/login', user)
       .then((res) =>
       {
         console.log(res.data);
+        // setAuth();
       })
       .catch((err) =>
       {
@@ -48,7 +53,7 @@ const Login = () =>
               </FloatingLabel>
             </Col>
             <Col md={ 8 } className="d-grid gap-2">
-              <button variant="light" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" type="submit" block size="lg" onSubmit={ submitLogin }>
+              <button variant="light" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" type="submit" size="lg" onSubmit={ submitLogin }>
                 Login
               </button>
               <h6 className="text-right my-1">New User then go to <Link to="/register" className="fw-bold">Register!</Link></h6>

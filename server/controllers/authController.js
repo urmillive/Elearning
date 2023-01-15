@@ -7,83 +7,97 @@ exports.getUser = (req, res, next) =>
     return req.user;
 }
 
-exports.postRegisterUser = (req, res, next) =>  
+
+exports.postRegisterUser = (req, res, next) =>
 {
     const { firstName, lastName, email, mobile, password } = req.body;
-    bcrypt
-        .hash(password, 10)
-        .then((hashedPassword) =>
+    User.findOne({ email: email }).then((user) =>
+    {
+        if (user)
         {
-            const user = new User({
-                firstName,
-                lastName,
-                email,
-                mobile,
-                password: hashedPassword,
+            return res.status(404).send({
+                message: "User Already Exist"
             });
-
-            user
-                .save()
-                .then((result) =>
+        } else
+        {
+            bcrypt.hash(password, 10).then((hashedPassword) =>
+            {
+                const newUser = new User({
+                    firstName,
+                    lastName,
+                    email,
+                    mobile,
+                    password: hashedPassword,
+                });
+                newUser.save().then((savedUser) =>
                 {
                     const token = jwt.sign(
                         {
-                            userId: user._id,
-                            userEmail: user.email,
+                            userId: savedUser._id,
+                            userEmail: savedUser.email,
                         },
                         process.env.JWT_SECRET,
                         { expiresIn: "24h" }
                     );
-
                     res.status(201).send({
                         message: "Registered Successfully",
                         data: {
                             token,
-                            user,
+                            user: savedUser,
                         },
                     });
-                })
-                .catch((err) =>
+                }).catch((err) =>
                 {
                     res.status(500).send({
                         message: "Error while Creating user",
                         err,
                     });
                 });
-        })
-        .catch((err) =>
-        {
-            res.status(500).send({
-                message: "Something went wrong!",
-                err,
+            }).catch((err) =>
+            {
+                res.status(500).send({
+                    message: "Error while Hashing Password",
+                    err,
+                });
             });
+        }
+    }).catch((err) =>
+    {
+        res.status(500).send({
+            message: "Error while Finding user",
+            err,
         });
+    });
 };
+
 
 exports.postLoginUser = (req, res, next) =>
 {
-    const { email, passbuzz } = req.body;
+    const { email, password } = req.body;
     User.findOne({ email: email })
         .then((user) =>
         {
-            bcrypt
-                .compare(passbuzz, user.password)
+            if (!user)
+            {
+                return res.status(404).send({
+                    message: "Email not found"
+                });
+            }
+            bcrypt.compare(password, user.password)
                 .then((passwordCheck) =>
                 {
                     if (!passwordCheck)
                     {
                         return res.status(400).send({
-                            message: "Passwords does not match",
-                            error,
+                            message: "Passwords does not match"
                         });
                     }
-
                     const token = jwt.sign(
                         {
                             userId: user._id,
                             userEmail: user.email,
                         },
-                        "RANDOM-TOKEN",
+                        process.env.JWT_SECRET,
                         { expiresIn: "24h" }
                     );
 
@@ -96,16 +110,15 @@ exports.postLoginUser = (req, res, next) =>
                 .catch((error) =>
                 {
                     res.status(400).send({
-                        message: "Passwords does not match",
-                        error,
+                        message: "Error while comparing passwords"
                     });
                 });
         })
         .catch((err) =>
         {
-            res.status(404).send({
-                message: "Email not found",
-                err,
+            res.status(500).send({
+                message: "Error while finding user",
+                err
             });
         });
 };

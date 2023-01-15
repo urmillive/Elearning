@@ -38,6 +38,6 @@ const UserSchema = new mongoose.Schema({
             ref: "Enrollment"
         }
     ],
-});
+}, { collection: 'users' });
 
 module.exports = mongoose.model('User', UserSchema);

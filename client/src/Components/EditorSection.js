@@ -6,7 +6,7 @@ import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 import './CSS/Editor.css';
-
+ 
 const EditorSection = () => 
 {
     const [ code, setCode ] = useState("print('hello world!')");

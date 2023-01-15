@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
-import {AuthProvider} from './Contexts/authProvider';
+import { AuthProvider } from './Contexts/authContext';
 
 
 const root = createRoot(document.getElementById('root'));

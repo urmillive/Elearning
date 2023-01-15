@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/panda-syntax-dark.css';
-// import hljs from 'highlight.js/lib/highlight';
-// import python from 'highlight.js/lib/languages/javascript';
 import "../CSS/copyButton.css";
 
 function CodeBlock({ code = "print('hello world!')", language = "python" })
@@ -23,7 +21,7 @@ function CodeBlock({ code = "print('hello world!')", language = "python" })
 
     useEffect(() =>
     {
-        hljs.highlightBlock(codeRef.current);
+        hljs.highlightElement(codeRef.current);
     }, [ code ]);
 
     return (
