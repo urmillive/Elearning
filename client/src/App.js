@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route,Navigate} from "react-router-dom";
 import EditorSection from "./Components/EditorSection";
 import Header from "./Components/Header";
 import Main from "./Components/Main";

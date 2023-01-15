@@ -24,7 +24,6 @@ const RegisterPage = () =>
 		axios.post('http://localhost:9999/register', user)
 			.then((res) =>
 			{
-				console.log("==>")
 				console.log(res.data.data.token);
 			})
 			.catch((err) =>

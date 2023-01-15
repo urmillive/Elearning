@@ -18,7 +18,7 @@ const Login = () =>
 
   const submitLogin = () =>
   {
-    axios.post('http://localhost:8000/login', { user })
+    axios.post('http://localhost:9999/login', user)
       .then((res) =>
       {
         console.log(res.data);

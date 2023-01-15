@@ -2,6 +2,11 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+exports.getUser = (req, res, next) =>
+{
+    return req.user;
+}
+
 exports.postRegisterUser = (req, res, next) =>  
 {
     const { firstName, lastName, email, mobile, password } = req.body;
@@ -59,14 +64,12 @@ exports.postLoginUser = (req, res, next) =>
 {
     const { email, passbuzz } = req.body;
     User.findOne({ email: email })
-        // if email exists
         .then((user) =>
         {
             bcrypt
                 .compare(passbuzz, user.password)
                 .then((passwordCheck) =>
                 {
-                    // check if password matches
                     if (!passwordCheck)
                     {
                         return res.status(400).send({
@@ -75,7 +78,6 @@ exports.postLoginUser = (req, res, next) =>
                         });
                     }
 
-                    //   create JWT token
                     const token = jwt.sign(
                         {
                             userId: user._id,
@@ -85,14 +87,12 @@ exports.postLoginUser = (req, res, next) =>
                         { expiresIn: "24h" }
                     );
 
-                    //   return success response
                     res.status(200).send({
                         message: "Login Successful",
                         email: user.email,
                         token,
                     });
                 })
-                // catch error if password does not match
                 .catch((error) =>
                 {
                     res.status(400).send({
@@ -101,7 +101,6 @@ exports.postLoginUser = (req, res, next) =>
                     });
                 });
         })
-        // catch error if email does not exist
         .catch((err) =>
         {
             res.status(404).send({
