@@ -74,7 +74,8 @@ exports.postRegisterUser = (req, res, next) =>
 exports.postLoginUser = (req, res, next) =>
 {
     const { email, password } = req.body;
-    User.findOne({ email: email })
+    console.log(email, password);
+    User.findOne({ email })
         .then((user) =>
         {
             if (!user)
@@ -83,6 +84,7 @@ exports.postLoginUser = (req, res, next) =>
                     message: "Email not found"
                 });
             }
+
             bcrypt.compare(password, user.password)
                 .then((passwordCheck) =>
                 {

@@ -9,9 +9,9 @@ import About from "./Components/About.js";
 import Contact from "./Components/Contact.js";
 import Footer from "./Components/Footer";
 import CourseSection from "./Components/CourseSection";
-import Layout from "./Components/Layout";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./Components/Dashboard";
+import Dashboard from "./Components/Admin/Dashboard";
+import PrivateRoutes from "./Components/PrivateRoutes.js"
 
 const App = () =>
 {
@@ -19,16 +19,15 @@ const App = () =>
     <>
       <Header />
       <Routes>
-        <Route path="/" element={ <Layout /> } >
+        <Route path="/" exact element={ <Main /> } />
+        <Route path="/register" element={ <Register /> } />
+        <Route path="/login" exact element={ <Login /> } />
+        <Route path="/about" element={ <About /> } />
+        <Route path="/contact" element={ <Contact /> } />
 
-          <Route path="/" exact element={ <Main /> } />
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Register /> } />
-          <Route path="/about" element={ <About /> } />
-          <Route path="/contact" element={ <Contact /> } />
-          <Route path="/learning" element={ <Learning /> } />
-
+        <Route element={ <PrivateRoutes /> }>
           <Route path="/dashboard" element={ <Dashboard /> } />
+          <Route path="/learning" element={ <Learning /> } />
           <Route path="/editor" element={ <EditorSection /> } />
           <Route path="/course" element={ <CourseSection /> } />
         </Route>

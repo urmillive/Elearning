@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import AuthProvider from "../Contexts/authContext";
-
+import Cookies from 'js-cookie';
+import AuthContext from '../Contexts/authContext';
+import swal from 'sweetalert';
 const RegisterPage = () =>
 {
-	const { setAuth } = useContext(AuthProvider);
+	const { login } = useContext(AuthContext);
+	const history = useNavigate();
+
 	const [ user, setUser ] = useState({
 		firstName: "",
 		lastName: "",
@@ -27,15 +30,22 @@ const RegisterPage = () =>
 		axios.post('http://localhost:9999/register', user)
 			.then((res) =>
 			{
-				const { firstName, email, } = res.data.user;
+				console.log(res.data);
+				console.log(res.data.data.user.firstName);
 				const token = res.data.token;
-				alert(token);
-				setAuth({ firstName, email, token });
-				localStorage.setItem("token", token);
+				Cookies.set('token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
+				swal({
+					title: res.data.message,
+					text: `Welcome ${ res.data.data.user.firstName }`,
+					icon: "success",
+					button: "Explore"
+				});
+				login();
+				history("/learning");
 			})
 			.catch((err) =>
 			{
-				console.error("🚀 ~ file: EditorSection.js:35 ~ err", err);
+				console.log("🚀 ~ file: Register.js:~ err", err);
 			});
 	}
 	return (

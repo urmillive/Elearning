@@ -1,10 +1,13 @@
-import React from 'react'
-import { Container, Nav, NavDropdown, Navbar, Button } from "react-bootstrap";
+import React, { useContext } from 'react'
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import AuthContext from '../Contexts/authContext';
 
 import "./CSS/Header.css";
 const Header = () =>
 {
+	const { isAuth, logout } = useContext(AuthContext);
+
 	return (
 		<>
 			<Navbar bg="" className="bg-slate-900" variant='dark' expand="lg">
@@ -27,7 +30,12 @@ const Header = () =>
 							<Link to="/about" className="nav-link dropdown-item">About</Link>
 							<Link to="/contact" className="nav-link dropdown-item">Contact</Link>
 						</Nav>
-						<Link to="/login" className='text-decoration-none'><Button variant="" className="bg-white">Login</Button></Link>
+						{
+							isAuth ?
+								<Link to="/login" className=''><button variant="" className="bg-red-500 px-4 py-2 rounded mx-2 text-decoration-none text-white" onClick={ () => { logout() } }>Logout</button></Link>
+								:
+								<Link to="/login" className=''><button variant="" className="bg-green-500 px-4 py-2 rounded mx-2 text-decoration-none text-white">Login</button></Link>
+						}
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
