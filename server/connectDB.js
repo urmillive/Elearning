@@ -8,8 +8,8 @@ const dbConnect = () =>
 		useUnifiedTopology: true,
 		serverSelectionTimeoutMS: 10000
 	})
-		.then((db) => console.log("Database connected"))
-		.catch((err) => console.log("======>", err));
+		.then((db) => console.log("DATABASE CONNECTED 🤪"))
+		.catch((err) => console.log("😡======>", err));
 };
 
 module.exports = dbConnect;

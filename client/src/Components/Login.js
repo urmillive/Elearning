@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 
 const Login = () =>
 {
-  const { login } = useContext(AuthContext);
+  const { login, admin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ user, setUser ] = useState({
     email: "",
@@ -24,25 +24,48 @@ const Login = () =>
   const submitLogin = (e) =>
   {
     e.preventDefault();
-    axios.post('http://localhost:9999/login', user)
-      .then((res) =>
-      {
-        console.log(res.data)
-        const token = res.data.token;
-        Cookies.set('token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
-        swal({
-          title: res.data.message,
-          text: `Welcome ${ res.data.user.firstName }`,
-          icon: "success",
-          button: "Explore"
-        });
-        login();
-        navigate("/learning");
-      })
-      .catch((err) =>
-      {
-        console.log("🚀 ~ file: Login.js:~ err", err);
+    if (user.email == 'admin@gmail.com' && user.password == "admin")
+    {
+      Cookies.set('admin', user.password, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
+      swal({
+        title: "Admin Login Successful",
+        icon: "success",
+        button: "Explore"
       });
+      admin();
+      navigate("/admin/dashboard");
+    }
+    else
+    {
+      axios.post('http://localhost:9999/login', user)
+        .then((res) =>
+        {
+          if (res.data.status == true)
+          {
+            const token = res.data.token;
+            Cookies.set('token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
+            swal({
+              title: res.data.message,
+              text: `Welcome ${ res.data.user.firstName }`,
+              icon: "success",
+            });
+            login();
+            navigate("/learning");
+          } else
+          {
+            swal({
+              title: res.data.message,
+              icon: "warning",
+              button: "close"
+            });
+            navigate("/login");
+          }
+        })
+        .catch((res, err) =>
+        {
+          console.log("🚀 ~ file: Login.js:~ err", err.message);
+        });
+    }
   }
 
   return (

@@ -4,15 +4,17 @@ import Header from "./Components/Header";
 import Main from "./Components/Main";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
-import Learning from "./Components/Learning.js";
-import About from "./Components/About.js";
-import Contact from "./Components/Contact.js";
+import Learning from "./Components/Learning";
+import About from "./Components/About";
+import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import CourseSection from "./Components/CourseSection";
+import CourseDetails from "./Components/CourseDetails";
 import { Routes, Route } from "react-router-dom";
+import PrivateRoutes from "./Components/PrivateRoutes"
+// admin routes
 import Dashboard from "./Components/Admin/Dashboard";
-import PrivateRoutes from "./Components/PrivateRoutes.js"
-
+import AdminRoutes from "./Components/Admin/AdminRoutes";
 const App = () =>
 {
   return (
@@ -21,15 +23,17 @@ const App = () =>
       <Routes>
         <Route path="/" exact element={ <Main /> } />
         <Route path="/register" element={ <Register /> } />
-        <Route path="/login" exact element={ <Login /> } />
+        <Route path="/login" element={ <Login /> } />
         <Route path="/about" element={ <About /> } />
         <Route path="/contact" element={ <Contact /> } />
-
+        <Route path="/learning" element={ <Learning /> } />
+        <Route path="/course" element={ <CourseSection /> } />
+        <Route path="/courseDetails" element={ <CourseDetails /> } />
         <Route element={ <PrivateRoutes /> }>
-          <Route path="/dashboard" element={ <Dashboard /> } />
-          <Route path="/learning" element={ <Learning /> } />
           <Route path="/editor" element={ <EditorSection /> } />
-          <Route path="/course" element={ <CourseSection /> } />
+        </Route>
+        <Route path="/admin" element={ <AdminRoutes /> }>
+          <Route path="/admin/dashboard" element={ <Dashboard /> } />
         </Route>
       </Routes>
       <Footer />

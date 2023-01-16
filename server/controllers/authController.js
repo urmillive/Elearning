@@ -10,7 +10,7 @@ exports.postRegisterUser = (req, res, next) =>
         if (user)
         {
             return res.status(404).send({
-                message: "User Already Exist"
+                message: "User Already Exist",
             });
         } else
         {
@@ -71,7 +71,8 @@ exports.postLoginUser = (req, res, next) =>
         {
             if (!user)
             {
-                return res.status(404).send({
+                return res.send({
+                    status: false,
                     message: "Email not found"
                 });
             }
@@ -81,7 +82,8 @@ exports.postLoginUser = (req, res, next) =>
                 {
                     if (!passwordCheck)
                     {
-                        return res.status(400).send({
+                        return res.send({
+                            status: false,
                             message: "Passwords does not match"
                         });
                     }
@@ -94,7 +96,8 @@ exports.postLoginUser = (req, res, next) =>
                         { expiresIn: "24h" }
                     );
 
-                    res.status(200).send({
+                    res.send({
+                        status: true,
                         message: "Login Successful",
                         user: user,
                         token,
@@ -102,14 +105,16 @@ exports.postLoginUser = (req, res, next) =>
                 })
                 .catch((error) =>
                 {
-                    res.status(400).send({
+                    res.send({
+                        status: false,
                         message: "Error while comparing passwords"
                     });
                 });
         })
         .catch((err) =>
         {
-            res.status(500).send({
+            res.send({
+                status: false,
                 message: "Error while finding user",
                 err
             });

@@ -3,7 +3,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import AuthContext from '../Contexts/authContext';
 import Cookies from 'js-cookie';
 
-const PrivateRoutes = ({ children, ...rest }) =>
+const PrivateRoutes = () =>
 {
     const { isAuth, login } = useContext(AuthContext);
 
@@ -15,9 +15,6 @@ const PrivateRoutes = ({ children, ...rest }) =>
             login();
         }
     }, []);
-
-    return (
-        isAuth ? <Outlet /> : <Navigate to="/login" />
-    )
+    return (isAuth ? <Outlet /> : <Navigate to="/login" />);
 }
 export default PrivateRoutes;

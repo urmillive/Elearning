@@ -8,7 +8,6 @@ const config = require('./config.json');
 app.use(cors());
 app.use(express.json());
 
-// console.log("DEBUG💕");
 app.post("/editor/submit", (req, res) =>
 {
     // process of code

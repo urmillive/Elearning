@@ -6,7 +6,7 @@ import AuthContext from '../Contexts/authContext';
 import "./CSS/Header.css";
 const Header = () =>
 {
-	const { isAuth, logout } = useContext(AuthContext);
+	const { isAuth, isAdmin, logout } = useContext(AuthContext);
 
 	return (
 		<>
@@ -31,7 +31,7 @@ const Header = () =>
 							<Link to="/contact" className="nav-link dropdown-item">Contact</Link>
 						</Nav>
 						{
-							isAuth ?
+							isAuth || isAdmin ?
 								<Link to="/login" className=''><button variant="" className="bg-red-500 px-4 py-2 rounded mx-2 text-decoration-none text-white" onClick={ () => { logout() } }>Logout</button></Link>
 								:
 								<Link to="/login" className=''><button variant="" className="bg-green-500 px-4 py-2 rounded mx-2 text-decoration-none text-white">Login</button></Link>
