@@ -12,7 +12,7 @@ const Header = () =>
 		<>
 			<Navbar bg="" className="bg-slate-900" variant='dark' expand="lg">
 				<Container fluid>
-					<Navbar.Brand href="/">
+					<Navbar.Brand>
 						<img src="/images/logo-white.png" alt="E-Learning logo" className="h-12" />
 					</Navbar.Brand>
 

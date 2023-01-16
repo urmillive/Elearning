@@ -58,7 +58,7 @@ const Main = () =>
 								<Col md={ 12 }>
 									<Row>
 										<Col md={ 4 } className='my-5'>
-											<Readmore readmoreTitle='Certification' readmoreDesc='After learning you can go for certificate by just given 1 test which actually check your practical knowledge' readmorebuttonText='Get your Certificate'></Readmore>
+											<Readmore readmoreTitle='Free Blogs' readmoreDesc='If you have no money to spend on course and certification you can learn from reading our coding guides' readmorebuttonText='Explore Learning'></Readmore>
 										</Col>
 										<Col md={ 4 } className='my-5'>
 											<Readmore readmoreTitle='Certification' readmoreDesc='After learning you can go for certificate by just given 1 test which actually check your practical knowledge' readmorebuttonText='Get your Certificate'></Readmore>

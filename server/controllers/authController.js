@@ -2,12 +2,6 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-exports.getUser = (req, res, next) =>
-{
-    return req.user;
-}
-
-
 exports.postRegisterUser = (req, res, next) =>
 {
     const { firstName, lastName, email, mobile, password } = req.body;
@@ -41,10 +35,8 @@ exports.postRegisterUser = (req, res, next) =>
                     );
                     res.status(201).send({
                         message: "Registered Successfully",
-                        data: {
-                            token,
-                            user: savedUser,
-                        },
+                        token,
+                        user: savedUser,
                     });
                 }).catch((err) =>
                 {
@@ -74,7 +66,6 @@ exports.postRegisterUser = (req, res, next) =>
 exports.postLoginUser = (req, res, next) =>
 {
     const { email, password } = req.body;
-    console.log(email, password);
     User.findOne({ email })
         .then((user) =>
         {
@@ -105,7 +96,7 @@ exports.postLoginUser = (req, res, next) =>
 
                     res.status(200).send({
                         message: "Login Successful",
-                        email: user.email,
+                        user: user,
                         token,
                     });
                 })

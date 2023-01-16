@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 const RegisterPage = () =>
 {
 	const { login } = useContext(AuthContext);
-	const history = useNavigate();
+	const navigate = useNavigate();
 
 	const [ user, setUser ] = useState({
 		firstName: "",
@@ -30,18 +30,16 @@ const RegisterPage = () =>
 		axios.post('http://localhost:9999/register', user)
 			.then((res) =>
 			{
-				console.log(res.data);
-				console.log(res.data.data.user.firstName);
 				const token = res.data.token;
 				Cookies.set('token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
 				swal({
 					title: res.data.message,
-					text: `Welcome ${ res.data.data.user.firstName }`,
+					text: `Welcome ${ res.data.user.firstName }`,
 					icon: "success",
 					button: "Explore"
 				});
 				login();
-				history("/learning");
+				navigate("/learning");
 			})
 			.catch((err) =>
 			{
@@ -78,7 +76,7 @@ const RegisterPage = () =>
 						</FloatingLabel>
 					</Col>
 					<Col md={ 8 } className="d-grid gap-2">
-						<button type="submit" variant="" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" size="lg">
+						<button type="submit" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" size="lg">
 							Register
 						</button>
 						<h6 className="text-right my-1">Already User then go to <Link to="/login" className="fw-bold">Login!</Link></h6>
