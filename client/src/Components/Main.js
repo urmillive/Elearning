@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
-import Readmore from "./UI/Readmore";
 
 const Main = () =>
 {

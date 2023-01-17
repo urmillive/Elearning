@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react'
 import { Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import Cookies from 'js-cookie';
-import AuthContext from '../Contexts/authContext';
+import AuthContext from '../contexts/authContext';
 import swal from 'sweetalert';
+// import Cookies from 'js-cookie';
 
 const Login = () =>
 {
@@ -24,9 +24,8 @@ const Login = () =>
   const submitLogin = (e) =>
   {
     e.preventDefault();
-    if (user.email == 'admin@gmail.com' && user.password == "admin")
+    if (user.email === 'admin@gmail.com' && user.password === "admin")
     {
-      Cookies.set('admin', user.password, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
       swal({
         title: "Admin Login Successful",
         icon: "success",
@@ -38,12 +37,12 @@ const Login = () =>
     else
     {
       axios.post('http://localhost:9999/login', user)
-        .then((res) =>
+      .then((res) =>
+      {
+        if (res.data.status === true)
         {
-          if (res.data.status == true)
-          {
-            const token = res.data.token;
-            Cookies.set('token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
+          const token = res.data.token;
+          localStorage.setItem('token', token);
             swal({
               title: res.data.message,
               text: `Welcome ${ res.data.user.firstName }`,
@@ -61,7 +60,7 @@ const Login = () =>
             navigate("/login");
           }
         })
-        .catch((res, err) =>
+        .catch((err) =>
         {
           console.log("🚀 ~ file: Login.js:~ err", err.message);
         });

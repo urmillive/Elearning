@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import CodeBlock from "../Components/UI/CodeBlock";
+import CodeBlock from "../components/UI/CodeBlock";
 const Learning = () =>
 {
     return (

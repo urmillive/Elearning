@@ -5,7 +5,7 @@ import AceEditor from "react-ace";
 import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
-import './CSS/Editor.css';
+import './css/Editor.css';
  
 const EditorSection = () => 
 {

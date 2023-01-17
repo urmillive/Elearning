@@ -1,11 +1,11 @@
 
 import { createContext, useState } from 'react';
-import Cookies from "js-cookie";
 
 const AuthContext = createContext({
     isAuth: false,
     isAdmin: false,
     login: () => { },
+    admin: () => { },
     logout: () => { }
 });
 
@@ -16,9 +16,10 @@ export const AuthProvider = ({ children }) =>
     const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
 
-    const login = () =>
+    const login = (navigation, location) =>
     {
         setIsAuth(true);
+        navigation(location?.pathname)
     }
 
     const admin = () =>
@@ -30,8 +31,7 @@ export const AuthProvider = ({ children }) =>
     {
         setIsAuth(false);
         setIsAdmin(false);
-        Cookies.remove('token');
-        Cookies.remove('admin');
+        localStorage.removeItem('token');
     }
 
     return (

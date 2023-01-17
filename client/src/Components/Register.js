@@ -3,7 +3,7 @@ import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'js-cookie';
-import AuthContext from '../Contexts/authContext';
+import AuthContext from '../contexts/authContext';
 import swal from 'sweetalert';
 const RegisterPage = () =>
 {
@@ -31,7 +31,7 @@ const RegisterPage = () =>
 			.then((res) =>
 			{
 				const token = res.data.token;
-				Cookies.set('token', token, { expires: 7, path: '/', secure: true, sameSite: 'strict', httpOnly: true });
+				localStorage.setItem('token', token);
 				swal({
 					title: res.data.message,
 					text: `Welcome ${ res.data.user.firstName }`,
@@ -39,7 +39,7 @@ const RegisterPage = () =>
 					button: "Explore"
 				});
 				login();
-				navigate("/learning");
+				navigate("/courses");
 			})
 			.catch((err) =>
 			{

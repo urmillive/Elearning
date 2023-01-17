@@ -10,6 +10,7 @@ const dbConnect = require('./connectDB');
 dbConnect();
 
 const authRouter = require("./routes/authRoute");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
