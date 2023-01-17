@@ -1,5 +1,6 @@
 
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext({
     isAuth: false,
@@ -15,6 +16,18 @@ export const AuthProvider = ({ children }) =>
 {
     const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
+
+    useEffect(() =>
+    {
+        axios.post('http://localhost:9999/getUser').then(
+            res =>
+            {
+                setIsAuth(true);
+                setIsAdmin(res.data.user.isAdmin);
+            }
+        )
+    }, [ isAuth ]);
+
 
     const login = (navigation, location) =>
     {
@@ -39,4 +52,5 @@ export const AuthProvider = ({ children }) =>
             { children }
         </AuthContext.Provider>
     );
+
 }

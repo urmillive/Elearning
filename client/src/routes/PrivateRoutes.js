@@ -10,11 +10,10 @@ const PrivateRoutes = () =>
 
     useEffect(() =>
     {
-        const token = localStorage.getItem('token');
-        if (token)
-        {
-            login(navigation, location);
-        }
+        //send req to server each time from here and get data on context
+        // TODO:
+
+        login(navigation, location);
     }, [ login ]);
     return (isAuth ? <Outlet /> : <Navigate to="/login" />);
 }

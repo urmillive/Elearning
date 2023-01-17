@@ -24,47 +24,34 @@ const Login = () =>
   const submitLogin = (e) =>
   {
     e.preventDefault();
-    if (user.email === 'admin@gmail.com' && user.password === "admin")
-    {
-      swal({
-        title: "Admin Login Successful",
-        icon: "success",
-        button: "Explore"
-      });
-      admin();
-      navigate("/admin/dashboard");
-    }
-    else
-    {
-      axios.post('http://localhost:9999/login', user)
+    axios.post('http://localhost:9999/login', user)
       .then((res) =>
       {
         if (res.data.status === true)
         {
           const token = res.data.token;
           localStorage.setItem('token', token);
-            swal({
-              title: res.data.message,
-              text: `Welcome ${ res.data.user.firstName }`,
-              icon: "success",
-            });
-            login();
-            navigate("/learning");
-          } else
-          {
-            swal({
-              title: res.data.message,
-              icon: "warning",
-              button: "close"
-            });
-            navigate("/login");
-          }
-        })
-        .catch((err) =>
+          swal({
+            title: res.data.message,
+            text: `Welcome ${ res.data.user.firstName }`,
+            icon: "success",
+          });
+          login();
+          navigate("/learning");
+        } else
         {
-          console.log("🚀 ~ file: Login.js:~ err", err.message);
-        });
-    }
+          swal({
+            title: res.data.message,
+            icon: "warning",
+            button: "close"
+          });
+          navigate("/login");
+        }
+      })
+      .catch((err) =>
+      {
+        console.log("🚀 ~ file: Login.js:~ err", err.message);
+      });
   }
 
   return (

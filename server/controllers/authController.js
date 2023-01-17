@@ -2,6 +2,11 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
+exports.getUser = (req, res, next) =>
+{
+    res.send(res.user)
+}
+
 exports.postRegisterUser = (req, res, next) =>
 {
     const { firstName, lastName, email, mobile, password } = req.body;

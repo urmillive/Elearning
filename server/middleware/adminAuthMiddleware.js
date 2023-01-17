@@ -21,7 +21,7 @@ module.exports = (req, res, next) =>
         }
 
         // Check if the user is an admin
-        if (decoded.role !== "admin")
+        if (decoded.isAdmin !== true)
         {
             return res.status(401).json({ message: "Unauthorized access" });
         }
