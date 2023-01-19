@@ -1,35 +1,38 @@
 
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext({
-    isLoggedIn: false,
+    isAuth: false,
     isAdmin: false,
     user: {},
     userLogin: () => { },
     adminLogin: () => { },
-    logout: () => { }
+    logout: () => { },
+    setIsAuth: () => { },
 });
 
 export default AuthContext;
 
 export const AuthProvider = ({ children }) =>
 {
-    const [ user, setUser ] = useState({});
+    const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
-    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+    const [ user, setUser ] = useState({});
+    const location = useLocation();
+    const navigation = useNavigate()
 
     const userLogin = (token) =>
     {
         localStorage.setItem('token', token);
-        setIsLoggedIn(true);
+        setIsAuth(true);
     }
 
     const logout = () =>
     {
         setIsAdmin(false);
-        setIsLoggedIn(false);
+        setIsAuth(false);
         localStorage.removeItem('token');
         delete axios.defaults.headers.common[ 'Authorization' ];
     }
@@ -39,30 +42,44 @@ export const AuthProvider = ({ children }) =>
         const token = localStorage.getItem('token');
         if (!token)
         {
-            setIsLoggedIn(false);
+            setIsAuth(false);
             setUser({});
+        } else
+        {
+            axios
+                .get("http://localhost:9999/getUser", {
+                    headers: {
+                        Authorization: token,
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then((res) =>
+                {
+                    if (res.data.status === true)
+                    {
+                        setIsAuth(true);
+                        setUser(res.data.user);
+                        setIsAdmin(res.data.user.isAdmin);
+                        // console.log(location.pathname);
+                        let path = location.pathname
+                        if (location.pathname === "/login") path = "/"
+                        if (res.data.user.isAdmin && location.pathname === "/login") path = "/admin"
+
+                        navigation(path)
+                    } else
+                    {
+                        logout();
+                    }
+                }).catch((err) =>
+                {
+                    console.log(err);
+                });
+
         }
-        axios.get("http://localhost:9999/getUser", {
-            headers: { Authorization: token }
-        }).then((res) =>
-        {
-            if (res.data.status === true)
-            {
-                setIsLoggedIn(true);
-                setUser(res.data.user);
-                setIsAdmin(res.data.user.isAdmin);
-            } else
-            {
-                logout();
-            }
-        }).catch((err) =>
-        {
-            console.log(err);
-        });
-    }, [ isLoggedIn ]);
+    }, [ isAuth ]);
 
     return (
-        <AuthContext.Provider value={ { userLogin, isLoggedIn, isAdmin, user, logout } }>
+        <AuthContext.Provider value={ { isAuth, isAdmin, user, userLogin, setIsAuth, logout } }>
             { children }
         </AuthContext.Provider>
     );

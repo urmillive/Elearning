@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // pages
 import Header from "./pages/Header";
@@ -22,33 +22,37 @@ import Dashboard from "./components/Admin/Dashboard";
 // routes
 import PrivateRoutes from "./routes/PrivateRoutes"
 import AdminRoutes from "./routes/AdminRoutes";
-import GuestRoutes from "./routes/GuestRoutes";
+import AuthContext from "./contexts/authContext";
 
 const App = () =>
 {
+  const { isAuth } = useContext(AuthContext);
+  console.log(isAuth)
   return (
     <>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/admin" element={ <AdminRoutes /> }>
-            <Route path="/admin/dashboard" element={ <Dashboard /> } />
-          </Route>
-          <Route path="/" exact element={ <Main /> } />
-          <Route path="/login" element={ <Login /> } />
-          <Route path="/register" element={ <Register /> } />
-          <Route element={ <PrivateRoutes /> }>
-            <Route path="/about" element={ <About /> } />
-            <Route path="/contact" element={ <Contact /> } />
-            <Route path="/learning" element={ <Learning /> } />
-            <Route path="/courses" element={ <CourseSection /> } />
-            <Route path="/profile" element={ <Profile /> } />
-            <Route path="/editor" element={ <EditorSection /> } />
-            <Route path="/courseDetails" element={ <CourseDetails /> } />
-          </Route>
-        </Routes>
-        <Footer />
-      </Router>
+      <Header />
+      <Routes>
+        <Route path="/" exact element={ <Main /> } />
+        <Route path="/about" element={ <About /> } />
+        <Route path="/contact" element={ <Contact /> } />
+        <Route path="/register" element={ <Register /> } />
+        { !isAuth &&
+          <Route path="/login" render={ (arg) => { console.log(arg) } } element={ <Login /> } />
+          // :
+          // <Navigate to="/" />
+        }
+        <Route path="/" element={ <PrivateRoutes /> }>
+          <Route path="/profile" element={ <Profile /> } />
+          <Route path="/editor" element={ <EditorSection /> } />
+          <Route path="/courseDetails" element={ <CourseDetails /> } />
+          <Route path="/learning" element={ <Learning /> } />
+          <Route path="/courses" element={ <CourseSection /> } />
+        </Route>
+        <Route path="/admin" element={ <AdminRoutes /> }>
+          <Route path="/admin/dashboard" element={ <Dashboard /> } />
+        </Route>
+      </Routes>
+      <Footer />
     </>
   );
 };
