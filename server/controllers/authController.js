@@ -2,9 +2,22 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-exports.getUser = (req, res, next) =>
+exports.getUser = async (req, res) =>
 {
-    res.send(res.user)
+    const userId = req.user.userId; // get userId from req.user
+    try
+    {
+        const user = await User.findById(userId); // get user from database using userId
+        // res.json({ user });
+        res.send({
+            status: true,
+            message: "Valid User",
+            user: user,
+        });
+    } catch (error)
+    {
+        res.status(500).send({ error: error.message });
+    }
 }
 
 exports.postRegisterUser = (req, res, next) =>
@@ -38,7 +51,8 @@ exports.postRegisterUser = (req, res, next) =>
                         process.env.JWT_SECRET,
                         { expiresIn: "24h" }
                     );
-                    res.status(201).send({
+                    res.send({
+                        status: true,
                         message: "Registered Successfully",
                         token,
                         user: savedUser,

@@ -1,14 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import AuthContext from '../contexts/authContext';
 import swal from 'sweetalert';
-// import Cookies from 'js-cookie';
 
 const Login = () =>
 {
-  const { login, admin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ user, setUser ] = useState({
     email: "",
@@ -36,8 +33,7 @@ const Login = () =>
             text: `Welcome ${ res.data.user.firstName }`,
             icon: "success",
           });
-          login();
-          navigate("/learning");
+          navigate("/profile");
         } else
         {
           swal({

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import CodeBlock from "../components/UI/CodeBlock";
+import Blog from "../components/Blog";
+
 const Learning = () =>
 {
     return (
@@ -17,6 +19,7 @@ const Learning = () =>
                             language='cpp' />
                     </Col>
                 </Row>
+                <Blog></Blog>
             </Container>
         </>
     )

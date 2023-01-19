@@ -25,7 +25,7 @@ const Header = () =>
 						>
 							<Link to="/" className="nav-link dropdown-item">Home</Link>
 							<Link to="/learning" className="nav-link dropdown-item">Learning</Link>
-							<Link to="/course" className="nav-link dropdown-item">Courses</Link>
+							<Link to="/courses" className="nav-link dropdown-item">Courses</Link>
 							<Link to="/editor" className="nav-link dropdown-item">Editor</Link>
 							<Link to="/about" className="nav-link dropdown-item">About</Link>
 							<Link to="/contact" className="nav-link dropdown-item">Contact</Link>

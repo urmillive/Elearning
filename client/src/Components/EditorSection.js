@@ -6,7 +6,7 @@ import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 import './css/Editor.css';
- 
+
 const EditorSection = () => 
 {
     const [ code, setCode ] = useState("print('hello world!')");
@@ -29,7 +29,7 @@ const EditorSection = () =>
 
     const submitCode = () =>
     {
-        axios.post('http://localhost:8000/editor/submit', { code, langId })
+        axios.post('http://localhost:9999/editor/submit', { code, langId })
             .then((res) =>
             {
                 console.log(res.data);
@@ -52,7 +52,7 @@ const EditorSection = () =>
         {
             try
             {
-                const res = await axios.post('http://localhost:8000/editor/languages/');
+                const res = await axios.post('http://localhost:9999/editor/languages/');
                 setLanguage(res.data);
             } catch (error)
             {

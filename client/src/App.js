@@ -15,6 +15,7 @@ import Learning from "./components/Learning";
 import CourseSection from "./components/CourseSection";
 import CourseDetails from "./components/CourseDetails";
 import EditorSection from "./components/EditorSection";
+import Profile from "./components/Profile";
 // admin components
 import Dashboard from "./components/Admin/Dashboard";
 
@@ -35,13 +36,17 @@ const App = () =>
         <Route path="/contact" element={ <Contact /> } />
         <Route path="/learning" element={ <Learning /> } />
         <Route path="/courses" element={ <CourseSection /> } />
-        <Route path="/courseDetails" element={ <CourseDetails /> } />
+
         <Route element={ <PrivateRoutes /> }>
+          <Route path="/profile" element={ <Profile /> } />
           <Route path="/editor" element={ <EditorSection /> } />
+          <Route path="/courseDetails" element={ <CourseDetails /> } />
         </Route>
+
         <Route path="/admin" element={ <AdminRoutes /> }>
           <Route path="/admin/dashboard" element={ <Dashboard /> } />
         </Route>
+        
       </Routes>
       <Footer />
     </>

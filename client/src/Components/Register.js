@@ -1,13 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from 'js-cookie';
-import AuthContext from '../contexts/authContext';
 import swal from 'sweetalert';
 const RegisterPage = () =>
 {
-	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	const [ user, setUser ] = useState({
@@ -30,16 +27,26 @@ const RegisterPage = () =>
 		axios.post('http://localhost:9999/register', user)
 			.then((res) =>
 			{
-				const token = res.data.token;
-				localStorage.setItem('token', token);
-				swal({
-					title: res.data.message,
-					text: `Welcome ${ res.data.user.firstName }`,
-					icon: "success",
-					button: "Explore"
-				});
-				login();
-				navigate("/courses");
+				if (res.data.status === true)
+				{
+					const token = res.data.token;
+					localStorage.setItem('token', token);
+					swal({
+						title: res.data.message,
+						text: `Welcome ${ res.data.user.firstName }`,
+						icon: "success",
+						button: "Explore"
+					});
+					navigate("/courses");
+				} else
+				{
+					swal({
+						title: res.data.message,
+						icon: "warning",
+						button: "close"
+					});
+					navigate("/register");
+				}
 			})
 			.catch((err) =>
 			{
