@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import CodeBlock from "../components/CodeBlock";
-import Blog from "../components/Blog";
+import CodeBlock from "./CodeBlock";
+import Blog from "./Blog";
 
 const Learning = () =>
 {

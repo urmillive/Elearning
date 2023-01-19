@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }) =>
                         let path = location.pathname
                         if (location.pathname === "/login") path = "/"
                         if (res.data.user.isAdmin && location.pathname === "/login") path = "/admin"
-
                         navigation(path)
                     } else
                     {
