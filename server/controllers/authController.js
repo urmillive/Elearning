@@ -49,7 +49,7 @@ exports.postRegisterUser = (req, res, next) =>
                             userEmail: savedUser.email,
                         },
                         process.env.JWT_SECRET,
-                        { expiresIn: "24h" }
+                        { expiresIn: "1h" }
                     );
                     res.send({
                         status: true,
@@ -112,7 +112,7 @@ exports.postLoginUser = (req, res, next) =>
                             userEmail: user.email,
                         },
                         process.env.JWT_SECRET,
-                        { expiresIn: "24h" }
+                        { expiresIn: "1h" }
                     );
 
                     res.send({

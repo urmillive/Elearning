@@ -32,7 +32,7 @@ const Header = () =>
 						</Nav>
 						{
 							isAuth || isAdmin ?
-								<Link to="/login" className=''><button variant="" className="bg-red-500 px-4 py-2 rounded mx-2 text-decoration-none text-white" onClick={ () => { logout() } }>Logout</button></Link>
+								<button variant="" className="bg-red-500 px-4 py-2 rounded mx-2 text-decoration-none text-white" onClick={ () => { logout() } }>Logout</button>
 								:
 								<Link to="/login" className=''><button variant="" className="bg-green-500 px-4 py-2 rounded mx-2 text-decoration-none text-white">Login</button></Link>
 						}

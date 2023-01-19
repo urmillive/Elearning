@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import swal from 'sweetalert';
+import AuthContext from '../contexts/authContext';
 
 const Login = () =>
 {
+  const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ user, setUser ] = useState({
     email: "",
@@ -27,7 +29,7 @@ const Login = () =>
         if (res.data.status === true)
         {
           const token = res.data.token;
-          localStorage.setItem('token', token);
+          userLogin(token);
           swal({
             title: res.data.message,
             text: `Welcome ${ res.data.user.firstName }`,

@@ -2,9 +2,11 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+
 const AuthContext = createContext({
-    isAuth: false,
+    isLoggedIn: false,
     isAdmin: false,
+    user: {},
     userLogin: () => { },
     adminLogin: () => { },
     logout: () => { }
@@ -14,57 +16,53 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) =>
 {
-    const [ isAuth, setIsAuth ] = useState(false);
-    const [ isAdmin, setIsAdmin ] = useState(false);
     const [ user, setUser ] = useState({});
+    const [ isAdmin, setIsAdmin ] = useState(false);
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
+    const userLogin = (token) =>
+    {
+        localStorage.setItem('token', token);
+        setIsLoggedIn(true);
+    }
+
+    const logout = () =>
+    {
+        setIsAdmin(false);
+        setIsLoggedIn(false);
+        localStorage.removeItem('token');
+        delete axios.defaults.headers.common[ 'Authorization' ];
+    }
 
     useEffect(() =>
     {
-        const authorization = localStorage.getItem('token');
-        axios.post("http://localhost:9999/getUser", {}, {
-            headers: { 'Authorization': authorization }
+        const token = localStorage.getItem('token');
+        if (!token)
+        {
+            setIsLoggedIn(false);
+            setUser({});
+        }
+        axios.get("http://localhost:9999/getUser", {
+            headers: { Authorization: token }
         }).then((res) =>
         {
             if (res.data.status === true)
             {
-                setUser({...user, ...res.data.user});
+                setIsLoggedIn(true);
+                setUser(res.data.user);
                 setIsAdmin(res.data.user.isAdmin);
-                setIsAuth(true);
-                // console.log("================");
-                // console.log(isAdmin)
-                // console.log(isAuth);
-                // console.log(res.data.user)
             } else
             {
-                console.log("helo")
-                // <Navigate to="/login" />
+                logout();
             }
         }).catch((err) =>
         {
             console.log(err);
         });
-    }, []);
-
-
-    const userLogin = () =>
-    {
-        setIsAuth(true);
-    }
-
-    // const adminLogin = () =>
-    // {
-    //     setIsAdmin(true);
-    // }
-
-    const logout = () =>
-    {
-        setIsAuth(false);
-        setIsAdmin(false);
-        localStorage.removeItem('token');
-    }
+    }, [ isLoggedIn ]);
 
     return (
-        <AuthContext.Provider value={ { isAuth, isAdmin, user, logout } }>
+        <AuthContext.Provider value={ { userLogin, isLoggedIn, isAdmin, user, logout } }>
             { children }
         </AuthContext.Provider>
     );

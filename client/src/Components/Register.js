@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from 'sweetalert';
+import AuthContext from '../contexts/authContext';
+
 const RegisterPage = () =>
 {
 	const navigate = useNavigate();
-
+	const { userLogin } = useContext(AuthContext);
 	const [ user, setUser ] = useState({
 		firstName: "",
 		lastName: "",
@@ -30,7 +32,7 @@ const RegisterPage = () =>
 				if (res.data.status === true)
 				{
 					const token = res.data.token;
-					localStorage.setItem('token', token);
+					userLogin(token);
 					swal({
 						title: res.data.message,
 						text: `Welcome ${ res.data.user.firstName }`,

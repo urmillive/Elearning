@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/panda-syntax-dark.css';
-import "../css/copyButton.css";
+import "./css/copyButton.css";
 
 function CodeBlock({ code = "print('hello world!')", language = "python" })
 {
