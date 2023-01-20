@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) =>
     const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
     const [ user, setUser ] = useState({});
+
     const location = useLocation();
     const navigation = useNavigate()
 
@@ -60,11 +61,10 @@ export const AuthProvider = ({ children }) =>
                         setIsAuth(true);
                         setUser(res.data.user);
                         setIsAdmin(res.data.user.isAdmin);
-                        // console.log(location.pathname);
                         let path = location.pathname
-                        if (location.pathname === "/login") path = "/"
-                        if (res.data.user.isAdmin && location.pathname === "/login") path = "/admin"
-                        navigation(path)
+                        if (location.pathname === "/login") path = "/";
+                        if (res.data.user.isAdmin && location.pathname === "/login") path = "/admin";
+                        navigation(path);
                     } else
                     {
                         logout();
@@ -73,7 +73,6 @@ export const AuthProvider = ({ children }) =>
                 {
                     console.log(err);
                 });
-
         }
     }, [ isAuth ]);
 
@@ -82,5 +81,4 @@ export const AuthProvider = ({ children }) =>
             { children }
         </AuthContext.Provider>
     );
-
 }

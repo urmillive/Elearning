@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 // pages
 import Header from "./pages/Header";
@@ -21,6 +21,7 @@ import Dashboard from "./Admin/Dashboard";
 import AdminCourses from "./Admin/AdminCourses";
 import AdminHeader from "./Admin/AdminHeader";
 import AdminBlogs from "./Admin/AdminBlogs";
+import AdminFooter from "./Admin/AdminFooter";
 
 // routes
 import PrivateRoutes from "./routes/PrivateRoutes"
@@ -30,10 +31,9 @@ import AuthContext from "./contexts/authContext";
 const App = () =>
 {
   const { isAuth, isAdmin } = useContext(AuthContext);
-  console.log(isAdmin);
   return (
     <>
-      <Header />
+      { !isAdmin ? <Header /> : <AdminHeader /> }
       <Routes>
         <Route path="/" exact element={ <Main /> } />
         <Route path="/about" element={ <About /> } />
@@ -41,8 +41,6 @@ const App = () =>
         <Route path="/register" element={ <Register /> } />
         { !isAuth &&
           <Route path="/login" render={ (arg) => { console.log(arg) } } element={ <Login /> } />
-          // :
-          // <Navigate to="/" />
         }
         <Route path="/" element={ <PrivateRoutes /> }>
           <Route path="/profile" element={ <Profile /> } />
@@ -57,7 +55,7 @@ const App = () =>
           <Route path="/admin/blogs" element={ <AdminBlogs /> } />
         </Route>
       </Routes>
-      <Footer />
+      { !isAdmin ? <Footer /> : <AdminFooter /> }
     </>
   );
 };

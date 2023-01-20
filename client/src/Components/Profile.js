@@ -9,12 +9,12 @@ const Profile = () =>
     const { user } = useContext(AuthContext);
     return (
         <>
-            <section style={ { backgroundColor: "#eee" } }>
+            <section>
                 <div className="container py-5">
                     <div className="row">
-                        <div className="col-lg-9">
+                        <div className="col-lg-6">
                             <div className="card mb-4">
-                                <div className="card-body">
+                                <div className="card-body bg-slate-300">
                                     <div>
                                         <div className="row">
                                             <div className="col-sm-3">
@@ -46,11 +46,11 @@ const Profile = () =>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3">
+                        <div className="col-lg-4">
                             <div className="card mb-4">
-                                <div className="card-body text-center">
-                                    <h5 className="my-3"><span className='text-muted'>Purchased Courses : { user.cart }</span></h5>
-                                    <h5 className="my-3"><span className='text-muted'>Enrollments : { user.cart }</span></h5>
+                                <div className="card-body text-left bg-slate-900 rounded">
+                                    <h5 className="my-3"><span className='text-muted'>Purchased Courses : { 12 }</span></h5>
+                                    <h5 className="my-3"><span className='text-muted'>Enrollments : { 0 }</span></h5>
                                 </div>
                             </div>
                         </div>

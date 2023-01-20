@@ -17,7 +17,7 @@ const Main = () =>
 									<Link to="/learning" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border bg-grey-500 border-gray-500 hover:bg-red-700 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
 										Learn Coding
 									</Link>
-									<Link to="/course" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 no-underline">
+									<Link to="/courses" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 no-underline">
 										Learn more
 										<svg className="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
 									</Link>
@@ -111,7 +111,7 @@ const Main = () =>
 						<section className="bg-white dark:bg-gray-900">
 							<div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
 								<h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Frequently asked questions</h2>
-								<div className="grid pt-8 text-left border-t border-gray-700 md:gap-16 dark:border-gray-700 md:grid-cols-2">
+								<div className="grid pt-8 text-left border-t-2 border-slate-300 md:gap-16 dark:border-gray-700 md:grid-cols-2">
 									<div>
 										<div className="mb-10">
 											<h3 className="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">
