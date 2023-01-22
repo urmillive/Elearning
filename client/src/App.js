@@ -27,10 +27,11 @@ import AdminFooter from "./Admin/AdminFooter";
 import PrivateRoutes from "./routes/PrivateRoutes"
 import AdminRoutes from "./routes/AdminRoutes";
 import AuthContext from "./contexts/authContext";
+import Loader from "./pages/Loader";
 
 const App = () =>
 {
-  const { isAuth, isAdmin } = useContext(AuthContext);
+  const { isAuth, isAdmin, loading } = useContext(AuthContext);
   return (
     <>
       { !isAdmin ? <Header /> : <AdminHeader /> }

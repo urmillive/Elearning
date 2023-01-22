@@ -13,7 +13,7 @@ const RegisterPage = () =>
 		firstName: "",
 		lastName: "",
 		email: "",
-		mobile: "",
+		contactNumber: "",
 		password: ""
 	});
 
@@ -26,12 +26,13 @@ const RegisterPage = () =>
 	const submitRegister = (e) =>
 	{
 		e.preventDefault();
-		axios.post('http://localhost:9999/register', user)
+		axios.put('http://localhost:9999/signup', user)
 			.then((res) =>
 			{
-				if (res.data.status === true)
+				if (res.status === 200)
 				{
 					const token = res.data.token;
+					localStorage.setItem('userId', res.data.user._id);
 					userLogin(token);
 					swal({
 						title: res.data.message,
@@ -77,7 +78,7 @@ const RegisterPage = () =>
 						</FloatingLabel>
 
 						<FloatingLabel controlId="floatingMobile" label="Mobile" className="mb-3">
-							<Form.Control type="number" placeholder="Mobile" name="mobile" value={ user.mobile } onChange={ handleChange } required />
+							<Form.Control type="number" placeholder="Mobile" name="contactNumber" value={ user.contactNumber } onChange={ handleChange } required />
 						</FloatingLabel>
 
 						<FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">

@@ -5,13 +5,14 @@ const About = () =>
   return (
     <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
       <div className="flex flex-col lg:flex-row justify-between gap-8">
-        <div className="w-full lg:w-5/12 flex flex-col justify-center">
-          <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">About Us</h1>
-          <p className="font-normal text-base leading-6 text-gray-600 ">IOur platform is designed to be user-friendly and easy to navigate. We use a combination of React and other technologies such as React Router for client-side routing and Redux for state management to ensure that our platform is fast and responsive.</p>
-        </div>
         <div className="w-full lg:w-8/12 ">
           <img className="w-full h-full" src="https://i.ibb.co/FhgPJt8/Rectangle-18.png" alt="A group of People" />
         </div>
+        <div className="w-full lg:w-5/12 flex flex-col justify-center">
+          <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">About Us</h1>
+          <p className="font-medium text-base leading-6 text-gray-600 ">Our platform is designed to be user-friendly and easy to navigate. We use a combination of React and other technologies such as React Router for client-side routing and Redux for state management to ensure that our platform is fast and responsive.</p>
+        </div>
+
       </div>
 
       <div className="flex lg:flex-row flex-col justify-between gap-8 pt-12">

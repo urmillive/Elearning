@@ -6,7 +6,6 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 const AuthContext = createContext({
     isAuth: false,
     isAdmin: false,
-    user: {},
     userLogin: () => { },
     adminLogin: () => { },
     logout: () => { },
@@ -17,9 +16,12 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) =>
 {
+    const [ token, setToken ] = useState(null);
     const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
-    const [ user, setUser ] = useState({});
+    const [ profile, setProfile ] = useState(null);
+    const [ pathname, setPathname ] = useState("/");
+    const [ loading, setLoading ] = useState(false);
 
     const location = useLocation();
     const navigation = useNavigate()
@@ -27,57 +29,72 @@ export const AuthProvider = ({ children }) =>
     const userLogin = (token) =>
     {
         localStorage.setItem('token', token);
-        setIsAuth(true);
+        setToken(token);
     }
 
     const logout = () =>
     {
+        setToken(null);
         setIsAdmin(false);
         setIsAuth(false);
         localStorage.removeItem('token');
+        // localStorage.removeItem('userId');
         delete axios.defaults.headers.common[ 'Authorization' ];
     }
 
     useEffect(() =>
     {
-        const token = localStorage.getItem('token');
-        if (!token)
+        if (localStorage.getItem('token', null) !== null)
         {
-            setIsAuth(false);
-            setUser({});
-        } else
-        {
-            axios
-                .get("http://localhost:9999/getUser", {
-                    headers: {
-                        Authorization: token,
-                        "Content-Type": "application/json",
-                    },
-                })
-                .then((res) =>
-                {
-                    if (res.data.status === true)
-                    {
-                        setIsAuth(true);
-                        setUser(res.data.user);
-                        setIsAdmin(res.data.user.isAdmin);
-                        let path = location.pathname
-                        if (location.pathname === "/login") path = "/";
-                        if (res.data.user.isAdmin && location.pathname === "/login") path = "/admin";
-                        navigation(path);
-                    } else
-                    {
-                        logout();
-                    }
-                }).catch((err) =>
-                {
-                    console.log(err);
-                });
+            setLoading(true);
         }
-    }, [ isAuth ]);
+        setToken(localStorage.getItem('token', ""));
+    }, []);
+
+    useEffect(() =>
+    {
+        if (token !== null)
+        {
+            if (token === "")
+            {
+                setIsAuth(false);
+                setProfile(null);
+                setLoading(false);
+            } else
+            {
+                axios
+                    .get(`http://localhost:9999/profile/`, {
+                        headers: {
+                            Authorization: `Bearer ${ token }`
+                        }
+                    })
+                    .then((res) =>
+                    {
+                        if (res.status === 200)
+                        {
+                            setIsAuth(true);
+                            setProfile(res.data.profile);
+                            setIsAdmin(res.data.profile.user.isAdmin);
+                            let path = location.pathname
+                            if (location.pathname === "/login") path = pathname;
+                            if (res.data.profile.user.isAdmin && location.pathname === "/login" && pathname === "/") path = "/admin";
+                            navigation(path);
+                        } else
+                        {
+                            logout();
+                        }
+                        setLoading(false);
+                    }).catch((err) =>
+                    {
+                        console.log(err);
+                        setLoading(false);
+                    });
+            }
+        }
+    }, [ token ]);
 
     return (
-        <AuthContext.Provider value={ { isAuth, isAdmin, user, userLogin, setIsAuth, logout } }>
+        <AuthContext.Provider value={ { loading, setLoading, token, isAuth, isAdmin, profile, userLogin, setPathname, setIsAuth, logout } }>
             { children }
         </AuthContext.Provider>
     );

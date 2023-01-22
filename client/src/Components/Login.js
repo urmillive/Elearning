@@ -4,10 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import swal from 'sweetalert';
 import AuthContext from '../contexts/authContext';
+import Loader from "../pages/Loader";
 
 const Login = () =>
 {
-  const { userLogin} = useContext(AuthContext);
+  const { userLogin, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ user, setUser ] = useState({
     email: "",
@@ -26,16 +27,23 @@ const Login = () =>
     axios.post('http://localhost:9999/login', user)
       .then((res) =>
       {
-        if (res.data.status === true)
+        if (res.status === 200)
         {
           const token = res.data.token;
+          // localStorage.setItem('userId', res.data.user._id);
           userLogin(token);
           swal({
-            title: res.data.message,
-            text: `Welcome ${ res.data.user.firstName }`,
+            title: `Welcome ${ res.data.user.firstName }`,
+            text: res.data.message,
             icon: "success",
           });
-          navigate("/profile");
+          if (res.data.user.isAdmin)
+          {
+            navigate("/admin");
+          } else
+          {
+            navigate("/profile");
+          }
         } else
         {
           swal({
@@ -51,33 +59,37 @@ const Login = () =>
         console.log("🚀 ~ file: Login.js:~ err", err.message);
       });
   }
-
+  console.log(loading);
   return (
     <>
-      <Container>
-        <form method="POST" onSubmit={ submitLogin }>
-          <Row className="justify-content-md-center my-5">
-            <Col md={ 8 }>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="Email address"
-                className="mb-3"
-              >
-                <Form.Control type="email" placeholder="name@example.com" name="email" value={ user.email } onChange={ handleChange } required />
-              </FloatingLabel>
-              <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
-                <Form.Control type="password" placeholder="Password" name="password" value={ user.password } onChange={ handleChange } required />
-              </FloatingLabel>
-            </Col>
-            <Col md={ 8 } className="d-grid gap-2">
-              <button type="submit" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" size="lg">
-                Login
-              </button>
-              <h6 className="text-right my-1">New User then go to <Link to="/register" className="fw-bold">Register!</Link></h6>
-            </Col>
-          </Row>
-        </form>
-      </Container>
+      {
+        loading ?
+          <Loader /> :
+          <Container>
+            <form method="POST" onSubmit={ submitLogin }>
+              <Row className="justify-content-md-center my-5">
+                <Col md={ 8 }>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Email address"
+                    className="mb-3"
+                  >
+                    <Form.Control type="email" placeholder="name@example.com" name="email" value={ user.email } onChange={ handleChange } required />
+                  </FloatingLabel>
+                  <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+                    <Form.Control type="password" placeholder="Password" name="password" value={ user.password } onChange={ handleChange } required />
+                  </FloatingLabel>
+                </Col>
+                <Col md={ 8 } className="d-grid gap-2">
+                  <button type="submit" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" size="lg">
+                    Login
+                  </button>
+                  <h6 className="text-right my-1">New User then go to <Link to="/register" className="fw-bold">Register!</Link></h6>
+                </Col>
+              </Row>
+            </form>
+          </Container>
+      }
     </>
   )
 }

@@ -1,50 +1,130 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useRef, useMemo } from 'react';
+import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
+import JoditEditor from 'jodit-react';
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 const AdminBlogs = () =>
 {
-    const [ bloglist, setBloglist ] = useState();
+    const editor = useRef(null);
+    const [ content, setContent ] = useState({
+        title: "",
+        summery: "",
+        password: ""
+    });
 
-    useEffect(() =>
+    const handleChange = (event) =>
     {
-        // axios
-        //     .get('http://localhost:9999/blogs')
+        event.preventDefault();
+        const { name, value } = event.target;
+        setContent({ ...content, [ name ]: value });
+    }
+    const submitBlog = (e) =>
+    {
+        e.preventDefault();
+        // axios.post('http://localhost:9999/register', user)
         //     .then((res) =>
         //     {
-        //         setBloglist(res.data);
+        //         if (res.data.status === true)
+        //         {
+        //             const token = res.data.token;
+        //             userLogin(token);
+        //             swal({
+        //                 title: res.data.message,
+        //                 text: `Welcome ${ res.data.user.firstName }`,
+        //                 icon: "success",
+        //                 button: "Explore"
+        //             });
+        //             navigate("/courses");
+        //         } else
+        //         {
+        //             swal({
+        //                 title: res.data.message,
+        //                 icon: "warning",
+        //                 button: "close"
+        //             });
+        //             navigate("/register");
+        //         }
         //     })
         //     .catch((err) =>
         //     {
-        //         console.log('Error from Show BlogList');
+        //         console.log("🚀 ~ file: Register.js:~ err", err);
         //     });
-    }, []);
+    }
+
     return (
         <>
-            <div className='flex flex-auto'>
-                <div className="mx-3 my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-                    <div className="p-5">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <Link to="/blogDetails" className="no-underline inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg aria-hidden="true" className="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </Link>
-                    </div>
-                </div>
-                <div className="mx-3 my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-                    <div className="p-5">
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <Link to="/blogDetails" className="no-underline inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg aria-hidden="true" className="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </Link>
-                    </div>
-                </div>
-            </div>
+
+            <Container>
+                <form method="POST" onSubmit={ submitBlog }>
+                    <Row className="justify-content-md-center my-5">
+                        <Col md={ 8 }>
+                            <FloatingLabel controlId="floatingtitle" label="Blog Title" className="mb-3">
+                                <Form.Control type="text" placeholder="Blog Title" name="title" value={ content.title } onChange={ handleChange } required />
+                            </FloatingLabel>
+                            <JoditEditor
+                                ref={ editor }
+                                value={ content.summery }
+                                tabIndex={ 1 } // tabIndex of textarea
+                                onChange={ newContent => setContent(newContent) }
+                            />
+                        </Col>
+                        <Col md={ 8 } className="d-grid gap-2 my-2">
+                            <button type="submit" className="bg-dark text-white py-3 fw-bolder text-2xl rounded" size="lg">
+                                Create Blog
+                            </button>
+                        </Col>
+                    </Row>
+                </form>
+            </Container>
+            <Container className='my-5'>
+                <Row>
+                    <Col md={ 4 }>
+                        <div className='flex flex-auto'>
+                            <div className="mx-3 my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+                                <div className="p-5">
+                                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+                                    <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                </div>
+                                <div className="d-flex mx-3 mb-2 gap-2">
+                                    <button href="#" class="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline">Edit Blog</button>
+                                    <button href="#" class="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline">Delete Blog</button>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col md={ 4 }>
+                        <div className='flex flex-auto'>
+                            <div className="mx-3 my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+                                <div className="p-5">
+                                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+                                    <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                </div>
+                                <div className="d-flex mx-3 mb-2 gap-2">
+                                    <button href="#" class="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline">Edit Blog</button>
+                                    <button href="#" class="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline">Delete Blog</button>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col md={ 4 }>
+                        <div className='flex flex-auto'>
+                            <div className="mx-3 my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+                                <div className="p-5">
+                                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
+                                    <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                                </div>
+                                <div className="d-flex mx-3 mb-2 gap-2">
+                                    <button href="#" class="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline">Edit Blog</button>
+                                    <button href="#" class="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline">Delete Blog</button>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }

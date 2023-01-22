@@ -17,7 +17,6 @@ const AdminHeader = () =>
 						<NavLink className="nav-link" to="/admin">Home</NavLink>
 						<NavLink className="nav-link" to="/admin/blogs">Blogs</NavLink>
 						<NavLink className="nav-link" to="/admin/courses">Courses</NavLink>
-						<NavLink className="nav-link" to="/admin/pricing">Pricing</NavLink>
 					</Nav>
 					{
 						isAuth || isAdmin ?
