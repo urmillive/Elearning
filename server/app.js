@@ -1,25 +1,110 @@
 const express = require("express");
-const path = require('path');
-const cors = require('cors');
-require('dotenv').config();
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const multer = require("multer");
+const path = require("path");
+const { v4: uuidv4 } = require("uuid");
+require("dotenv").config();
+
+const User = require("./models/User");
+
+// Database
+const connectDB = require("./util/connectDB");
+
+//Routes
+const authRoutes = require("./routes/auth");
+const profileRoutes = require("./routes/profile");
+//blog Route
+const blogRoutes = require("./routes/admin/blog");
+//user handler route
+const userHandlerRoutes = require("./routes/admin/userHandler");
+//editor handler route
+const editorRoutes = require("./routes/editor");
+
 const app = express();
+connectDB();
+
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) =>
+  {
+    const extension = file.mimetype.split("/")[ 1 ];
+    if (extension === "json")
+    {
+      cb(null, "public/modules");
+    } else
+    {
+      cb(null, "public/images");
+    }
+  },
+  filename: (req, file, cb) =>
+  {
+    const extension = file.originalname.split(".")[ 1 ];
+    cb(null, uuidv4() + "." + extension);
+  },
+});
+
+const fileFilter = (req, file, cb) =>
+{
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  )
+  {
+    cb(null, true);
+  } else if (file.mimetype.split("/")[ 1 ] === "json")
+  {
+    cb(null, true);
+  } else
+  {
+    cb(new Error("Image uploaded is not of Valid types"), false);
+  }
+};
+
 app.use(cors());
-
-
-const dbConnect = require('./connectDB');
-dbConnect();
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("file")
+);
 app.use(express.static(path.join(__dirname, "public")));
 
-const authRouter = require("./routes/authRoute");
-const editorRouter = require("./routes/editorRoute");
+// app.use((req, res, next) => {
+//   User.findOne({ _id: "63c66b38ee98e25c8ebda065" })
+//     .then((user) => {
+//       if (!user) {
+//         const error = new Error("User not found!");
+//         throw error;
+//       }
+//       req.userId = user._id;
+//       next();
+//     })
+//     .catch((err) => console.log(err));
+// });
 
-app.use(authRouter);
-app.use(editorRouter);
+app.use(authRoutes);
+app.use("/profile", profileRoutes);
+
+//blog route
+app.use("/blog", blogRoutes);
+
+// FIXME:
+//userHandler router
+app.use("/user", userHandlerRoutes);
+
+//editor router
+app.use("/editor", editorRoutes)
+
+
+app.use((error, req, res, next) =>
+{
+  console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({ message, data });
+});
 
 app.listen(process.env.PORT, () =>
 {
-    console.log(`listening on port ${ process.env.PORT }`);
+  console.log(`Server is running at port ${ process.env.PORT }`);
 });

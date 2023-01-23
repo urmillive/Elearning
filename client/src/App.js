@@ -28,6 +28,7 @@ import PrivateRoutes from "./routes/PrivateRoutes"
 import AdminRoutes from "./routes/AdminRoutes";
 import AuthContext from "./contexts/authContext";
 import Loader from "./pages/Loader";
+import BlogList from "./components/Blog/BlogList";
 
 const App = () =>
 {
@@ -47,7 +48,7 @@ const App = () =>
           <Route path="/profile" element={ <Profile /> } />
           <Route path="/editor" element={ <EditorSection /> } />
           <Route path="/courseDetails" element={ <CourseDetails /> } />
-          <Route path="/learning" element={ <Learning /> } />
+          <Route path="/learning" element={ <BlogList /> } />
           <Route path="/courses" element={ <CourseSection /> } />
         </Route>
         <Route path="/admin" element={ <AdminRoutes /> }>

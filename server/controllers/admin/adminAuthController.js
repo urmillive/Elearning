@@ -1,5 +1,0 @@
-
-exports.adminLogin = (req, res) =>
-{
-    
-}
