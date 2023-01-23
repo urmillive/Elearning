@@ -2,14 +2,17 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-exports.getProfile = async (req, res, next) => {
+exports.getProfile = async (req, res, next) =>
+{
   const { userId } = req;
-  try {
+  try
+  {
     const profile = await Profile.findOne({ user: userId })
       .select("-password")
       .populate("user");
 
-    if (!profile) {
+    if (!profile)
+    {
       const error = new Error("Something Went Wrong!");
       error.statusCode = 404;
       return next(error);
@@ -17,33 +20,41 @@ exports.getProfile = async (req, res, next) => {
     res
       .status(200)
       .json({ message: "User profile fetched!", profile: profile });
-  } catch (error) {
-    if (!error.statusCode) {
+  } catch (error)
+  {
+    if (!error.statusCode)
+    {
       error.statusCode = 500;
     }
     next(error);
   }
 };
 
-exports.createProfile = async (req, res, next) => {
-  //   const { userId } = req.params;
+exports.createProfile = async (req, res, next) =>
+{
+    // const { userId } = req.params;
   const { location, about } = req.body;
   let imageUrl;
-  try {
+  try
+  {
     const profile = await Profile.findOne({ user: req.userId });
-    if (!profile) {
+    if (!profile)
+    {
       const error = new Error("Something went wrong!");
       error.statusCode = 400;
       return next(error);
     }
 
-    if (req.file) {
+    if (req.file)
+    {
       imageUrl = req.file.path.replace(/\\/g, "/");
-    } else {
+    } else
+    {
       imageUrl = profile.imageUrl;
     }
 
-    if (!imageUrl) {
+    if (!imageUrl)
+    {
       const error = new Error("Please provide an image");
       error.statusCode = 422;
       return next(error);
@@ -59,8 +70,10 @@ exports.createProfile = async (req, res, next) => {
       message: "Profile Updated Successfully",
       profile: createdProfile,
     });
-  } catch (error) {
-    if (!error.statusCode) {
+  } catch (error)
+  {
+    if (!error.statusCode)
+    {
       error.statusCode = 500;
     }
     next(error);

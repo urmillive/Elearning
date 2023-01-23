@@ -15,7 +15,7 @@ const Profile = () =>
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="card mb-4">
-                                    <div className="card-body bg-slate-300">
+                                    <div className="card-body bg-slate-900 text-white rounded">
                                         <div className="card-body text-center rounder">
                                             <img
                                                 src="images/avtar.png"
@@ -24,10 +24,10 @@ const Profile = () =>
                                             />
                                         </div>
                                         <hr />
-                                        <div>
+                                        <div className='text-center'>
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <p className="mb-0 text-slate-900">Full Name</p>
+                                                    <p className="mb-0 text-white">Full Name</p>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <p className="text-muted mb-0">{ `${ profile.user.firstName } ${ profile.user.lastName } ` }</p>
@@ -36,7 +36,7 @@ const Profile = () =>
                                             <hr />
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <p className="mb-0 text-slate-900">Email</p>
+                                                    <p className="mb-0 text-white">Email</p>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <p className="text-muted mb-0">{ profile.user.email }</p>
@@ -45,7 +45,7 @@ const Profile = () =>
                                             <hr />
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <p className="mb-0 text-slate-900">Phone</p>
+                                                    <p className="mb-0 text-white">Phone</p>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <p className="text-muted mb-0">{ profile.user.contactNumber }</p>
@@ -55,10 +55,26 @@ const Profile = () =>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-8">
                                 <div className="card mb-4">
-                                    <div className="card-body text-center bg-slate-300 rounded">
-                                        <h1>hello world!</h1>
+                                    <div className="card-body bg-slate-900 text-white text-center rounded">
+                                        <div className="row">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Total Purchased Courses</p>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{ profile.courses.items.length }</p>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div className="row my-1 rounded">
+                                            <div className="col-sm-3">
+                                                <p className="mb-0">Your Enrollments</p>
+                                            </div>
+                                            <div className="col-sm-9">
+                                                <p className="text-muted mb-0">{ profile.courses.items }</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

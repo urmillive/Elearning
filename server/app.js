@@ -84,12 +84,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(authRoutes);
 app.use("/profile", profileRoutes);
 
-//blog route
-app.use("/blog", blogRoutes);
-
-// FIXME:
 //userHandler router
 app.use("/user", userHandlerRoutes);
+
+//blog route
+app.use("/blog", blogRoutes);
 
 //editor router
 app.use("/editor", editorRoutes)

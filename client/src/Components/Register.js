@@ -32,7 +32,7 @@ const RegisterPage = () =>
 				if (res.status === 200)
 				{
 					const token = res.data.token;
-					localStorage.setItem('userId', res.data.user._id);
+					console.log(res.data.token);
 					userLogin(token);
 					swal({
 						title: res.data.message,
@@ -40,7 +40,7 @@ const RegisterPage = () =>
 						icon: "success",
 						button: "Explore"
 					});
-					navigate("/courses");
+					navigate("/profile");
 				} else
 				{
 					swal({

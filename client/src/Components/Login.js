@@ -30,7 +30,6 @@ const Login = () =>
         if (res.status === 200)
         {
           const token = res.data.token;
-          // localStorage.setItem('userId', res.data.user._id);
           userLogin(token);
           swal({
             title: `Welcome ${ res.data.user.firstName }`,
@@ -59,7 +58,6 @@ const Login = () =>
         console.log("🚀 ~ file: Login.js:~ err", err.message);
       });
   }
-  console.log(loading);
   return (
     <>
       {

@@ -22,7 +22,11 @@ const Dashboard = () =>
             })
             .then((res) =>
             {
-                console.log("=>", res.data.message);
+                swal({
+                    title: res.data.message,
+                    icon: "warning",
+                    button: "close"
+                });
                 getAllUsers();
             }).catch((err) =>
             {
@@ -40,7 +44,7 @@ const Dashboard = () =>
             })
             .then((res) =>
             {
-                console.log("=>", res.data);
+                console.log(res.data);
                 setUsers(res.data.users);
             }).catch((err) =>
             {
@@ -88,7 +92,7 @@ const Dashboard = () =>
                                                 { index }
                                             </td>
                                             <td className="px-6 py-4">
-                                                { user.firstName }
+                                                { `${ user.firstName } ${ user.lastName }` }
                                             </td>
                                             <td className="px-6 py-4">
                                                 { user.email }
@@ -97,7 +101,7 @@ const Dashboard = () =>
                                                 { user.contactNumber }
                                             </td>
                                             <td className="px-6 py-4">
-                                                { user.coursePurchases }
+                                                {}
                                             </td>
                                             <td className="px-6 py-4 text-right">
                                                 <button className="font-medium rounded bg-red-500 px-3 py-2 text-white no-underline hover:bg-red-800" onClick={ () => { deleteUser(user._id); } }>Delete</button>

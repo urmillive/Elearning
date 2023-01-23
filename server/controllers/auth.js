@@ -32,6 +32,14 @@ exports.signUp = async (req, res, next) =>
       contactNumber,
       password: hashedPassword,
     });
+    const token = jwt.sign(
+      {
+        _id: user._id.toString(),
+        email: user.email,
+      },
+      "jO3*iC8&zN4%eB7]rU5#",
+      { expiresIn: "1h" }
+    );
 
     const createdUser = await user.save();
     const createProfile = new Profile({
@@ -41,7 +49,7 @@ exports.signUp = async (req, res, next) =>
     const createdProfile = await createProfile.save();
     createdUser.profile = createdProfile._id;
     await createdUser.save();
-    res.status(200).json({ message: "Signup Successfully done", user: createdUser });
+    res.status(200).json({ message: "Signup Successfully done", user: createdUser, token: token });
   } catch (error)
   {
     error.statusCode = 500;
