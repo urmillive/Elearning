@@ -1,41 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import AuthContext from '../../contexts/authContext';
 const Blog = () =>
 {
 	const { id } = useParams();
-	console.log(id);
-
-	const oneBlog = (blogId) =>
+	const { token } = useContext(AuthContext);
+	const [ blog, setBlog ] = useState({});
+	useEffect(() =>
 	{
-		const token = localStorage.getItem('token');
 		axios
-			.get(`http://localhost:9999/blog/${ blogId }`, {
+			.get(`http://localhost:9999/blog/${ id }`, {
 				headers: {
 					Authorization: `Bearer ${ token }`
 				}
 			})
 			.then((res) =>
 			{
-				console.log(res.data);
+				setBlog(res.data.blog);
 			}).catch((err) =>
 			{
 				console.log(err.message);
 			})
-	}
-	// useEffect(() =>
-	// {
-	//   oneBlog(id);
-	// }, [ id ]);
+	}, []);
 
 	return (
 		<>
 			<Container>
 				<Row>
 					<Col md={ 12 }>
-						<h1>Blog</h1>
+						<div dangerouslySetInnerHTML={ { __html: blog.content } }></div>
 					</Col>
 				</Row>
 			</Container>

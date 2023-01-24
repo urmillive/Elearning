@@ -14,17 +14,13 @@ const profileSchema = new Schema({
     type: String,
     required: false,
   },
-  courses: {
-    items: [
-      {
-        course: {
-          type: Schema.Types.ObjectId,
-          ref: "Course",
-          required: true,
-        },
-      },
-    ],
-  },
+  courses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+      required: true,
+    }
+  ],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

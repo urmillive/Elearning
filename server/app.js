@@ -13,7 +13,7 @@ const connectDB = require("./util/connectDB");
 
 //Routes
 const authRoutes = require("./routes/auth");
-const profileRoutes = require("./routes/profile");
+const profileRoutes = require("./routes/user");
 //blog Route
 const blogRoutes = require("./routes/admin/blog");
 //user handler route
@@ -66,20 +66,8 @@ app.use(bodyParser.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("file")
 );
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
-// app.use((req, res, next) => {
-//   User.findOne({ _id: "63c66b38ee98e25c8ebda065" })
-//     .then((user) => {
-//       if (!user) {
-//         const error = new Error("User not found!");
-//         throw error;
-//       }
-//       req.userId = user._id;
-//       next();
-//     })
-//     .catch((err) => console.log(err));
-// });
 
 app.use(authRoutes);
 app.use("/profile", profileRoutes);

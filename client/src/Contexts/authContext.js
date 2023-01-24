@@ -2,6 +2,7 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import api from "../api/api";
 
 const AuthContext = createContext({
     isAuth: false,
@@ -62,22 +63,17 @@ export const AuthProvider = ({ children }) =>
                 setLoading(false);
             } else
             {
-                axios
-                    .get(`http://localhost:9999/profile/`, {
-                        headers: {
-                            Authorization: `Bearer ${ token }`
-                        }
-                    })
+                api.get(`/profile/`)
                     .then((res) =>
                     {
                         if (res.status === 200)
                         {
                             setIsAuth(true);
-                            setProfile(res.data.profile);
-                            setIsAdmin(res.data.profile.user.isAdmin);
+                            setProfile(res.data.user);
+                            setIsAdmin(res.data.user.isAdmin);
                             let path = location.pathname
                             if (location.pathname === "/login") path = pathname;
-                            if (res.data.profile.user.isAdmin && location.pathname === "/login" && pathname === "/") path = "/admin";
+                            if (res.data.user.isAdmin && location.pathname === "/login" && pathname === "/") path = "/admin";
                             navigation(path);
                         } else
                         {
@@ -94,7 +90,7 @@ export const AuthProvider = ({ children }) =>
     }, [ token ]);
 
     return (
-        <AuthContext.Provider value={ { loading, setLoading, token, isAuth, isAdmin, profile, userLogin, setPathname, setIsAuth, logout } }>
+        <AuthContext.Provider value={ { loading, setLoading, token, isAuth, isAdmin, profile, setProfile, userLogin, setPathname, setIsAuth, logout } }>
             { children }
         </AuthContext.Provider>
     );

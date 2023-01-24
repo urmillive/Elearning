@@ -8,33 +8,41 @@ const UserSchema = new Schema({
   },
   firstName: {
     type: String,
-    required: [true, "Please Provide First Name"],
+    required: [ true, "Please Provide First Name" ],
     unique: false,
   },
   lastName: {
     type: String,
-    required: [true, "Please Provide Last Name"],
+    required: [ true, "Please Provide Last Name" ],
     unique: false,
   },
   email: {
     type: String,
-    required: [true, "Please Provide an Email"],
-    unique: [true, "Email Exist"],
+    required: [ true, "Please Provide an Email" ],
+    unique: [ true, "Email Exist" ],
   },
   contactNumber: {
     type: Number,
-    required: [true, "Please Provide a number"],
-    unique: [true, "Number Exist"],
+    required: [ true, "Please Provide a number" ],
+    unique: [ true, "Number Exist" ],
   },
   password: {
     type: String,
-    required: [true, "Please Provide a Password"],
+    required: [ true, "Please Provide a Password" ],
     unique: false,
   },
   profile: {
-    type: Schema.Types.ObjectId,
-    ref: "Profile",
+    type: String,
+    required: false,
+    default: ""
   },
+  courses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+      required: true,
+    }
+  ],
 });
 
 module.exports =

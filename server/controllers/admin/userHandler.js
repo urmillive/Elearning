@@ -13,7 +13,7 @@ exports.getAllUsers = async (req, res, next) =>
 
   try
   {
-    const users = await User.find().populate("profile");
+    const users = await User.find();
     if (!users)
     {
       const error = new Error("User Not Found!");
@@ -37,17 +37,14 @@ exports.getUserById = async (req, res, next) =>
   let userData;
   try
   {
-    const profile = await Profile.findOne({ user: userId }).populate(
-      "user",
-      "-password"
-    );
-    if (!profile)
+    const user = await User.findOne({ _id: userId });
+    if (!user)
     {
       const error = new Error("User does not found!");
       error.statusCode = 404;
       return next(error);
     }
-    res.status(200).json({ message: "User Found!", user: profile });
+    res.status(200).json({ message: "User Found!", user: user });
   } catch (error)
   {
     if (!error.statusCode)

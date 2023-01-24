@@ -15,6 +15,7 @@ const AdminHeader = () =>
 					<Navbar.Brand>Admin</Navbar.Brand>
 					<Nav className="me-auto">
 						<NavLink className="nav-link" to="/admin">Home</NavLink>
+						<NavLink className="nav-link" to="/admin/users">Users</NavLink>
 						<NavLink className="nav-link" to="/admin/blogs">Blogs</NavLink>
 						<NavLink className="nav-link" to="/admin/courses">Courses</NavLink>
 					</Nav>

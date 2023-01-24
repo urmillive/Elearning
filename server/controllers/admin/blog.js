@@ -8,7 +8,9 @@ exports.getBlogs = async (req, res, next) =>
 {
   try
   {
-    const blogs = await Blog.find();
+    const blogs = await Blog.find({
+      "creator.userId": req.userId,
+    });
     if (!blogs)
     {
       const error = new Error("Blogs not found!");

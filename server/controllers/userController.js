@@ -2,16 +2,14 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
-exports.getProfile = async (req, res, next) =>
+exports.getUser = async (req, res, next) =>
 {
   const { userId } = req;
   try
   {
-    const profile = await Profile.findOne({ user: userId })
-      .select("-password")
-      .populate("user");
-
-    if (!profile)
+    const user = await User.findOne({ _id: userId });
+    if (!user
+    )
     {
       const error = new Error("Something Went Wrong!");
       error.statusCode = 404;
@@ -19,7 +17,7 @@ exports.getProfile = async (req, res, next) =>
     }
     res
       .status(200)
-      .json({ message: "User profile fetched!", profile: profile });
+      .json({ message: "User profile fetched!", user: user });
   } catch (error)
   {
     if (!error.statusCode)
@@ -30,27 +28,18 @@ exports.getProfile = async (req, res, next) =>
   }
 };
 
-exports.createProfile = async (req, res, next) =>
+exports.saveUser = async (req, res, next) =>
 {
-    // const { userId } = req.params;
-  const { location, about } = req.body;
   let imageUrl;
   try
   {
-    const profile = await Profile.findOne({ user: req.userId });
-    if (!profile)
-    {
-      const error = new Error("Something went wrong!");
-      error.statusCode = 400;
-      return next(error);
-    }
-
+    const user = await User.findOne({ _id: req.userId });
     if (req.file)
     {
       imageUrl = req.file.path.replace(/\\/g, "/");
     } else
     {
-      imageUrl = profile.imageUrl;
+      imageUrl = user.profile;
     }
 
     if (!imageUrl)
@@ -60,15 +49,12 @@ exports.createProfile = async (req, res, next) =>
       return next(error);
     }
 
-    profile.imageUrl = imageUrl;
-    profile.location = location;
-    profile.about = about;
-    profile.user = req.userId;
+    user.profile = imageUrl;
 
-    const createdProfile = await profile.save();
+    await user.save();
     res.status(200).json({
       message: "Profile Updated Successfully",
-      profile: createdProfile,
+      user: user,
     });
   } catch (error)
   {
