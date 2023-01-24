@@ -8,7 +8,6 @@ import swal from 'sweetalert';
 const Dashboard = () =>
 {
     const navigate = useNavigate();
-    const { userLogin } = useContext(AuthContext);
     const [ users, setUsers ] = useState([]);
 
     const deleteUser = (userId) =>
@@ -24,8 +23,7 @@ const Dashboard = () =>
             {
                 swal({
                     title: res.data.message,
-                    icon: "warning",
-                    button: "close"
+                    icon: "success",
                 });
                 getAllUsers();
             }).catch((err) =>
@@ -44,7 +42,7 @@ const Dashboard = () =>
             })
             .then((res) =>
             {
-                console.log(res.data);
+                // console.log(res.data);
                 setUsers(res.data.users);
             }).catch((err) =>
             {
@@ -101,7 +99,7 @@ const Dashboard = () =>
                                                 { user.contactNumber }
                                             </td>
                                             <td className="px-6 py-4">
-                                                {}
+                                                { }
                                             </td>
                                             <td className="px-6 py-4 text-right">
                                                 <button className="font-medium rounded bg-red-500 px-3 py-2 text-white no-underline hover:bg-red-800" onClick={ () => { deleteUser(user._id); } }>Delete</button>

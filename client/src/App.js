@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // pages
 import Header from "./pages/Header";
@@ -12,10 +12,13 @@ import EditorSection from "./pages/EditorSection";
 import Main from "./pages/Main";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Learning from "./components/Blog/Learning";
 import CourseSection from "./components/Course/CourseSection";
 import CourseDetails from "./components/Course/CourseDetails";
 import Profile from "./components/Profile";
+import BlogList from "./components/Blog/BlogList";
+import Blog from "./components/Blog/Blog";
+
+
 // admin components
 import Dashboard from "./Admin/Dashboard";
 import AdminCourses from "./Admin/AdminCourses";
@@ -27,12 +30,10 @@ import AdminFooter from "./Admin/AdminFooter";
 import PrivateRoutes from "./routes/PrivateRoutes"
 import AdminRoutes from "./routes/AdminRoutes";
 import AuthContext from "./contexts/authContext";
-import Loader from "./pages/Loader";
-import BlogList from "./components/Blog/BlogList";
 
 const App = () =>
 {
-  const { isAuth, isAdmin, loading } = useContext(AuthContext);
+  const { isAuth, isAdmin } = useContext(AuthContext);
   return (
     <>
       { !isAdmin ? <Header /> : <AdminHeader /> }
@@ -48,7 +49,8 @@ const App = () =>
           <Route path="/profile" element={ <Profile /> } />
           <Route path="/editor" element={ <EditorSection /> } />
           <Route path="/courseDetails" element={ <CourseDetails /> } />
-          <Route path="/learning" element={ <BlogList /> } />
+          <Route path="/blog" element={ <BlogList /> } />
+          <Route path="/blog/:id" component={ <Blog /> } />
           <Route path="/courses" element={ <CourseSection /> } />
         </Route>
         <Route path="/admin" element={ <AdminRoutes /> }>
