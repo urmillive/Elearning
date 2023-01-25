@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import swal from 'sweetalert';
 import AuthContext from '../contexts/authContext';
 
 const RegisterPage = () =>
 {
 	const navigate = useNavigate();
-	const { userLogin } = useContext(AuthContext);
+	const { userLogin, api } = useContext(AuthContext);
 	const [ user, setUser ] = useState({
 		firstName: "",
 		lastName: "",
@@ -26,13 +25,12 @@ const RegisterPage = () =>
 	const submitRegister = (e) =>
 	{
 		e.preventDefault();
-		axios.put('http://localhost:9999/signup', user)
+		api.put('/signup/', user)
 			.then((res) =>
 			{
 				if (res.status === 200)
 				{
 					const token = res.data.token;
-					console.log(res.data.token);
 					userLogin(token);
 					swal({
 						title: res.data.message,

@@ -1,24 +1,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import swal from 'sweetalert';
-import api from "../../api/api";
+import AuthContext from "../../contexts/authContext";
 
 const Dashboard = () =>
 {
+    const { api } = useContext(AuthContext);
     const navigate = useNavigate();
     const [ users, setUsers ] = useState([]);
 
     const deleteUser = (userId) =>
     {
-        const token = localStorage.getItem('token');
-        axios
-            .delete(`http://localhost:9999/user/${ userId }`, {
-                headers: {
-                    Authorization: `Bearer ${ token }`
-                }
-            })
+        api.delete(`/user/${ userId }`)
             .then((res) =>
             {
                 swal({

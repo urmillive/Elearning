@@ -1,8 +1,7 @@
 
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import api from "../api/api";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext({
     isAuth: false,
@@ -17,12 +16,21 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) =>
 {
+    // const [ api, setApi ] = useState(null);
     const [ token, setToken ] = useState(null);
     const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
     const [ profile, setProfile ] = useState(null);
     const [ pathname, setPathname ] = useState("/");
     const [ loading, setLoading ] = useState(false);
+
+    const api = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+        headers: {
+            'Authorization': `Bearer ${ token }`,
+            'Content-Type': 'application/json'
+        }
+    });
 
     const location = useLocation();
     const navigation = useNavigate()
@@ -68,6 +76,7 @@ export const AuthProvider = ({ children }) =>
                     {
                         if (res.status === 200)
                         {
+
                             setIsAuth(true);
                             setProfile(res.data.user);
                             setIsAdmin(res.data.user.isAdmin);
@@ -90,7 +99,7 @@ export const AuthProvider = ({ children }) =>
     }, [ token ]);
 
     return (
-        <AuthContext.Provider value={ { loading, setLoading, token, isAuth, isAdmin, profile, setProfile, userLogin, setPathname, setIsAuth, logout } }>
+        <AuthContext.Provider value={ { api, loading, setLoading, token, isAuth, isAdmin, profile, setProfile, userLogin, setPathname, setIsAuth, logout } }>
             { children }
         </AuthContext.Provider>
     );

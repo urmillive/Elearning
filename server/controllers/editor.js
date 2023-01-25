@@ -46,13 +46,14 @@ exports.postEditorSubmit = (req, res) =>
             {
                 const encodedData = response2.data.stdout;
                 const data = Buffer.from(encodedData, 'base64').toString();
-                res.send(data);
+                // res.send(data);
+                res.status(200).json({ message: "Code Run Successfully", data: data });
             }
             else
             {
                 const encodedData = response2.data.stderr;
                 const data = Buffer.from(encodedData, 'base64').toString();
-                res.send(data);
+                res.status(200).json({ message: "Error in your Code", data: data });
             }
         }).catch((err) =>
         {

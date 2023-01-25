@@ -8,7 +8,7 @@ import Loader from "../pages/Loader";
 
 const Login = () =>
 {
-  const { userLogin, loading } = useContext(AuthContext);
+  const { userLogin, loading, api } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ user, setUser ] = useState({
     email: "",
@@ -24,7 +24,7 @@ const Login = () =>
   const submitLogin = (e) =>
   {
     e.preventDefault();
-    axios.post('http://localhost:9999/login', user)
+    api.post('/login', user)
       .then((res) =>
       {
         if (res.status === 200)

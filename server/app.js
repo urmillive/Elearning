@@ -13,11 +13,11 @@ const connectDB = require("./util/connectDB");
 
 //Routes
 const authRoutes = require("./routes/auth");
-const profileRoutes = require("./routes/user");
+const profileRoutes = require("./routes/profile");
 //blog Route
 const blogRoutes = require("./routes/admin/blog");
 //user handler route
-const userHandlerRoutes = require("./routes/admin/userHandler");
+const userHandlerRoutes = require("./routes/admin/userRoute");
 //editor handler route
 const editorRoutes = require("./routes/editor");
 
@@ -68,11 +68,10 @@ app.use(
 );
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-
 app.use(authRoutes);
 app.use("/profile", profileRoutes);
 
-//userHandler router
+//userHandler router for Admin
 app.use("/user", userHandlerRoutes);
 
 //blog route

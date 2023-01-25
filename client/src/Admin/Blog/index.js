@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import BlogForm from "./BlogForm";
-import api from '../../api/api';
+import AuthContext from "../../contexts/authContext";
 
 const AdminBlogs = () =>
 {
+    const { api } = useContext(AuthContext);
     const navigate = useNavigate();
     const [ blogs, setBlogs ] = useState([]);
 

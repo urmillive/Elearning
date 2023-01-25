@@ -32,6 +32,7 @@ import AdminRoutes from "./routes/AdminRoutes";
 
 // contexts
 import AuthContext from "./contexts/authContext";
+import Dashboard from "./Admin/Dashboard";
 
 
 const App = () =>
@@ -58,6 +59,7 @@ const App = () =>
           <Route path="/courses" element={ <CourseSection /> } />
         </Route>
         <Route path="/admin" element={ <AdminRoutes /> }>
+          <Route path="/admin/" element={ <Dashboard /> } />
           <Route path="/admin/users" element={ <AdminUser /> } />
           <Route path="/admin/blogs" element={ <AdminBlogs /> } />
           <Route path="/admin/blogs/:id" element={ <BlogForm /> } />

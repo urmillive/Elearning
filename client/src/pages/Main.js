@@ -14,7 +14,7 @@ const Main = () =>
 								<h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Teach you in Easy way</h1>
 								<p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 decoration-slate-900">We provide simple & smart contexts for your reading, so your learning experience will be smooth.</p>
 								<div className="flex flex-col mb-4 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-									<Link to="/learning" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border bg-grey-500 border-gray-500 hover:bg-red-700 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
+									<Link to="/blogs" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border bg-grey-500 border-gray-500 hover:bg-red-700 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
 										Learn Coding
 									</Link>
 									<Link to="/courses" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 no-underline">
@@ -72,7 +72,7 @@ const Main = () =>
 													Urmil Rupareliya
 												</span>
 											</div>
-											<Link to="/learning" className="no-underline inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+											<Link to="/blogs" className="no-underline inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
 												Read more
 												<svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
 											</Link>
@@ -95,7 +95,7 @@ const Main = () =>
 													Pritam Prakash
 												</span>
 											</div>
-											<Link to="/learning" className="no-underline inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+											<Link to="/courses" className="no-underline inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
 												Read more
 												<svg className="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
 											</Link>

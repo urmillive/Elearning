@@ -5,7 +5,7 @@ const router = express.Router();
 const User = require("../../models/User");
 
 //userhandler controller
-const userHandlerController = require("../../controllers/admin/userHandler");
+const userHandlerController = require("../../controllers/admin/userController");
 
 //authorization
 const isAuth = require("../../middleware/is-auth");

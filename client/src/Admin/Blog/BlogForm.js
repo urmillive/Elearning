@@ -4,10 +4,11 @@ import axios from "axios";
 import swal from 'sweetalert';
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
-import api from "../../api/api";
+import AuthContext from "../../contexts/authContext";
 
 const BlogForm = ({ getBlogs }) =>
 {
+    const { api } = useContext(AuthContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const [ blog, setBlog ] = useState({

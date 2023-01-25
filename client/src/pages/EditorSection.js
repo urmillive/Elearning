@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
 import axios from 'axios';
 import AceEditor from "react-ace";
@@ -6,9 +6,11 @@ import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 import './css/Editor.css';
-
+import AuthContext from "../contexts/authContext";
+import { Circles } from "react-loader-spinner";
 const EditorSection = () => 
 {
+    const { api, loading, setLoading } = useContext(AuthContext);
     const [ code, setCode ] = useState("print('hello world!')");
     const [ output, setOutput ] = useState();
     const [ language, setLanguage ] = useState([]);
@@ -17,7 +19,6 @@ const EditorSection = () =>
 
     const handleChange = (eventKey, item) =>
     {
-        console.log(item.name);
         setSelectedLanguage(item.name);
         setlangId(item.id);
     };
@@ -29,11 +30,17 @@ const EditorSection = () =>
 
     const submitCode = () =>
     {
-        axios.post('http://localhost:9999/editor/submit', { code, langId })
+        setLoading(true);
+
+        api.post('/editor/submit', { code, langId })
             .then((res) =>
             {
-                console.log(res.data);
-                setOutput(res.data);
+                if (res.status === 200)
+                {
+                    setLoading(false);
+                    console.log("=>", res.data.data);
+                    setOutput(res.data.data);
+                }
             })
             .catch((err) =>
             {
@@ -52,7 +59,7 @@ const EditorSection = () =>
         {
             try
             {
-                const res = await axios.post('http://localhost:9999/editor/languages/');
+                const res = await api.post('/editor/languages/');
                 setLanguage(res.data);
             } catch (error)
             {
@@ -66,7 +73,7 @@ const EditorSection = () =>
 
     return (
         <>
-            <Container fluid className='my-5'>
+            <Container fluid className='my-2'>
                 <Row>
                     <Col md={ 8 }>
                         <AceEditor
@@ -84,15 +91,15 @@ const EditorSection = () =>
                     </Col>
                     <Col md={ 4 } className="bg-dark">
                         <Col md={ 12 } className="d-grid gap-2 my-2">
-                            <Button onClick={ submitCode } variant="success" block="block">
+                            <button onClick={ submitCode } className="bg-green-500 px-5 py-3 rounded text-dark font-bold text-lg" block="block">
                                 Run Code
-                            </Button>
+                            </button>
                         </Col>
                         <Col md={ 12 } className="d-grid gap-2 my-2">
-                            <Button onClick={ clearEditor } variant="danger">Reset</Button>
+                            <button className="bg-red-500 px-5 py-3 rounded text-white font-bold text-lg" onClick={ clearEditor } variant="danger">Reset</button>
                         </Col>
                         <Dropdown>
-                            <Dropdown.Toggle variant="warning" id="dropdown-basic" style={ { width: '100%' } }>
+                            <Dropdown.Toggle className="bg-green-500 px-5 py-3 rounded text-dark text-white font-bold text-lg" id="dropdown-basic" style={ { width: '100%' } }>
                                 { selectedLanguage ? selectedLanguage : "Select Language" }
                             </Dropdown.Toggle>
                             <Dropdown.Menu style={ { height: '200px', overflow: 'scroll' } }>
@@ -103,11 +110,21 @@ const EditorSection = () =>
                                 )) }
                             </Dropdown.Menu>
                         </Dropdown>
-                        <h2 className='text-secondary my-3'>Output🔽</h2>
+                        <h2 className='text-secondary my-3 text-center'>Output🔽</h2>
                         <div className='text-secondary mt-5 outputBlock'>
-                            <h5 className='text-white'>{ output ? output : "" } </h5>
-                            <p className='text-white'>
-                            </p>
+                            {
+                                loading ? <div className="mx-5 d-flex flex-column align-items-center justify-content-center">
+                                    <Circles
+                                        height="80"
+                                        width="80"
+                                        color="#ffd500"
+                                        ariaLabel="circles-loading"
+                                        wrapperStyle={ {} }
+                                        wrapperClass=""
+                                        visible={ true }
+                                    />
+                                </div> : <h5 className='text-white'>{ output ? output : "" } </h5>
+                            }
                         </div>
                     </Col>
                 </Row>

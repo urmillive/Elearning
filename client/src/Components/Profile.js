@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Modal, Form } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
 import AuthContext from '../contexts/authContext';
-import api from '../api/api';
 
 const Profile = () =>
 {
-    const { profile, setProfile } = useContext(AuthContext);
+    const { profile, setProfile, api } = useContext(AuthContext);
     const [ selectedImage, setSelectedImage ] = useState(null);
     const [ show, setShow ] = useState(false);
     const handleClose = () => setShow(false);
@@ -34,7 +31,6 @@ const Profile = () =>
     return (
         <>
             { profile != null ?
-
                 <section>
                     <Modal show={ show } onHide={ handleClose }>
                         <Modal.Header closeButton>
