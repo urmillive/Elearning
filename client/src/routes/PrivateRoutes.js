@@ -10,7 +10,7 @@ const PrivateRoutes = () =>
     useEffect(() =>
     {
         setPathname(location.pathname);
-    }, []);
+    });
     return (isAuth ? <Outlet /> : <Navigate to="/login" />);
 }
 export default PrivateRoutes;

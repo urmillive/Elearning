@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";
 import swal from 'sweetalert';
 import AuthContext from '../Contexts/authContext';
 import Loader from "../pages/Loader";

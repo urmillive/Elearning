@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
-import axios from 'axios';
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import AceEditor from "react-ace";
 import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";

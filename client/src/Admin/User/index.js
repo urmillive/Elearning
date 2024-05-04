@@ -1,13 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
 import swal from 'sweetalert';
 import AuthContext from "../../Contexts/authContext";
 
 const Dashboard = () =>
 {
     const { api } = useContext(AuthContext);
-    const navigate = useNavigate();
     const [ users, setUsers ] = useState([]);
 
     const deleteUser = (userId) =>

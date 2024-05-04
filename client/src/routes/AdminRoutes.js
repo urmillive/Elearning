@@ -9,7 +9,7 @@ const AdminRoutes = () =>
     useEffect(() =>
     {
         setPathname(location.pathname);
-    }, []);
+    });
     return (isAdmin ? <Outlet /> : <Navigate to="/login" />);
 }
 export default AdminRoutes;

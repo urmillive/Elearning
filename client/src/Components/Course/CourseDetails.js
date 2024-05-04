@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Row, Col, Accordion } from "react-bootstrap";
 
 const CourseDetails = () =>
 {
-    const [ courseDetails, setCourseDetails ] = useState({});
     return (
         <>
             <Container fluid className="bg-zinc-900">

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import JoditEditor from 'jodit-react';
-import axios from "axios";
 import swal from 'sweetalert';
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
