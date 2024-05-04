@@ -4,7 +4,7 @@ import axios from "axios";
 import swal from 'sweetalert';
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
-import AuthContext from "../../contexts/authContext";
+import AuthContext from "../../Contexts/authContext";
 
 const BlogForm = ({ getBlogs }) =>
 {

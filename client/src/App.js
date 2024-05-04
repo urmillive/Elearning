@@ -10,13 +10,13 @@ import About from "./pages/About";
 import EditorSection from "./pages/EditorSection";
 
 // user components
-import Login from "./components/Login";
-import Register from "./components/Register";
-import CourseSection from "./components/Course/CourseSection";
-import CourseDetails from "./components/Course/CourseDetails";
-import Profile from "./components/Profile";
-import BlogList from "./components/Blog/BlogList";
-import Blog from "./components/Blog/Blog";
+import Login from "./Components/Login";
+import Register from "./Components/Register";
+import CourseSection from "./Components/Course/CourseSection";
+import CourseDetails from "./Components/Course/CourseDetails";
+import Profile from "./Components/Profile";
+import BlogList from "./Components/Blog/BlogList";
+import Blog from "./Components/Blog/Blog";
 
 // admin components
 import AdminUser from "./Admin/User";
@@ -31,7 +31,7 @@ import PrivateRoutes from "./routes/PrivateRoutes"
 import AdminRoutes from "./routes/AdminRoutes";
 
 // contexts
-import AuthContext from "./contexts/authContext";
+import AuthContext from "./Contexts/authContext";
 import Dashboard from "./Admin/Dashboard";
 
 

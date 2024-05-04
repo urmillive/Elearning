@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from 'react-router-dom';
-import AuthContext from '../contexts/authContext';
+import AuthContext from '../Contexts/authContext';
 
 import "./css/Header.css";
 const Header = () =>

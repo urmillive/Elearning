@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import AuthContext from '../../contexts/authContext';
+import AuthContext from '../../Contexts/authContext';
 const Blog = () =>
 {
 	const { id } = useParams();

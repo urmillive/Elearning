@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
-import AuthContext from '../contexts/authContext';
+import AuthContext from '../Contexts/authContext';
 
 const RegisterPage = () =>
 {

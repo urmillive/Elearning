@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import swal from 'sweetalert';
-import AuthContext from '../contexts/authContext';
+import AuthContext from '../Contexts/authContext';
 import Loader from "../pages/Loader";
 
 const Login = () =>

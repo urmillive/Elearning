@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import swal from 'sweetalert';
 import { useNavigate } from "react-router-dom";
 import BlogForm from "./BlogForm";
-import AuthContext from "../../contexts/authContext";
+import AuthContext from "../../Contexts/authContext";
 
 const AdminBlogs = () =>
 {

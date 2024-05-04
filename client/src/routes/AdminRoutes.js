@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { Outlet, Navigate, useLocation } from 'react-router-dom';
-import AuthContext from '../contexts/authContext';
+import AuthContext from '../Contexts/authContext';
 
 const AdminRoutes = () =>
 {

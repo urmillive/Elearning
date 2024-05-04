@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button, Modal, Form } from "react-bootstrap";
-import AuthContext from '../contexts/authContext';
+import AuthContext from '../Contexts/authContext';
 
 const Profile = () =>
 {

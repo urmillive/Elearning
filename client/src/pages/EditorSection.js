@@ -6,7 +6,7 @@ import 'ace-builds/src-noconflict/ace';
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-monokai";
 import './css/Editor.css';
-import AuthContext from "../contexts/authContext";
+import AuthContext from "../Contexts/authContext";
 import { Circles } from "react-loader-spinner";
 const EditorSection = () => 
 {

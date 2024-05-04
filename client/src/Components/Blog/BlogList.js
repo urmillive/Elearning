@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import AuthContext from '../../contexts/authContext';
+import AuthContext from '../../Contexts/authContext';
 const BlogList = () =>
 {
     const { api } = useContext(AuthContext);
