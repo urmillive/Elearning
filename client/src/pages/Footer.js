@@ -11,7 +11,7 @@ const Footer = () =>
                         <img src="/images/logo-dark.png" alt="footer logo" className="h-20" />
                     </div>
                     <p className="text-md leading-none text-gray-800 mt-4">Copyright © 2023 E-learning Private Limited</p>
-                    <p className="text-md leading-none text-gray-800 mt-4">All rights reserved by <a href="https://elearning.com/" target="_blank" className="text-lg font-bold text-slate-900 bg-slate-300">Elearning.com</a></p>
+                    <p className="text-md leading-none text-gray-800 mt-4">All rights reserved by <Link to="https://elearning.com/" target="_blank" className="text-lg font-bold text-slate-900 bg-slate-300">Elearning.com</Link></p>
                     <div className="flex items-center gap-x-4 mt-12">
                         <div className="opacity-50 w-8 h-8 flex-shrink-0 bg-gray-800 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center">
                             <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">

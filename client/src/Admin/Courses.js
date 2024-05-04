@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 const AdminCourses = () =>
 {
   return (
