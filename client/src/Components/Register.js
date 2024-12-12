@@ -42,7 +42,7 @@ const RegisterPage = () =>
 				} else
 				{
 					swal({
-						title: res.data.message,
+						title: res.message,
 						icon: "warning",
 						button: "close"
 					});

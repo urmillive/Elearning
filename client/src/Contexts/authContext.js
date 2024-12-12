@@ -1,7 +1,8 @@
 
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext({
     isAuth: false,
@@ -16,7 +17,6 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) =>
 {
-    // const [ api, setApi ] = useState(null);
     const [ token, setToken ] = useState(null);
     const [ isAuth, setIsAuth ] = useState(false);
     const [ isAdmin, setIsAdmin ] = useState(false);
@@ -98,9 +98,17 @@ export const AuthProvider = ({ children }) =>
         }
     }, [ token ]);
 
+    const contextValue = useMemo(() => ({
+        api, loading, setLoading, token, isAuth, isAdmin, profile, setProfile, userLogin, setPathname, setIsAuth, logout
+    }), [ api, loading, token, isAuth, isAdmin, profile ]);
+
     return (
-        <AuthContext.Provider value={ { api, loading, setLoading, token, isAuth, isAdmin, profile, setProfile, userLogin, setPathname, setIsAuth, logout } }>
+        <AuthContext.Provider value={ contextValue }>
             { children }
         </AuthContext.Provider>
     );
 }
+
+AuthProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};
