@@ -15,7 +15,6 @@ root.render(
       <ThemeProvider>
         <App />
       </ThemeProvider>
-      <App />
     </AuthProvider>
   </Router>
 );

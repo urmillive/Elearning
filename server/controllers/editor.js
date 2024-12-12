@@ -5,7 +5,6 @@ const JUDGE_API = process.env.JUDGE_API;
 
 exports.postEditorSubmit = (req, res) =>
 {
-    // const data = 'print("hello world"';
     const data = req.body.code;
     const languageID = req.body.langId;
     const encodedData = Buffer.from(data).toString('base64');
