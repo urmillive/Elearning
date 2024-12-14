@@ -2,19 +2,24 @@ import React, { useContext } from 'react';
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../Contexts/authContext';
-import { useTheme } from '../Contexts/themeContext'; // Correct import for theme context
 import { FaSun, FaMoon } from 'react-icons/fa';
+import useTheme from '../Contexts/themeContext';
 import "./css/Header.css";
 
 const Header = () => {
 	const { isAuth, isAdmin, logout } = useContext(AuthContext);
-	const { theme, toggleTheme } = useTheme();
-
+	const { themeMode, lightTheme, darkTheme } = useTheme();
+	const onThemeToggleButton = () => themeMode === 'light' ? darkTheme() : lightTheme();
 	return (
-		<Navbar className={ theme === 'light' ? "bg-light" : "bg-slate-900" } variant={ theme === 'light' ? 'light' : 'dark' } expand="lg">
+		<Navbar className={ themeMode === 'light' ? "bg-light" : "bg-slate-900" } variant={ themeMode === 'light' ? 'light' : 'dark' } expand="lg">
 			<Container fluid>
 				<Navbar.Brand>
-					<img src="/images/logo-white.png" alt="E-Learning logo" className="h-12" />
+					<img
+						src={ themeMode === 'light' ? "/images/logo-dark.png" : "/images/logo-white.png" }
+						alt="E-Learning logo"
+						className="h-12"
+					/>
+
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
@@ -24,14 +29,14 @@ const Header = () => {
 						navbarScroll
 					>
 						<NavLink to="/" className="nav-link nav-item">Home</NavLink>
-						<NavLink to="/blogs" className="nav-link nav-item">Learning</NavLink>
+						<NavLink to="/blogs" className="nav-link nav-item">Blogs</NavLink>
 						<NavLink to="/courses" className="nav-link nav-item">Courses</NavLink>
-						<NavLink to="/editor" className="nav-link nav-item">Editor</NavLink>
+						<NavLink to="/editor" className="nav-link nav-item"> Coding Playground </NavLink>
 						<NavLink to="/about" className="nav-link nav-item">About</NavLink>
 						<NavLink to="/contact" className="nav-link nav-item">Contact</NavLink>
 					</Nav>
-					<button className="text-white px-4 py-2 rounded mx-2" onClick={ toggleTheme }>
-						{ theme === 'light' ? <FaSun /> : <FaMoon /> }
+					<button className="text-white px-4 py-2 rounded mx-2" onClick={ onThemeToggleButton }>
+						{ themeMode === 'light' ? <FaSun className='text-slate-900' /> : <FaMoon /> }
 					</button>
 					{
 						isAuth || isAdmin ?

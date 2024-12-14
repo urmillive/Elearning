@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // pages
@@ -33,13 +33,28 @@ import AdminRoutes from "./routes/AdminRoutes";
 // contexts
 import AuthContext from "./Contexts/authContext";
 import Dashboard from "./Admin/Dashboard";
+import { ThemeProvider } from "./Contexts/themeContext";
 
 
 const App = () =>
 {
   const { isAuth, isAdmin } = useContext(AuthContext);
+  const [ themeMode, setThemeMode ] = useState("light");
+  const darkTheme = () => {
+    setThemeMode("dark");
+  }
+  const lightTheme = () => {
+    setThemeMode("light");
+  }
+
+  useEffect(() => {
+    document.querySelector('html').classList.remove('dark', 'light');
+    document.querySelector('html').classList.add(themeMode);
+  }, [ themeMode ]);
+
   return (
     <>
+      <ThemeProvider value={ { themeMode, darkTheme, lightTheme } }>
       { !isAdmin ? <Header /> : <AdminHeader /> }
       <Routes>
         <Route path="/" exact element={ <Main /> } />
@@ -67,6 +82,7 @@ const App = () =>
         </Route>
       </Routes>
       { !isAdmin ? <Footer /> : <AdminFooter /> }
+      </ThemeProvider>
     </>
   );
 };
