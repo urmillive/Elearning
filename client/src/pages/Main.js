@@ -6,15 +6,15 @@ const Main = () =>
 {
 	return (
 		<>
-			<Container>
+			<Container fluid className="light:bg-white dark:bg-slate-900">
 				<Row>
 					<Col md={ 12 }>
-						<section className="bg-white dark:bg-gray-900">
+						<section className="light:bg-white dark:bg-slate-900">
 							<div className="py-6 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
 								<h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Teach you in Easy way</h1>
 								<p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 decoration-slate-900">We provide simple & smart contexts for your reading, so your learning experience will be smooth.</p>
 								<div className="flex flex-col mb-4 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-									<Link to="/blogs" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border bg-grey-500 border-gray-500 hover:bg-red-700 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
+									<Link to="/blogs" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-grey-500 hover:bg-red-700 hover:text-black hover:fw-bold focus:ring-4 focus:ring-gray-100 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-800 bg-red-500 no-underline">
 										Learn Coding
 									</Link>
 									<Link to="/courses" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-500 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 no-underline">
@@ -28,7 +28,7 @@ const Main = () =>
 				</Row>
 				<Row>
 					<Col md={ 12 }>
-						<section className="bg-white dark:bg-gray-900">
+						<section className="light:bg-white dark:bg-gray-900">
 							<div className="gap-16 items-center py-4 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
 								<div className="grid grid-cols-2 gap-4 mt-8">
 									<img className="w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png" alt="office content 1" />
@@ -44,7 +44,7 @@ const Main = () =>
 				</Row>
 				<Row>
 					<Col md={ 12 }>
-						<section className="bg-white dark:bg-gray-900">
+						<section className="light:bg-white dark:bg-gray-900">
 							<div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 text-center">
 								<div className="mx-auto max-w-screen-md text-center lg:mb-16 mb-8">
 									<h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
@@ -55,7 +55,7 @@ const Main = () =>
 									</p>
 								</div>
 								<div className="grid gap-8 lg:grid-cols-2">
-									<article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+									<article className="p-6 light:bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 										<div className="flex justify-between items-center mb-5 text-gray-500">
 											<span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
 												<svg className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd"></path><path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path></svg>
@@ -78,7 +78,7 @@ const Main = () =>
 											</Link>
 										</div>
 									</article>
-									<article className="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+									<article className="p-6 light:bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
 										<div className="flex justify-between items-center mb-5 text-gray-500">
 											<span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
 												<svg className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
@@ -108,7 +108,7 @@ const Main = () =>
 				</Row>
 				<Row>
 					<Col md={ 12 }>
-						<section className="bg-white dark:bg-gray-900">
+						<section className="light:bg-white dark:bg-gray-900">
 							<div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
 								<h2 className="mb-8 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Frequently asked questions</h2>
 								<div className="grid pt-8 text-left border-t-2 border-slate-300 md:gap-16 dark:border-gray-700 md:grid-cols-2">
