@@ -31,7 +31,7 @@ const Profile = () =>
     return (
         <>
             { profile != null ?
-                <section>
+                <section className='dark:bg-slate-900'>
                     <Modal show={ show } onHide={ handleClose }>
                         <Modal.Header closeButton>
                             <Modal.Title>Upload Photo</Modal.Title>
@@ -63,16 +63,16 @@ const Profile = () =>
                         <div className="row">
                             <div className="col-lg-4">
                                 <div className="card mb-4">
-                                    <div className="card-body bg-slate-900 text-white rounded">
+                                    <div className="card-body bg-slate-100 dark:bg-slate-900 text-slate-900 rounded">
                                         <div className="card-body text-center rounder">
                                             <img
-                                                src={ profile.profile != "" ? process.env.REACT_APP_API_URL + "/" + profile.profile : 'images/avtar.png' }
+                                                src={ profile.profile !== "" ? process.env.REACT_APP_API_URL + "/" + profile.profile : 'images/avtar.png' }
                                                 alt="avatar"
                                                 className="rounded-circle mx-auto h-44 w-44"
                                             />
                                         </div>
                                         <div className="text-center pb-2">
-                                            <button onClick={ handleShow } className='bg-slate-500 px-5 py-2 rounded-pill'>
+                                            <button onClick={ handleShow } className='bg-slate-300 text-slate-800 dark:bg-slate-300 px-5 py-2 rounded-pill'>
                                                 Update Profile
                                             </button>
                                         </div>
@@ -80,7 +80,7 @@ const Profile = () =>
                                         <div className='text-center'>
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <p className="mb-0 text-white">Full Name</p>
+                                                    <p className="mb-0 font-mono text-nowrap text-slate-800 font-bold dark:text-slate-400">Full Name</p>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <p className="text-muted mb-0">{ `${ profile.firstName } ${ profile.lastName } ` }</p>
@@ -89,7 +89,7 @@ const Profile = () =>
                                             <hr />
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <p className="mb-0 text-white">Email</p>
+                                                    <p className="mb-0 font-mono text-nowrap text-slate-800 font-bold dark:text-slate-400">Email</p>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <p className="text-muted mb-0">{ profile.email }</p>
@@ -98,7 +98,7 @@ const Profile = () =>
                                             <hr />
                                             <div className="row">
                                                 <div className="col-sm-3">
-                                                    <p className="mb-0 text-white">Phone</p>
+                                                    <p className="mb-0 font-mono text-nowrap text-slate-800 font-bold dark:text-slate-400">Phone</p>
                                                 </div>
                                                 <div className="col-sm-9">
                                                     <p className="text-muted mb-0">{ profile.contactNumber }</p>
@@ -110,10 +110,10 @@ const Profile = () =>
                             </div>
                             <div className="col-lg-8">
                                 <div className="card mb-4">
-                                    <div className="card-body bg-slate-900 text-white text-center rounded">
+                                    <div className="card-body bg-slate-100 dark:bg-slate-900 text-slate-800 text-center rounded">
                                         <div className="row">
                                             <div className="col-sm-3">
-                                                <p className="mb-0">Total Purchased Courses</p>
+                                                <p className="mb-0 text-nowrap font-mono text-nowrap text-slate-800 font-bold dark:text-slate-400">Total Purchased Courses</p>
                                             </div>
                                             <div className="col-sm-9">
                                                 <p className="text-muted mb-0">{ profile.courses.length }</p>
@@ -122,7 +122,7 @@ const Profile = () =>
                                         <hr />
                                         <div className="row my-1 rounded">
                                             <div className="col-sm-3">
-                                                <p className="mb-0">Your Enrollments</p>
+                                                <p className="mb-0 text-nowrap font-mono text-nowrap text-slate-800 font-bold dark:text-slate-400">Your Enrollments</p>
                                             </div>
                                             <div className="col-sm-9">
                                                 <p className="text-muted mb-0">{ profile.courses }</p>

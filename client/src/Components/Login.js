@@ -58,13 +58,13 @@ const Login = () =>
       });
   }
   return (
-    <>
+    <div className='dark:bg-slate-900 flex-grow'>
       {
         loading ?
           <Loader /> :
           <Container>
             <form method="POST" onSubmit={ submitLogin }>
-              <Row className="justify-content-md-center my-5">
+              <Row className="justify-content-md-center py-5">
                 <Col md={ 8 }>
                   <FloatingLabel
                     controlId="floatingInput"
@@ -78,16 +78,21 @@ const Login = () =>
                   </FloatingLabel>
                 </Col>
                 <Col md={ 8 } className="d-grid gap-2">
-                  <button type="submit" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" size="lg">
+                  <button
+                    type="submit"
+                    className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded border border-transparent hover:border-slate-300 dark:hover:border-slate-300"
+                    size="lg"
+                  >
                     Login
                   </button>
-                  <h6 className="text-right my-1">New User then go to <Link to="/register" className="fw-bold">Register!</Link></h6>
+
+                  <h6 className="text-right my-1 dark:text-slate-300 font-mono">New User then go to <Link to="/register" className="fw-bold text-slate-800 dark:text-yellow-200 hover:text-slate-900 dark:hover:bg-yellow-100 dark:hover:text-slate-800">Register!</Link></h6>
                 </Col>
               </Row>
             </form>
           </Container>
       }
-    </>
+    </div>
   )
 }
 

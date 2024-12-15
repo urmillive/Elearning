@@ -19,7 +19,7 @@ const BlogList = () =>
     }, []);
 
     return (
-        <>
+        <div className="dark:bg-slate-900">
             <Container className='my-5'>
                 <Row>
                     { blogList.map((blogItem, index) =>
@@ -44,7 +44,7 @@ const BlogList = () =>
                     }
                 </Row>
             </Container>
-        </>
+        </div>
     )
 }
 
