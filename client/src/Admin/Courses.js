@@ -46,8 +46,8 @@ const AdminCourses = () =>
                   <p className="font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
                 </div>
                 <div className="d-flex mx-3 mb-2 gap-2">
-                  <button href="#" class="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline">Edit Course</button>
-                  <button href="#" class="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline">Delete Course</button>
+                  <button href="#" class="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline text-nowrap">Edit Course</button>
+                  <button href="#" class="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline text-nowrap">Delete Course</button>
                 </div>
               </div>
             </div>

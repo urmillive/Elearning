@@ -39,12 +39,12 @@ const Dashboard = () =>
         getAllUsers();
     }, []);
     return (
-        <>
+        <div className="dark:bg-slate-900">
             <Container>
                 <Row>
                     <Col md={ 12 }>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg my-5">
-                            <table className="w-full text-sm text-left text-slate-900 dark:text-gray-400">
+                            <table className="w-full text-sm text-left text-slate-900 dark:text-gray-400 dark:bg-slate-700 border-slate-50">
                                 <thead className="text-xs text-center text-gray-200 uppercase bg-dark dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                         <th scope="col" className="px-6 py-3">
@@ -71,7 +71,7 @@ const Dashboard = () =>
                                     { users.map((user, index) => (
                                         <tr key={ index }>
                                             <td className="px-6 py-4">
-                                                { index }
+                                                { index + 1 }
                                             </td>
                                             <td className="px-6 py-4">
                                                 { `${ user.firstName } ${ user.lastName }` }
@@ -96,7 +96,7 @@ const Dashboard = () =>
                     </Col>
                 </Row>
             </Container >
-        </>
+        </div>
     )
 }
 

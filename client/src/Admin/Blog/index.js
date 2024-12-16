@@ -56,12 +56,12 @@ const AdminBlogs = () =>
                                 <div className="mx-3 my-5 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
                                     <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
-                                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{ blogItem.name }</h5>
+                                        <h5 className="mb-2 text-2xl font-bold font-mono tracking-tight text-gray-900 dark:text-slate-900">{ blogItem.name }</h5>
                                         <p className="font-normal text-gray-700 dark:text-gray-400">{ blogItem.summary }</p>
                                     </div>
                                     <div className="d-flex mx-3 mb-2 gap-2">
-                                        <button href="#" className="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline" onClick={ () => { navigate(`/admin/blogs/${ blogItem._id }`); } }>Edit Blog</button>
-                                        <button href="#" className="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline" onClick={ () => { deleteBlog(blogItem._id); } }>Delete Blog</button>
+                                        <button href="#" className="font-medium rounded bg-blue-500 px-5 py-2 text-white no-underline hover:underline text-nowrap" onClick={ () => { navigate(`/admin/blogs/${ blogItem._id }`); } }>Edit Blog</button>
+                                        <button href="#" className="font-medium rounded bg-red-500 px-5 py-2 text-white no-underline hover:underline text-nowrap" onClick={ () => { deleteBlog(blogItem._id); } }>Delete Blog</button>
                                     </div>
                                 </div>
                             </div>

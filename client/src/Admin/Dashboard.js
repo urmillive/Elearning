@@ -8,23 +8,23 @@ const Dashboard = () =>
             <Container>
                 <Row>
                     <Col md="4">
-                        <Link to="/admin/users" class="no-underline block my-5 max-w-sm p-6 bg-yellow-300 border border-gray-200 rounded-lg shadow hover:bg-yellow-400 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-white inline">Total Users
-                                <p class="inline mx-5 text-3xl text-gray-700 dark:text-gray-400">5</p>
+                        <Link to="/admin/users" class="no-underline block my-5 max-w-sm p-6 bg-yellow-300 rounded-lg shadow hover:bg-yellow-400 dark:bg-yellow-300 dark:border-yellow-700 dark:hover:bg-yellow-400">
+                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-slate-900 inline">Total Users
+                                <p class="inline mx-5 text-5xl text-gray-700 dark:text-slate-900">5</p>
                             </h5>
                         </Link>
                     </Col>
                     <Col md="4">
-                        <Link to="/admin/blogs" class="no-underline block my-5 max-w-sm p-6 bg-blue-300 border border-gray-200 rounded-lg shadow hover:bg-blue-400 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-white inline">Total Blogs
-                                <p class="inline mx-5 text-3xl text-gray-700 dark:text-gray-400">5</p>
+                        <Link to="/admin/blogs" class="no-underline block my-5 max-w-sm p-6 bg-blue-300 rounded-lg shadow hover:bg-blue-400 dark:bg-blue-300 dark:border-blue-700 dark:hover:bg-blue-400">
+                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-slate-900 inline">Total Blogs
+                                <p class="inline mx-5 text-5xl text-gray-700 dark:slate-900">5</p>
                             </h5>
                         </Link>
                     </Col>
                     <Col md="4">
-                        <Link to="/admin/courses" class="no-underline block my-5 max-w-sm p-6 bg-red-300 border border-gray-200 rounded-lg shadow hover:bg-red-400 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-white inline">Total Courses
-                                <p class="inline mx-5 text-3xl text-gray-700 dark:text-gray-400">1</p>
+                        <Link to="/admin/courses" class="no-underline block my-5 max-w-sm p-6 bg-red-300 rounded-lg shadow hover:bg-red-400 dark:bg-red-300 dark:border-red-700 dark:hover:bg-red-400">
+                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-slate-900 inline">Total Courses
+                                <p class="inline mx-5 text-5xl text-gray-700 dark:slate-900">1</p>
                             </h5>
                         </Link>
                     </Col>

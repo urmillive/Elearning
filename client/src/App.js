@@ -53,7 +53,7 @@ const App = () =>
   }, [ themeMode ]);
 
   return (
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col min-h-screen dark:bg-slate-900">
       <ThemeProvider value={ { themeMode, darkTheme, lightTheme } }>
       { !isAdmin ? <Header /> : <AdminHeader /> }
       <Routes>

@@ -84,10 +84,14 @@ const RegisterPage = () =>
 						</FloatingLabel>
 					</Col>
 					<Col md={ 8 } className="d-grid gap-2">
-						<button type="submit" className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded" size="lg">
+						<button
+							type="submit"
+							className="bg-slate-900 text-white py-3 fw-bolder text-2xl rounded border border-transparent hover:border-slate-300 dark:hover:border-slate-300"
+							size="lg"
+						>
 							Register
 						</button>
-						<h6 className="text-right my-1">Already User then go to <Link to="/login" className="fw-bold">Login!</Link></h6>
+						<h6 className="text-right my-1 dark:text-slate-300 font-mono">Already User then go to <Link to="/login" className="fw-bold text-slate-800 dark:text-yellow-200 hover:text-slate-900 dark:hover:bg-yellow-100 dark:hover:text-slate-800">Login!</Link></h6>
 					</Col>
 				</Row>
 			</form>
