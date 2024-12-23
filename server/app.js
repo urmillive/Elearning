@@ -61,7 +61,12 @@ const fileFilter = (req, file, cb) =>
   }
 };
 
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://your-frontend.vercel.app',
+  methods: [ 'GET', 'POST', 'PUT' ]
+}));
+
 app.use(bodyParser.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("file")
