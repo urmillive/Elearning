@@ -85,7 +85,7 @@ app.use("/blog", blogRoutes);
 //editor router
 app.use("/editor", editorRoutes)
 
-app.use("/test", (req, res, next) => {
+app.use("/", (req, res, next) => {
   res.send("Hello World");
 });
 
