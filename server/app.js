@@ -6,8 +6,6 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 require("dotenv").config();
 
-const User = require("./models/User");
-
 // Database
 const connectDB = require("./util/connectDB");
 
@@ -25,38 +23,30 @@ const app = express();
 connectDB();
 
 const fileStorage = multer.diskStorage({
-  destination: (req, file, cb) =>
-  {
+  destination: (req, file, cb) => {
     const extension = file.mimetype.split("/")[ 1 ];
-    if (extension === "json")
-    {
+    if (extension === "json") {
       cb(null, "public/modules");
-    } else
-    {
+    } else {
       cb(null, "public/images");
     }
   },
-  filename: (req, file, cb) =>
-  {
+  filename: (req, file, cb) => {
     const extension = file.originalname.split(".")[ 1 ];
     cb(null, uuidv4() + "." + extension);
   },
 });
 
-const fileFilter = (req, file, cb) =>
-{
+const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||
     file.mimetype === "image/jpeg"
-  )
-  {
+  ) {
     cb(null, true);
-  } else if (file.mimetype.split("/")[ 1 ] === "json")
-  {
+  } else if (file.mimetype.split("/")[ 1 ] === "json") {
     cb(null, true);
-  } else
-  {
+  } else {
     cb(new Error("Image uploaded is not of Valid types"), false);
   }
 };
@@ -87,10 +77,9 @@ app.use("/editor", editorRoutes)
 
 app.use("/", (req, res, next) => {
   res.send("Hello World");
-});
+}); 
 
-app.use((error, req, res, next) =>
-{
+app.use((error, req, res, next) => {
   console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
@@ -98,7 +87,6 @@ app.use((error, req, res, next) =>
   res.status(status).json({ message, data });
 });
 
-app.listen(process.env.PORT, () =>
-{
+app.listen(process.env.PORT, () => {
   console.log(`Server is running at port ${ process.env.PORT }`);
 });
