@@ -53,7 +53,7 @@ const fileFilter = (req, file, cb) => {
 
 
 app.use(cors({
-  origin: 'https://your-frontend.vercel.app',
+  origin: 'https://elearning-steel-three.vercel.app',
   methods: [ 'GET', 'POST', 'PUT' ]
 }));
 
