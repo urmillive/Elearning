@@ -47,9 +47,17 @@ app.use(passport.initialize());
 
 // Simple request logging middleware
 app.use((req, res, next) => {
-  console.log(`Incoming Request: Method=${req.method}, URL=${req.originalUrl}, Path=${req.path}`);
+  console.log(`Incoming Request: Method=${req.method}, URL=${req.originalUrl}, Path=${req.path}, Origin=${req.headers.origin || 'No Origin'}`);
   // Optionally, log headers if needed for deep debugging:
   // console.log('Request Headers:', JSON.stringify(req.headers, null, 2));
+  next();
+});
+
+// Add headers middleware
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   next();
 });
 
@@ -100,13 +108,24 @@ const allowedOrigins = [
   'http://localhost:3000', // Assuming client runs on port 3000 locally
   'http://localhost:3001', // Another common local port
   'http://localhost:4200', // Added for typical client dev server port
+  'http://localhost:4201', // Additional local port
+  'http://localhost:5000', // Server port
   // Add any other client origins if necessary
 ];
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
+    
+    // For development, allow all localhost origins
+    if (origin && origin.includes('localhost')) {
+      return callback(null, true);
+    }
+    
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
@@ -114,8 +133,9 @@ app.use(cors({
     return callback(null, true);
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Explicitly include OPTIONS
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], // Add common headers
-  credentials: true // If you need to handle cookies or authorization headers
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'], // Add common headers
+  credentials: true, // If you need to handle cookies or authorization headers
+  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
 }));
 
 app.use(
@@ -162,7 +182,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message, data });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4200;
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
 });

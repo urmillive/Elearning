@@ -36,8 +36,7 @@ router.post(
         }
       }),
     body("password", "Please enter a valid password!")
-      .isLength({ min: 8 })
-      .isAlphanumeric(),
+      .isLength({ min: 8 }),
   ],
   authController.signUp
 );
@@ -46,7 +45,7 @@ router.post(
   "/login",
   [
     body("email").isEmail().normalizeEmail().trim(),
-    body("password").isLength({ min: 8 }).isAlphanumeric(),
+    body("password").isLength({ min: 8 }),
   ],
   authController.login
 );
