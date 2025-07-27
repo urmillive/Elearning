@@ -9,7 +9,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: '/auth/google/callback', // Matches the one in Google Cloud Console
+            callbackURL: process.env.GOOGLE_CALLBACK_URL || '/auth/google/callback', // Use environment variable for flexibility
             proxy: true // Important if your app is behind a proxy (e.g., Heroku, Nginx)
         },
         async (accessToken, refreshToken, profile, done) => {
@@ -31,7 +31,7 @@ passport.use(
                         firstName: profile.name && profile.name.givenName ? profile.name.givenName : 'User',
                         lastName: profile.name && profile.name.familyName ? profile.name.familyName : '',
                         profilePicUrl: profile.photos && profile.photos[0] ? profile.photos[0].value : null,
-                        password: hashedPassword, // Store a hashed random password
+                        password: hashedPassword, // Store a hashed random password for Google users
                         authProvider: 'google',
                         // contactNumber will be optional as per model
                     });

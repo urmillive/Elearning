@@ -65,7 +65,7 @@ router.get(
 router.get(
   '/auth/google/callback',
   passport.authenticate('google', {
-    failureRedirect: `${process.env.CLIENT_URL || 'http://localhost:3000'}/login?google_auth_failed=true`, // Redirect to client login on failure
+    failureRedirect: `${process.env.CLIENT_URL || 'https://elearning-steel-three.vercel.app'}/login?google_auth_failed=true`, // Redirect to client login on failure
     session: false // We are using JWT
   }),
   (req, res) => {
@@ -83,7 +83,7 @@ router.get(
 
     // Redirect back to client with the token
     // Client will need to pick this up from URL, store it, and update auth state.
-    res.redirect(`${process.env.CLIENT_URL || 'http://localhost:3000'}/auth/google/success?token=${token}`);
+    res.redirect(`${process.env.CLIENT_URL || 'https://elearning-steel-three.vercel.app'}/auth/google/success?token=${token}`);
   }
 );
 

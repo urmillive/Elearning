@@ -94,6 +94,7 @@ app.use(bodyParser.json()); // Moved bodyParser before CORS as a general good pr
 
 const allowedOrigins = [
   'https://elearning-steel-three.vercel.app',
+  'https://elearning-c9yc.onrender.com', // Add the render.com domain
   'http://localhost:3000', // Assuming client runs on port 3000 locally
   'http://localhost:3001', // Another common local port
   'http://localhost:4200', // Added for typical client dev server port

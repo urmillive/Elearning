@@ -34,14 +34,10 @@ const UserSchema = new Schema({
     required: [ true, "Please Provide a Password" ],
     unique: false,
   },
-  profile: {
-    type: String, // URL to profile picture
+  profilePicUrl: {
+    type: String, // URL to profile picture from Google
     required: false,
   },
-  // 'profile' field seems to be for a custom profile string, maybe keep or rename if it conflicts with profilePicUrl
-  // For clarity, let's assume 'profile' is distinct from Google's profile picture.
-  // If 'profile' was meant for profile picture URL, then 'profilePicUrl' replaces it.
-  // Let's keep 'profile' as is for now, assuming it's different.
   profile: {
     type: String,
     required: false,
