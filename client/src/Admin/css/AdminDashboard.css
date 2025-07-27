@@ -1,0 +1,104 @@
+/* AdminDashboard.css */
+
+.admin-dashboard-page {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.dashboard-welcome-message h1 {
+  font-weight: 600;
+}
+.dashboard-welcome-message .lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.quick-links-grid {
+  /* Uses Bootstrap Row's g-4 for gaps */
+}
+
+.quick-link-card-anchor {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%; /* Ensure anchor takes full width of col */
+  max-width: 280px; /* Max width for larger cards */
+}
+
+.quick-link-card {
+  background-color: #f8f9fa; /* Light background */
+  border: 1px solid #dee2e6;
+  border-radius: 0.75rem; /* More pronounced rounding */
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  height: 100%; /* For align-items-stretch on Col */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-link-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.dark .quick-link-card {
+  background-color: #2d3748; /* slate-800 equivalent */
+  border-color: #4a5568;    /* slate-700 equivalent */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.dark .quick-link-card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.quick-link-icon {
+  margin-bottom: 1rem;
+  /* Icon color will be inherited or can be set by react-icons props */
+}
+.dark .quick-link-icon svg { /* Target svg if react-icons are used */
+  color: #90cdf4; /* Example: light blue for dark theme icons */
+}
+.quick-link-card.users .quick-link-icon svg { color: #1abc9c; } /* Teal */
+.quick-link-card.blogs .quick-link-icon svg { color: #3498db; } /* Blue */
+.quick-link-card.courses .quick-link-icon svg { color: #9b59b6; } /* Purple */
+
+.dark .quick-link-card.users .quick-link-icon svg { color: #48c9b0; }
+.dark .quick-link-card.blogs .quick-link-icon svg { color: #5dade2; }
+.dark .quick-link-card.courses .quick-link-icon svg { color: #af7ac5; }
+
+
+.quick-link-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #343a40;
+}
+.dark .quick-link-text {
+  color: #e2e8f0; /* slate-200 */
+}
+
+/* Comment out or remove old .stat-card styles if no longer used elsewhere */
+/*
+.dashboard-title { ... }
+.stat-card-link { ... }
+.stat-card { ... }
+.stat-card:hover { ... }
+.stat-card-header { ... }
+.stat-card-title { ... }
+.stat-card-icon { ... }
+.stat-card-value { ... }
+.stat-card.users { ... }
+.dark .stat-card.users { ... }
+.stat-card.blogs { ... }
+.dark .stat-card.blogs { ... }
+.stat-card.courses { ... }
+.dark .stat-card.courses { ... }
+.stat-card.earnings { ... }
+.dark .stat-card.earnings { ... }
+.dark .stat-card-title,
+.dark .stat-card-value,
+.dark .stat-card-icon { ... }
+*/

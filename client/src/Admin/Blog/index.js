@@ -13,7 +13,7 @@ const AdminBlogs = () =>
 
     const deleteBlog = (userId) =>
     {
-        api.delete(`/blog/${ userId }`)
+        api.delete(`/admin/blogs/${ userId }`) // Changed to /admin/blogs/
             .then((res) =>
             {
                 swal({
@@ -29,7 +29,7 @@ const AdminBlogs = () =>
 
     const getBlogs = () =>
     {
-        api.get('/blog/')
+        api.get('/admin/blogs/') // Changed to /admin/blogs/
             .then((res) =>
             {
                 setBlogs(res.data.blogs);

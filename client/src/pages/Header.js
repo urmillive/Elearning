@@ -11,39 +11,54 @@ const Header = () => {
 	const { themeMode, lightTheme, darkTheme } = useTheme();
 	const onThemeToggleButton = () => themeMode === 'light' ? darkTheme() : lightTheme();
 	return (
-		<Navbar className={ themeMode === 'light' ? "bg-light" : "bg-slate-900" } variant={ themeMode === 'light' ? 'light' : 'dark' } expand="lg">
-			<Container fluid>
-				<Navbar.Brand>
+		<Navbar
+			className={`app-header shadow-sm ${themeMode === 'light' ? "bg-light" : "bg-slate-900"}`}
+			variant={themeMode === 'light' ? 'light' : 'dark'}
+			expand="lg"
+			sticky="top" // Make navbar sticky
+		>
+			<Container fluid className="px-lg-4"> {/* Added more horizontal padding on larger screens */}
+				<Navbar.Brand as={Link} to="/" className="me-lg-4"> {/* Link brand to home */}
 					<img
 						src={ themeMode === 'light' ? "/images/logo-dark.png" : "/images/logo-white.png" }
 						alt="E-Learning logo"
-						className="h-12"
+						className="h-10" // Slightly reduced height, adjust as needed
 					/>
-
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="navbarScroll" />
 				<Navbar.Collapse id="navbarScroll">
-					<Nav
-						className="me-auto my-2 my-lg-0"
-						style={ { maxHeight: '100px' } }
-						navbarScroll
-					>
-						<NavLink to="/" className="nav-link nav-item">Home</NavLink>
-						<NavLink to="/blogs" className="nav-link nav-item">Blogs</NavLink>
-						<NavLink to="/courses" className="nav-link nav-item">Courses</NavLink>
-						<NavLink to="/editor" className="nav-link nav-item"> Coding Playground </NavLink>
-						<NavLink to="/about" className="nav-link nav-item">About</NavLink>
-						<NavLink to="/contact" className="nav-link nav-item">Contact</NavLink>
+					{/* Centered navigation links */}
+					<Nav className="mx-auto my-2 my-lg-0" navbarScroll>
+						{!isAuth && <NavLink to="/" className="nav-link nav-item px-lg-3">Home</NavLink>}
+						<NavLink to="/blogs" className="nav-link nav-item px-lg-3">Blogs</NavLink>
+						<NavLink to="/courses" className="nav-link nav-item px-lg-3">Courses</NavLink>
+						<NavLink to="/editor" className="nav-link nav-item px-lg-3">Playground</NavLink>
+						<NavLink to="/about" className="nav-link nav-item px-lg-3">About</NavLink>
+						<NavLink to="/contact" className="nav-link nav-item px-lg-3">Contact</NavLink>
 					</Nav>
-					<button className="text-white px-4 py-2 rounded mx-2" onClick={ onThemeToggleButton }>
-						{ themeMode === 'light' ? <FaSun className='text-slate-900' /> : <FaMoon /> }
-					</button>
-					{
-						isAuth || isAdmin ?
-							<button className="bg-red-500 px-4 py-2 rounded-pill mx-2 text-decoration-none text-white" onClick={ logout }>Logout</button>
-							:
-							<Link to="/login" className="bg-green-500 px-4 py-2 rounded-pill mx-2 text-decoration-none text-white hover:bg-green-700">Login</Link>
+					{/* Right-aligned items: theme toggle and auth buttons */}
+					<Nav className="ms-auto d-flex align-items-center flex-row">
+						<button
+							className={`theme-toggle-btn p-2 rounded-circle d-flex align-items-center justify-content-center mx-2 ${themeMode === 'light' ? 'text-slate-700 hover:bg-gray-200' : 'text-gray-300 hover:bg-slate-700'}`}
+							onClick={onThemeToggleButton}
+							aria-label="Toggle theme"
+							style={{ width: '40px', height: '40px', border: 'none', background: 'transparent' }}
+						>
+							{themeMode === 'light' ? <FaSun size="1.2em" /> : <FaMoon size="1.2em" />}
+						</button>
+						{isAuth ? (
+							<>
+								<NavLink to="/profile" className="btn-auth btn-auth-profile nav-item mx-1">Profile</NavLink>
+								{isAdmin && (
+									<NavLink to="/admin" className="btn-auth btn-auth-admin nav-item mx-1">Admin</NavLink>
+								)}
+								<button className="btn-auth btn-auth-logout nav-item mx-1" onClick={logout}>Logout</button>
+							</>
+						) : (
+							<Link to="/login" className="btn-auth btn-auth-login nav-item mx-1">Login</Link>
+						)
 					}
+</Nav>
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

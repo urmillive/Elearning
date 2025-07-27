@@ -4,13 +4,6 @@ const User = require("../../models/User");
 
 exports.getAllUsers = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authorized!");
-    error.statusCode = 401;
-    return next(error);
-  }
-
   try
   {
     const users = await User.find();
@@ -57,12 +50,6 @@ exports.getUserById = async (req, res, next) =>
 
 exports.manageUserAdmin = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authorized!");
-    error.statusCode = 401;
-    return next(error);
-  }
   const { userId } = req.params;
   try
   {
@@ -94,12 +81,6 @@ exports.manageUserAdmin = async (req, res, next) =>
 
 exports.deleteUser = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authorized!");
-    error.statusCode = 404;
-    return next(error);
-  }
   const { userId } = req.params;
   try
   {

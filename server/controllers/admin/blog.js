@@ -28,13 +28,6 @@ exports.getBlogs = async (req, res, next) =>
 
 exports.createBlog = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authenticated!");
-    error.statusCode = 401;
-    return next(error);
-  }
-
   const errors = validationResult(req);
   if (!errors.isEmpty())
   {
@@ -95,13 +88,6 @@ exports.getBlogById = async (req, res, next) =>
 
 exports.getBlogsByUser = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authenticated!");
-    error.statusCode = 401;
-    return next(error);
-  }
-
   try
   {
     const userBlog = await Blog.find({ "creator.userId": req.userId });
@@ -125,13 +111,6 @@ exports.getBlogsByUser = async (req, res, next) =>
 
 exports.updateBlog = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authenticated!");
-    error.statusCode = 401;
-    return next(error);
-  }
-
   const errors = validationResult(req);
   if (!errors.isEmpty())
   {
@@ -173,12 +152,6 @@ exports.updateBlog = async (req, res, next) =>
 
 exports.deleteBlog = async (req, res, next) =>
 {
-  if (!req.isAdmin)
-  {
-    const error = new Error("Not Authenticated!");
-    error.statusCode = 401;
-    return next(error);
-  }
   const { blogId } = req.params;
 
   try

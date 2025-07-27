@@ -1,4 +1,112 @@
-.lightgreen-navbar {
-    background-color: lightgreen !important;
-    color: black !important;
+/* General Header Styling */
+.app-header {
+  transition: background-color 0.3s ease-in-out;
+  padding-top: 0.75rem; /* py-3 equivalent for Navbar */
+  padding-bottom: 0.75rem;
+}
+
+/* Navigation Links */
+.app-header .nav-item {
+  padding-left: 0.75rem; /* px-lg-3 on larger screens handled by bootstrap, this is for smaller */
+  padding-right: 0.75rem;
+  margin: 0 0.25rem; /* Add some horizontal margin between items */
+  font-weight: 500; /* Slightly bolder */
+  transition: color 0.2s ease-in-out;
+  border-radius: 0.25rem; /* Subtle rounding on hover/active */
+}
+
+/* Light theme nav link colors */
+.app-header.bg-light .nav-link {
+  color: #343a40; /* Darker gray for better contrast on light bg */
+}
+.app-header.bg-light .nav-link:hover {
+  color: #007bff; /* Bootstrap primary blue for hover */
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.app-header.bg-light .nav-link.active {
+  color: #0056b3; /* Darker blue for active */
+  font-weight: 700;
+  /* border-bottom: 2px solid #0056b3; */
+}
+
+/* Dark theme nav link colors */
+.app-header.bg-slate-900 .nav-link {
+  color: #e2e8f0; /* Light gray (slate-200) */
+}
+.app-header.bg-slate-900 .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.app-header.bg-slate-900 .nav-link.active {
+  color: #ffffff;
+  font-weight: 700;
+  /* border-bottom: 2px solid #ffffff; */
+}
+
+
+/* Theme Toggle Button - already styled inline mostly, this is for consistency if needed */
+.theme-toggle-btn {
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Authentication Buttons */
+.btn-auth {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 50px; /* rounded-pill */
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5; /* Ensure text is centered vertically */
+}
+
+.btn-auth-login {
+  background-color: #28a745; /* Green */
+  color: white;
+}
+.btn-auth-login:hover {
+  background-color: #218838; /* Darker green */
+  color: white;
+}
+
+.btn-auth-profile {
+  background-color: #007bff; /* Blue */
+  color: white;
+}
+.btn-auth-profile:hover {
+  background-color: #0056b3; /* Darker blue */
+  color: white;
+}
+
+.btn-auth-admin {
+  background-color: #6f42c1; /* Purple */
+  color: white;
+}
+.btn-auth-admin:hover {
+  background-color: #5a2a9d; /* Darker purple */
+  color: white;
+}
+
+.btn-auth-logout {
+  background-color: #dc3545; /* Red */
+  color: white;
+  border: none; /* Ensure it looks like a button if it's a <button> element */
+}
+.btn-auth-logout:hover {
+  background-color: #c82333; /* Darker red */
+  color: white;
+}
+
+/* Ensure NavLink inside Navbar.Collapse has proper styling for active state */
+.navbar-collapse .nav-link.active {
+  /* Add specific active styles if Bootstrap defaults are overridden or not strong enough */
+}
+
+/* Adjust logo height if needed, h-10 was used in JSX */
+.app-header .navbar-brand img {
+  /* className="h-10" from Tailwind is approx 2.5rem / 40px */
+  /* max-height: 40px; */ 
 }

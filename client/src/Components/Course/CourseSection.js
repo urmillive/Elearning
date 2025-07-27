@@ -1,38 +1,42 @@
-import React from 'react'
-import { Container, Row, Col } from "react-bootstrap";
+import React from 'react';
 import { Link } from "react-router-dom";
+import '../CSS/CourseCard.css'; // Import the new CSS file
 
-const CourseSection = ({ image = "/images/i1.jpg", courseTitle = "Ultimate JavaScript Course", courseDesc = "A JavaScript course with a focus on simplicity and modularity.", coursePrice = "150" }) =>
-{
+// Added courseId to props
+const CourseSection = ({ courseId, image = "/images/i1.jpg", courseTitle = "Ultimate JavaScript Course", courseDesc = "A JavaScript course with a focus on simplicity and modularity.", coursePrice = "150" }) => {
+    
+    // Fallback for description to prevent rendering issues if it's too short or undefined
+    const displayDesc = courseDesc && courseDesc.length > 10 ? courseDesc.slice(0, 100) + (courseDesc.length > 100 ? "..." : "") : "No description available.";
+
     return (
-        <>
-            <Container>
-                <Row className='my-5'>
-                    <Col md={ 4 }>
-                        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                            <img className="w-full" src={ image } alt="Sunset in the mountains" />
-                            <div className="px-6 py-2">
-                                <div className="font-bold text-center text-xl mb-2">{ courseTitle }</div>
-                                <p className="text-gray-700 text-base text-center">
-                                    { courseDesc }
-                                </p>
-                                <div className="px-6 pt-1 pg-2">
-                                    <span className="inline bg-gray-200 rounded-full px-3 py-2 text-md font-semibold text-gray-700 mb-2 text-left">₹{ coursePrice }</span>
-                                    <p className="inline float-right font-bold text-gray-500 text-md">Team E-learning</p>
-                                </div>
-                            </div>
-                            <div className="text-center my-3">
-                                <Link to="/courseDetails" className="display-block text-white bg-slate-900 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-20 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    <svg aria-hidden="true" className="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>
-                                    Buy now
-                                </Link>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    )
-}
+        <div className="course-card h-100"> {/* Use custom class, h-100 for grid alignment */}
+            <img
+                className="card-img-top"
+                src={image || "/images/i1.jpg"} // Fallback for image
+                alt={courseTitle}
+                style={{ height: '200px', objectFit: 'cover' }}
+            />
+            <div className="card-body d-flex flex-column"> {/* p-3 is now in .card-body CSS */}
+                <h5 className="card-title">{courseTitle}</h5> {/* Styling via .course-card .card-title */}
+                <p className="card-text flex-grow-1"> {/* Styling via .course-card .card-text */}
+                    {displayDesc}
+                </p>
+                <div className="mt-auto"> {/* Push price and button to bottom */}
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="course-price"> {/* Use custom class for price */}
+                            ₹{coursePrice !== undefined && coursePrice !== null ? coursePrice : 'N/A'}
+                        </span>
+                    </div>
+                    <Link
+                        to={courseId ? `/courses/${courseId}` : '#'}
+                        className={`btn-view-details w-100 ${!courseId ? 'disabled' : ''}`} // Use custom class
+                    >
+                        View Details
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default CourseSection;

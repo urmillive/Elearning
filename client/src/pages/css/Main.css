@@ -1,0 +1,141 @@
+/* Main.css - Styles for the Homepage */
+
+/* Hero Section */
+.hero-section {
+  padding: 4rem 0; /* Increased padding */
+  /* Consider a background image or gradient here */
+  /* background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); */
+  /* color: #ffffff; /* If using a dark background */
+  text-align: center;
+}
+
+.dark .hero-section {
+  /* background-image: linear-gradient(to right, #370b65 0%, #123e81 100%); */
+}
+
+.hero-section .hero-title {
+  font-size: 2.8rem; /* Responsive font size can be added with media queries */
+  font-weight: 800; /* extrabold */
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+/* .dark .hero-section .hero-title { color: #ffffff; } */ /* Already handled by dark:text-white */
+
+.hero-section .hero-subtitle {
+  font-size: 1.15rem; /* lg:text-xl */
+  font-weight: 300; /* font-light */
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 700px; /* Constrain width for readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+/* .dark .hero-section .hero-subtitle { color: #d1d5db; } */ /* Already handled by dark:text-gray-400 */
+
+.hero-section .hero-cta-container {
+  /* Tailwind classes already handle flex, justify-center, spacing */
+}
+
+.hero-section .btn-hero-primary,
+.hero-section .btn-hero-secondary {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem; /* rounded-lg */
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem; /* Add some margin for wrapping on small screens */
+}
+
+.hero-section .btn-hero-primary {
+  background-color: #1abc9c; /* Teal accent from AdminHeader */
+  color: white;
+}
+.hero-section .btn-hero-primary:hover {
+  background-color: #16a085; /* Darker teal */
+  color: white;
+  transform: translateY(-2px);
+}
+
+.hero-section .btn-hero-secondary {
+  background-color: #3498db; /* Blue accent */
+  color: white;
+}
+.hero-section .btn-hero-secondary:hover {
+  background-color: #2980b9; /* Darker blue */
+  color: white;
+  transform: translateY(-2px);
+}
+.dark .hero-section .btn-hero-primary {
+   background-color: #1abc9c;
+}
+.dark .hero-section .btn-hero-primary:hover {
+   background-color: #1dd4b0;
+}
+.dark .hero-section .btn-hero-secondary {
+   background-color: #3498db;
+}
+.dark .hero-section .btn-hero-secondary:hover {
+   background-color: #5dade2;
+}
+
+
+/* General Section Styling */
+.content-section {
+  padding: 3rem 0;
+}
+
+/* Two-column image/text section */
+.feature-section .feature-text-content {
+  /* Tailwind classes text-gray-500 sm:text-lg dark:text-gray-400 handle text color */
+}
+.feature-section .feature-title {
+  font-size: 2rem; /* text-4xl */
+  font-weight: 800; /* font-extrabold */
+  margin-bottom: 1rem; /* mb-4 */
+}
+.dark .feature-section .feature-title {
+  color: #ffffff;
+}
+.feature-section .feature-description {
+  margin-bottom: 1rem; /* mb-4 */
+  line-height: 1.6;
+}
+
+/* "Explore Content" Articles Section */
+.explore-section .section-title {
+   margin-bottom: 1rem; /* mb-4 */
+}
+.explore-section .section-subtitle {
+  margin-bottom: 2rem; /* lg:mb-16 mb-8 */
+}
+.explore-section .article-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.explore-section .article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+}
+.dark .explore-section .article-card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+}
+
+
+/* FAQ Section */
+.faq-section .faq-title {
+  margin-bottom: 2rem; /* mb-8 */
+}
+.faq-section .faq-item h3 {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 500; /* font-medium */
+  margin-bottom: 0.5rem; /* mb-4 (on h3) */
+}
+.faq-section .faq-item p {
+  color: #6b7280; /* text-gray-500 */
+}
+.dark .faq-section .faq-item p {
+  color: #9ca3af; /* dark:text-gray-400 */
+}

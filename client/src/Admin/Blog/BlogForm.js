@@ -19,7 +19,7 @@ const BlogForm = ({ getBlogs }) =>
     {
         if (id !== undefined)
         {
-            api.get(`/blog/${ id }`)
+            api.get(`/admin/blogs/${ id }`) // Changed to /admin/blogs/
                 .then((res) =>
                 {
                     setBlog({ name: res.data.blog.name, summary: res.data.blog.summary, content: res.data.blog.content });
@@ -46,7 +46,7 @@ const BlogForm = ({ getBlogs }) =>
         console.log(blog);
         if (id === undefined)
         {
-            api.post('/blog/', blog)
+            api.post('/admin/blogs/', blog) // Changed to /admin/blogs/
                 .then((res) =>
                 {
                     if (res.status === 200)
@@ -76,7 +76,7 @@ const BlogForm = ({ getBlogs }) =>
                 });
         } else
         {
-            api.put(`/blog/${ id }`, blog)
+            api.put(`/admin/blogs/${ id }`, blog) // Changed to /admin/blogs/
                 .then((res) =>
                 {
                     console.log("=>", res.data);

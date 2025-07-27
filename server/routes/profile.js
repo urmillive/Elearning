@@ -11,4 +11,8 @@ router.get("/", isAuth, userController.getUser);
 
 router.post("/", isAuth, userController.saveUser);
 
+// Route for avatar upload
+// Assumes global Multer middleware in app.js handles `single('file')`
+router.post("/avatar", isAuth, userController.updateUserAvatar);
+
 module.exports = router;

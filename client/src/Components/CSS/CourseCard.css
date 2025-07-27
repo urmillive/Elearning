@@ -1,0 +1,100 @@
+.course-card {
+  border-radius: 0.5rem; /* Slightly more rounded corners */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-color: #ffffff; /* Default light mode background */
+  border: 1px solid #e9ecef; /* Default light mode border */
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Enhanced shadow on hover */
+}
+
+/* Dark mode specific styles for course-card (overriding Tailwind) */
+.dark .course-card {
+  background-color: #1f2937; /* slate-800 equivalent */
+  border-color: #374151;    /* slate-700 equivalent */
+}
+.dark .course-card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25) !important;
+}
+
+
+.course-card .card-img-top {
+  border-top-left-radius: calc(0.5rem - 1px); /* Match card's border-radius */
+  border-top-right-radius: calc(0.5rem - 1px);
+  /* Add transition if you want image effects on hover */
+  /* transition: transform 0.3s ease-in-out; */
+}
+/* Example image zoom on hover:
+.course-card:hover .card-img-top {
+  transform: scale(1.05);
+}
+*/
+
+.course-card .card-body {
+  padding: 1.25rem; /* Consistent padding */
+}
+
+.course-card .card-title {
+  font-size: 1.15rem; /* Slightly adjusted title size */
+  font-weight: 600;   /* Semi-bold */
+  margin-bottom: 0.75rem;
+}
+.dark .course-card .card-title {
+  color: #f9fafb; /* Lighter text for dark mode */
+}
+
+.course-card .card-text {
+  font-size: 0.875rem; /* Slightly smaller description text */
+  line-height: 1.5;
+  color: #6c757d; /* Muted text color */
+  /* min-height: 60px; /* Removed to rely on flex-grow */
+}
+.dark .course-card .card-text {
+  color: #9ca3af; /* Lighter muted text for dark mode */
+}
+
+.course-card .course-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.dark .course-card .course-price {
+  color: #38bdf8; /* sky-400 equivalent */
+}
+
+.course-card .btn-view-details {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  /* Light mode button */
+  background-color: #0d6efd; /* Bootstrap primary */
+  border-color: #0d6efd;
+  color: white;
+}
+.course-card .btn-view-details:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+  color: white;
+}
+
+/* Dark mode button for view details */
+.dark .course-card .btn-view-details {
+  background-color: #0ea5e9; /* sky-500 */
+  border-color: #0ea5e9;
+  color: white;
+}
+.dark .course-card .btn-view-details:hover {
+  background-color: #0284c7; /* sky-600 */
+  border-color: #0369a1; /* sky-700 */
+  color: white;
+}
+
+.course-card .btn-view-details.disabled {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  pointer-events: none;
+}

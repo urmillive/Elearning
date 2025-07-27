@@ -1,48 +1,59 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Spinner } from "react-bootstrap"; // Added Spinner
+// import { Link } from "react-router-dom"; // Link is now in BlogCard
 import AuthContext from '../../Contexts/authContext';
+import BlogCard from './BlogCard'; // Import the new BlogCard component
+
 const BlogList = () =>
 {
-    const { api } = useContext(AuthContext);
+    const { api, loading, setLoading } = useContext(AuthContext); // Added loading and setLoading
     const [ blogList, setBlogList ] = useState([]);
 
     useEffect(() =>
     {
-        api.get('/blog/').then((res) =>
-        {
-            setBlogList(res.data.blogs);
-        }).catch((err) =>
-        {
-            console.log(err);
-        })
-    }, []);
+        setLoading(true);
+        api.get('/blogs/')
+            .then((res) => {
+                if (res.data && res.data.blogs) {
+                    setBlogList(res.data.blogs);
+                } else {
+                    setBlogList([]);
+                }
+            })
+            .catch((err) => {
+                console.error("Error fetching blogs:", err);
+                setBlogList([]);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [api, setLoading]); // Added dependencies
+
+    if (loading && blogList.length === 0) {
+        return (
+            <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
+                <Spinner animation="border" role="status" className="dark:text-white">
+                    <span className="visually-hidden">Loading blogs...</span>
+                </Spinner>
+            </Container>
+        );
+    }
 
     return (
-        <div className="dark:bg-slate-900">
-            <Container className='my-5'>
-                <Row>
-                    { blogList.map((blogItem, index) =>
-                    (
-                        <Col md={ 4 } key={ index }>
-                            <div className="mx-3 my-5 h-400 min-h-300 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                                <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-                                <div className="p-3">
-                                    <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{ blogItem.name }</h3>
-                                    <h5 className="font-normal text-gray-700 dark:text-gray-400">
-                                        { blogItem.summary.slice(0, 30) + "..." }
-                                    </h5>
-                                </div>
-                                <Link key={ blogItem._id } to={ `/blog/${ blogItem._id }` }
-                                    className="no-underline inline-flex items-center mx-2 mb-2 px-3 py-2 text-md font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    Read more
-                                    <svg aria-hidden="true" className="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                                </Link>
-                            </div>
-                        </Col>
-                    ))
-                    }
-                </Row>
+        <div className="dark:bg-slate-900 py-5 flex-grow"> {/* Added padding and flex-grow */}
+            <Container>
+                <h2 className="text-center mb-5 display-4 dark:text-white">Latest Blog Posts</h2>
+                {blogList.length === 0 && !loading ? (
+                    <p className="text-center dark:text-slate-300">No blog posts available at the moment.</p>
+                ) : (
+                    <Row xs={1} md={2} lg={3} className="g-4"> {/* Responsive grid */}
+                        { blogList.map((blogItem) => (
+                            <Col key={blogItem._id} className="d-flex align-items-stretch"> {/* Ensure cards align height */}
+                                <BlogCard blog={blogItem} />
+                            </Col>
+                        ))}
+                    </Row>
+                )}
             </Container>
         </div>
     )
