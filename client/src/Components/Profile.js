@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { Button, Modal, Form } from "react-bootstrap";
 import AuthContext from '../Contexts/authContext';
+import swal from 'sweetalert'; // Import sweetalert
 
 const Profile = () =>
 {
@@ -13,15 +14,27 @@ const Profile = () =>
     const updateImage = (e) =>
     {
         const formData = new FormData();
-        formData.append("file", selectedImage);
-        console.log(selectedImage)
-        api.post("/profile", formData, {
+        formData.append("file", selectedImage); // Field name "file" as expected by server
+        api.post("/profile/avatar", formData, { // Changed endpoint to /profile/avatar
             headers: { "Content-Type": "multipart/form-data" },
         }).then((res) =>
         {
-            console.log(res.data);
-            setProfile(res.data.user);
-            setShow(false);
+            if (res.data && res.data.user) {
+                setProfile(res.data.user);
+                swal("Success!", "Profile picture updated.", "success")
+                    .then(() => {
+                        setShow(false); // Close modal after swal is dismissed
+                    });
+            } else if (res.data && res.data.profilePath) {
+                setProfile(prevProfile => ({...prevProfile, profile: res.data.profilePath}));
+                swal("Success!", "Profile picture updated.", "success")
+                    .then(() => {
+                        setShow(false); // Close modal after swal is dismissed
+                    });
+            } else {
+                // Fallback if response structure is unexpected, still close modal
+                setShow(false);
+            }
         }).catch((err) =>
         {
             console.log(err)
@@ -66,9 +79,10 @@ const Profile = () =>
                                     <div className="card-body bg-slate-100 dark:bg-slate-900 text-slate-900 rounded">
                                         <div className="card-body text-center rounder">
                                             <img
-                                                src={ profile.profile !== "" ? process.env.REACT_APP_API_URL + "/" + profile.profile : 'images/avtar.png' }
+                                                src={ profile.profile ? `${process.env.REACT_APP_API_URL}${profile.profile.startsWith('/') ? '' : '/'}${profile.profile}` : (profile.profilePicUrl || 'images/avtar.png') }
                                                 alt="avatar"
-                                                className="rounded-circle mx-auto h-44 w-44"
+                                                className="rounded-circle mx-auto h-44 w-44 object-cover" // Added object-cover
+                                                onError={(e) => { e.target.onerror = null; e.target.src="/images/avtar.png"; }} // Fallback for broken image links
                                             />
                                         </div>
                                         <div className="text-center pb-2">

@@ -9,17 +9,18 @@ const userHandlerController = require("../../controllers/admin/userController");
 
 //authorization
 const isAuth = require("../../middleware/is-auth");
+const isAdmin = require("../../middleware/is-admin");
 
 //get all users
-router.get("/", isAuth, userHandlerController.getAllUsers);
+router.get("/", isAuth, isAdmin, userHandlerController.getAllUsers);
 
 //get particular user
-router.get("/:userId", isAuth, userHandlerController.getUserById);
+router.get("/:userId", isAuth, isAdmin, userHandlerController.getUserById);
 
 //set or remove user admin
-router.patch("/:userId", isAuth, userHandlerController.manageUserAdmin);
+router.patch("/:userId", isAuth, isAdmin, userHandlerController.manageUserAdmin);
 
 //delete user
-router.delete("/:userId", isAuth, userHandlerController.deleteUser);
+router.delete("/:userId", isAuth, isAdmin, userHandlerController.deleteUser);
 
 module.exports = router;

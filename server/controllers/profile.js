@@ -1,5 +1,4 @@
 //models
-const Profile = require("../models/Profile");
 const User = require("../models/User");
 
 exports.getUser = async (req, res, next) =>
@@ -60,6 +59,48 @@ exports.saveUser = async (req, res, next) =>
   {
     if (!error.statusCode)
     {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
+};
+
+exports.updateUserAvatar = async (req, res, next) => {
+  if (!req.file) {
+    const error = new Error("No image file provided.");
+    error.statusCode = 422;
+    return next(error);
+  }
+
+  // The global Multer middleware in app.js saves to public/images
+  // and req.file.filename will have the generated filename.
+  const imageUrl = `/public/images/${req.file.filename}`;
+
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      const error = new Error("User not found.");
+      error.statusCode = 404;
+      return next(error);
+    }
+
+    user.profile = imageUrl; // Save the public path to the profile field
+    // If you decide to use profilePicUrl for uploaded avatars as well:
+    // user.profilePicUrl = imageUrl;
+    
+    await user.save();
+
+    res.status(200).json({
+      message: "Avatar updated successfully.",
+      profilePath: imageUrl,
+      user: { // Send back minimal user info or updated user object
+        _id: user._id,
+        profile: user.profile,
+        profilePicUrl: user.profilePicUrl
+      }
+    });
+  } catch (error) {
+    if (!error.statusCode) {
       error.statusCode = 500;
     }
     next(error);

@@ -1,38 +1,46 @@
-import React from 'react'
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect, useContext } from 'react';
+import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-const Dashboard = () =>
-{
-    return (
-        <>
-            <Container>
-                <Row>
-                    <Col md="4">
-                        <Link to="/admin/users" class="no-underline block my-5 max-w-sm p-6 bg-yellow-300 rounded-lg shadow hover:bg-yellow-400 dark:bg-yellow-300 dark:border-yellow-700 dark:hover:bg-yellow-400">
-                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-slate-900 inline">Total Users
-                                <p class="inline mx-5 text-5xl text-gray-700 dark:text-slate-900">5</p>
-                            </h5>
-                        </Link>
-                    </Col>
-                    <Col md="4">
-                        <Link to="/admin/blogs" class="no-underline block my-5 max-w-sm p-6 bg-blue-300 rounded-lg shadow hover:bg-blue-400 dark:bg-blue-300 dark:border-blue-700 dark:hover:bg-blue-400">
-                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-slate-900 inline">Total Blogs
-                                <p class="inline mx-5 text-5xl text-gray-700 dark:slate-900">5</p>
-                            </h5>
-                        </Link>
-                    </Col>
-                    <Col md="4">
-                        <Link to="/admin/courses" class="no-underline block my-5 max-w-sm p-6 bg-red-300 rounded-lg shadow hover:bg-red-400 dark:bg-red-300 dark:border-red-700 dark:hover:bg-red-400">
-                            <h5 class="text-4xl text-left font-bold tracking-tight text-gray-900 dark:text-slate-900 inline">Total Courses
-                                <p class="inline mx-5 text-5xl text-gray-700 dark:slate-900">1</p>
-                            </h5>
-                        </Link>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    )
-}
+import AuthContext from '../Contexts/authContext';
+import { FaUsers, FaBlog, FaChalkboardTeacher } from 'react-icons/fa'; // Icons for quick links
+import './css/AdminDashboard.css';
 
-export default Dashboard
+const Dashboard = () => {
+    const { profile } = useContext(AuthContext); // Get admin's profile for welcome message
+
+    const adminName = profile ? profile.firstName : "Admin";
+
+    const quickLinks = [
+        { title: "Manage Users", icon: <FaUsers size="3em" />, link: "/admin/users", colorClass: "users" },
+        { title: "Manage Blogs", icon: <FaBlog size="3em" />, link: "/admin/blogs", colorClass: "blogs" },
+        { title: "Manage Courses", icon: <FaChalkboardTeacher size="3em" />, link: "/admin/courses", colorClass: "courses" },
+    ];
+
+    return (
+        <div className="admin-dashboard-page dark:bg-slate-900">
+            <Container>
+                <div className="dashboard-welcome-message text-center mb-5">
+                    <h1 className="display-4 dark:text-white">Welcome, {adminName}!</h1>
+                    <p className="lead dark:text-slate-300">Manage your platform efficiently.</p>
+                </div>
+
+                <Row xs={1} md={2} lg={3} className="g-4 justify-content-center quick-links-grid">
+                    {quickLinks.map((item, index) => (
+                        <Col key={index} className="d-flex justify-content-center">
+                            <Link to={item.link} className="quick-link-card-anchor">
+                                <div className={`quick-link-card ${item.colorClass}`}>
+                                    <div className="quick-link-icon">{item.icon}</div>
+                                    <div className="quick-link-text">{item.title}</div>
+                                </div>
+                            </Link>
+                        </Col>
+                    ))}
+                </Row>
+                {/* Future sections can be added here */}
+            </Container>
+        </div>
+    );
+};
+
+export default Dashboard;
 

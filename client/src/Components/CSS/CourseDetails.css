@@ -1,0 +1,133 @@
+/* CourseDetails.css */
+
+.course-hero-section {
+  padding: 3rem 0; /* More vertical padding */
+  /* background-color: #f8f9fa; /* Light gray for light mode, example */
+}
+
+.dark .course-hero-section {
+  /* background-color: #1e293b; /* Darker slate for dark mode, example */
+}
+
+.course-hero-section .course-title {
+  font-size: 2.5rem; /* Larger title */
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.dark .course-hero-section .course-title {
+  color: #ffffff;
+}
+
+.course-hero-section .course-short-description {
+  font-size: 1.1rem;
+  color: #6c757d; /* Muted text */
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.dark .course-hero-section .course-short-description {
+  color: #cbd5e1; /* Lighter muted text for dark */
+}
+
+.course-metadata {
+  margin-bottom: 1.5rem;
+}
+.course-metadata-item {
+  display: inline-block;
+  margin-right: 1.5rem;
+  font-size: 0.9rem;
+  color: #495057;
+}
+.dark .course-metadata-item {
+  color: #a0aec0;
+}
+.course-metadata-item strong {
+  color: #212529;
+}
+.dark .course-metadata-item strong {
+  color: #e2e8f0;
+}
+
+
+.course-purchase-box {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.075);
+  text-align: center;
+}
+.dark .course-purchase-box {
+  background-color: #2d3748; /* Darker card background */
+  box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.15);
+}
+
+.course-purchase-box .course-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 220px; /* Control image height */
+  object-fit: cover;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+}
+
+.course-purchase-box .course-price-display {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+.dark .course-purchase-box .course-price-display {
+  color: #ffffff;
+}
+
+.course-purchase-box .btn-buy-now {
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  background-color: #fd7e14; /* Example: Orange CTA */
+  border-color: #fd7e14;
+  color: white;
+  width: 100%;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.course-purchase-box .btn-buy-now:hover {
+  background-color: #e66a00;
+  border-color: #e66a00;
+  color: white;
+}
+
+/* Accordion styling enhancements */
+.course-content-section .accordion-button:not(.collapsed) {
+  color: #0c63e4; /* Bootstrap primary */
+  background-color: #e7f1ff;
+}
+.dark .course-content-section .accordion-button:not(.collapsed) {
+  color: #58a6ff; /* Lighter blue for dark mode */
+  background-color: #30363d; /* GitHub-like dark accordion header */
+}
+
+.dark .course-content-section .accordion-button {
+  background-color: #22272e;
+  color: #c9d1d9;
+}
+.dark .course-content-section .accordion-button::after {
+  filter: invert(1) grayscale(100%) brightness(200%); /* Make arrow white */
+}
+
+
+.dark .course-content-section .accordion-item {
+  background-color: #1c2128;
+  border-color: #444c56;
+}
+.dark .course-content-section .accordion-body {
+  background-color: #1c2128; /* Match item background or slightly different */
+  color: #adb5bd;
+}
+
+.dark .course-content-section .list-group-item {
+  background-color: transparent; /* Make list items transparent to show accordion body bg */
+  border-color: #444c56;
+  color: #adb5bd;
+}
+.dark .course-content-section .list-group-item h6 {
+  color: #e2e8f0;
+}

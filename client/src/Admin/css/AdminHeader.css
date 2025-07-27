@@ -1,0 +1,119 @@
+/* AdminHeader.css */
+
+.admin-app-header {
+  transition: background-color 0.3s ease-in-out;
+  padding-top: 0.65rem; /* Slightly less padding than public header */
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid transparent; /* Placeholder for themed border */
+}
+
+.admin-app-header.bg-light {
+  border-bottom-color: #dee2e6;
+}
+.admin-app-header.bg-slate-900 { /* Tailwind's dark background */
+  border-bottom-color: #374151; /* slate-700 for border */
+}
+
+/* Admin Navigation Links */
+.admin-app-header .nav-item {
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  margin: 0 0.15rem;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  border-radius: 0.25rem;
+}
+
+/* Light theme admin nav link colors */
+.admin-app-header.bg-light .nav-link {
+  color: #2c3e50; /* Darker, slightly desaturated blue */
+}
+.admin-app-header.bg-light .nav-link:hover {
+  color: #34495e; 
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.admin-app-header.bg-light .nav-link.active {
+  color: #1abc9c; /* A distinct admin accent color (e.g., teal) */
+  font-weight: 700;
+}
+
+/* Dark theme admin nav link colors */
+.admin-app-header.bg-slate-900 .nav-link {
+  color: #bdc3c7; /* Lighter gray for dark theme */
+}
+.admin-app-header.bg-slate-900 .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.admin-app-header.bg-slate-900 .nav-link.active {
+  color: #1abc9c; /* Admin accent color */
+  font-weight: 700;
+}
+
+/* Admin Theme Toggle Button (similar to public) */
+.admin-theme-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease-in-out;
+}
+.admin-app-header.bg-light .admin-theme-toggle-btn {
+  color: #2c3e50;
+}
+.admin-app-header.bg-light .admin-theme-toggle-btn:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+.admin-app-header.bg-slate-900 .admin-theme-toggle-btn {
+  color: #e2e8f0;
+}
+.admin-app-header.bg-slate-900 .admin-theme-toggle-btn:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+
+/* Admin Logout Button */
+.btn-admin-logout {
+  padding: 0.4rem 0.9rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.admin-app-header.bg-light .btn-admin-logout {
+  background-color: #e74c3c; /* Admin red */
+  color: white;
+  border-color: #e74c3c;
+}
+.admin-app-header.bg-light .btn-admin-logout:hover {
+  background-color: #c0392b; /* Darker admin red */
+  border-color: #c0392b;
+  color: white;
+}
+.admin-app-header.bg-slate-900 .btn-admin-logout {
+  background-color: #c0392b; /* Darker Red for dark theme */
+  color: white;
+  border-color: #c0392b;
+}
+.admin-app-header.bg-slate-900 .btn-admin-logout:hover {
+  background-color: #e74c3c; 
+  border-color: #e74c3c;
+  color: white;
+}
+
+.admin-app-header .navbar-brand {
+    font-weight: 600; /* Bolder brand */
+}
+.admin-app-header.bg-light .navbar-brand {
+    color: #2c3e50;
+}
+.admin-app-header.bg-slate-900 .navbar-brand {
+    color: #ffffff;
+}

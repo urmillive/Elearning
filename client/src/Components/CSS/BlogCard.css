@@ -1,0 +1,114 @@
+.blog-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex; /* Ensure it's a flex container if h-100 is used */
+  flex-direction: column; /* Stack items vertically */
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.dark .blog-card {
+  background-color: #1f2937; /* slate-800 */
+  border-color: #374151;    /* slate-700 */
+}
+.dark .blog-card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.blog-card .blog-card-image-link {
+  display: block;
+  overflow: hidden; /* For image zoom effect if added */
+  border-top-left-radius: calc(0.5rem - 1px);
+  border-top-right-radius: calc(0.5rem - 1px);
+}
+
+.blog-card .card-img-top {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.blog-card:hover .card-img-top {
+  transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.blog-card .card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Make card body take remaining space */
+}
+
+.blog-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+.dark .blog-card .card-title {
+  color: #f9fafb;
+}
+
+.blog-card .blog-card-meta {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+}
+.dark .blog-card .blog-card-meta .text-muted {
+  color: #9ca3af !important; /* Override bootstrap if needed */
+}
+
+
+.blog-card .card-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+.dark .blog-card .card-text {
+  color: #d1d5db; /* slate-300 */
+}
+
+.blog-card .btn-read-more {
+  display: inline-flex; /* For icon alignment */
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Light mode read more button */
+.blog-card .btn-read-more {
+  background-color: #007bff; /* Bootstrap primary */
+  color: white;
+}
+.blog-card .btn-read-more:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Dark mode read more button */
+.dark .blog-card .btn-read-more {
+  background-color: #0ea5e9; /* sky-500 */
+  color: white;
+}
+.dark .blog-card .btn-read-more:hover {
+  background-color: #0284c7; /* sky-600 */
+  color: white;
+}
+
+.blog-card .btn-read-more svg {
+  width: 1em; /* Adjust icon size relative to font */
+  height: 1em;
+  margin-left: 0.25rem;
+}

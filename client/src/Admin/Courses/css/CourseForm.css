@@ -1,0 +1,151 @@
+/* Admin/Courses/css/CourseForm.css */
+
+.admin-course-form-page {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.admin-course-form-page .form-page-title {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.dark .admin-course-form-page .form-page-title {
+  color: #e2e8f0; /* slate-200 */
+}
+
+/* Styling for the main form section card */
+.form-section-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.075);
+  margin-bottom: 2rem;
+}
+.dark .form-section-card {
+  background-color: #2d3748; /* slate-800 equivalent */
+  border: 1px solid #4a5568; /* slate-700 for border */
+}
+
+/* General input styling enhancements (overriding/complementing Bootstrap/Tailwind) */
+.admin-course-form-page .form-control,
+.admin-course-form-page .form-select {
+  border-radius: 0.375rem; /* Slightly more rounded */
+  /* Add more specific styles if needed for focus, dark mode etc. */
+}
+.dark .admin-course-form-page .form-control,
+.dark .admin-course-form-page .form-select {
+  background-color: #4a5568; /* slate-700 */
+  color: #e2e8f0; /* slate-200 */
+  border-color: #718096; /* slate-600 */
+}
+.dark .admin-course-form-page .form-control::placeholder {
+  color: #a0aec0; /* slate-400 */
+}
+.dark .admin-course-form-page .form-control:focus,
+.dark .admin-course-form-page .form-select:focus {
+  background-color: #4a5568;
+  color: #e2e8f0;
+  border-color: #38bdf8; /* sky-500 */
+  box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25);
+}
+.dark .admin-course-form-page .form-label,
+.dark .admin-course-form-page .floating-label label { /* For FloatingLabel */
+    color: #cbd5e1; /* slate-300 */
+}
+
+
+/* Modules & Lessons Section Card */
+.modules-section-card {
+  background-color: #f8f9fa; /* Slightly off-white */
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dee2e6;
+  margin-top: 2rem;
+}
+.dark .modules-section-card {
+  background-color: #1f2937; /* slate-800 slightly darker than form-section-card */
+  border-color: #374151; /* slate-700 */
+}
+.modules-section-card .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+.dark .modules-section-card .section-header {
+  border-bottom-color: #374151;
+}
+.modules-section-card .section-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.dark .modules-section-card .section-title {
+  color: #e2e8f0;
+}
+
+/* Individual Module Block */
+.module-block {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.dark .module-block {
+  background-color: #2d3748; /* slate-800 */
+  border-color: #4a5568; /* slate-700 */
+}
+.module-block .module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.dark .module-block .form-label, /* For FloatingLabel within module */
+.dark .module-block .floating-label label {
+    color: #cbd5e1; /* slate-300 */
+}
+
+
+/* Individual Lesson Block */
+.lesson-block {
+  background-color: #f8f9fa; /* Slightly different from module block */
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+  margin-top: 1rem; /* Space from module description or previous lesson */
+}
+.dark .lesson-block {
+  background-color: #1e2937; /* Even darker slate */
+  border-color: #374151;
+}
+.lesson-block .lesson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.dark .lesson-block .form-label, /* For FloatingLabel within lesson */
+.dark .lesson-block .floating-label label,
+.dark .lesson-block .text-sm { /* For "Content Type" and "Upload Video File" labels */
+    color: #cbd5e1; /* slate-300 */
+}
+
+
+/* Styling for Add/Remove buttons */
+.btn-add-item, .btn-remove-item {
+  /* Using Bootstrap variants for now, can be customized further */
+  /* Example: .btn-add-item { background-color: var(--bs-success); } */
+}
+
+/* Main submit button */
+.btn-submit-course {
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+}

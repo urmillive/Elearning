@@ -12,28 +12,63 @@ const connectDB = require("./util/connectDB");
 //Routes
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
-//blog Route
-const blogRoutes = require("./routes/admin/blog");
+// Public blog routes
+const publicBlogRoutes = require("./routes/blog");
+// Public course routes
+const publicCourseRoutes = require("./routes/course");
+// Admin blog Route
+const adminBlogRoutes = require("./routes/admin/blog");
 //user handler route
 const userHandlerRoutes = require("./routes/admin/userRoute");
 //editor handler route
 const editorRoutes = require("./routes/editor");
+// Admin course routes
+const adminCourseRoutes = require("./routes/admin/course");
+// Admin upload routes
+const adminUploadRoutes = require("./routes/admin/upload");
+// Contact form route
+const contactRoutes = require("./routes/contact");
+
+// Passport config (ensure this is required to execute passport.use())
+require('./config/passport-setup');
+const passport = require('passport'); // require passport itself
 
 const app = express();
+
+// Initialize Passport (before routes that use it)
+app.use(passport.initialize());
+// If using sessions (even if minimally for some OAuth flows, though we aim for JWT):
+// const session = require('express-session');
+// app.use(session({ secret: process.env.SESSION_SECRET || 'your session secret', resave: false, saveUninitialized: false }));
+// app.use(passport.session());
+
+
+// Simple request logging middleware
+app.use((req, res, next) => {
+  console.log(`Incoming Request: Method=${req.method}, URL=${req.originalUrl}, Path=${req.path}`);
+  // Optionally, log headers if needed for deep debugging:
+  // console.log('Request Headers:', JSON.stringify(req.headers, null, 2));
+  next();
+});
+
 connectDB();
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const extension = file.mimetype.split("/")[ 1 ];
-    if (extension === "json") {
+    const mimeType = file.mimetype;
+    if (mimeType.startsWith("video/")) {
+      cb(null, "public/videos");
+    } else if (mimeType === "application/json") {
       cb(null, "public/modules");
-    } else {
+    } else if (mimeType.startsWith("image/")) {
       cb(null, "public/images");
+    } else {
+      cb(new Error("Invalid file type for destination mapping."), false);
     }
   },
   filename: (req, file, cb) => {
-    const extension = file.originalname.split(".")[ 1 ];
-    cb(null, uuidv4() + "." + extension);
+    const extension = path.extname(file.originalname);
+    cb(null, uuidv4() + extension);
   },
 });
 
@@ -41,23 +76,45 @@ const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === "image/png" ||
     file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
+    file.mimetype === "image/jpeg" ||
+    file.mimetype === "application/json" || // More specific check for JSON
+    file.mimetype === "video/mp4" ||
+    file.mimetype === "video/webm" ||
+    file.mimetype === "video/ogg"
+    // Add other video types as needed
   ) {
     cb(null, true);
-  } else if (file.mimetype.split("/")[ 1 ] === "json") {
-    cb(null, true);
   } else {
-    cb(new Error("Image uploaded is not of Valid types"), false);
+    cb(new Error("File type not supported. Please upload a valid image, JSON, or video file."), false);
   }
 };
 
 
+app.use(bodyParser.json()); // Moved bodyParser before CORS as a general good practice, though unlikely to be the cause here.
+
+const allowedOrigins = [
+  'https://elearning-steel-three.vercel.app',
+  'http://localhost:3000', // Assuming client runs on port 3000 locally
+  'http://localhost:3001', // Another common local port
+  'http://localhost:4200', // Added for typical client dev server port
+  // Add any other client origins if necessary
+];
+
 app.use(cors({
-  origin: 'https://elearning-steel-three.vercel.app',
-  methods: [ 'GET', 'POST', 'PUT' ]
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Explicitly include OPTIONS
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], // Add common headers
+  credentials: true // If you need to handle cookies or authorization headers
 }));
 
-app.use(bodyParser.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("file")
 );
@@ -66,14 +123,27 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(authRoutes);
 app.use("/profile", profileRoutes);
 
+// Public blog routes
+app.use("/blogs", publicBlogRoutes); // New public blog routes
+// Public course routes
+app.use("/courses", publicCourseRoutes); // New public course routes
+// Contact form route
+app.use("/api/contact", contactRoutes);
+
+
 //userHandler router for Admin
 app.use("/user", userHandlerRoutes);
 
-//blog route
-app.use("/blog", blogRoutes);
+//blog route (admin)
+app.use("/admin/blogs", adminBlogRoutes); // Changed from /blog to /admin/blogs
 
 //editor router
-app.use("/editor", editorRoutes)
+app.use("/editor", editorRoutes);
+
+// Admin course router
+app.use("/admin/courses", adminCourseRoutes);
+// Admin upload router
+app.use("/admin/uploads", adminUploadRoutes);
 
 app.use("/", (req, res, next) => {
   res.send("Hello World");
@@ -87,6 +157,7 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message, data });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running at port ${ process.env.PORT }`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running at port ${PORT}`);
 });
