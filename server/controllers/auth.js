@@ -37,7 +37,7 @@ exports.signUp = async (req, res, next) =>
         _id: user._id.toString(),
         email: user.email,
       },
-      "jO3*iC8&zN4%eB7]rU5#",
+      process.env.JWT_SECRET || "jO3*iC8&zN4%eB7]rU5#",
       { expiresIn: "1h" }
     );
 
@@ -88,7 +88,7 @@ exports.login = async (req, res, next) =>
         name: user.firstName,
         _id: user._id.toString(),
       },
-      "jO3*iC8&zN4%eB7]rU5#",
+      process.env.JWT_SECRET || "jO3*iC8&zN4%eB7]rU5#",
       { expiresIn: "1h" }
     );
 
@@ -98,8 +98,8 @@ exports.login = async (req, res, next) =>
     if (!error.statusCode)
     {
       error.statusCode = 500;
-      next(error);
     }
+    return next(error);
   }
 };
 

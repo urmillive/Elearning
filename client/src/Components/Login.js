@@ -121,7 +121,7 @@ const Login = () =>
                   <div className="text-center my-3">
                     <p className="dark:text-slate-400">OR</p>
                     <a
-                      href={`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/auth/google`}
+                      href={`${process.env.REACT_APP_API_URL || 'https://elearning-c9yc.onrender.com'}/auth/google`}
                       className="btn btn-danger w-100 py-2.5 d-flex align-items-center justify-content-center" // Using Bootstrap classes for styling
                       style={{backgroundColor: '#DB4437', color: 'white', textDecoration: 'none', borderRadius: '0.25rem'}}
                     >

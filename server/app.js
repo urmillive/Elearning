@@ -16,6 +16,8 @@ const profileRoutes = require("./routes/profile");
 const publicBlogRoutes = require("./routes/blog");
 // Public course routes
 const publicCourseRoutes = require("./routes/course");
+// Enrollment routes
+const enrollmentRoutes = require("./routes/enrollment");
 // Admin blog Route
 const adminBlogRoutes = require("./routes/admin/blog");
 //user handler route
@@ -94,6 +96,7 @@ app.use(bodyParser.json()); // Moved bodyParser before CORS as a general good pr
 
 const allowedOrigins = [
   'https://elearning-steel-three.vercel.app',
+  'https://elearning-c9yc.onrender.com', // Add the render.com domain
   'http://localhost:3000', // Assuming client runs on port 3000 locally
   'http://localhost:3001', // Another common local port
   'http://localhost:4200', // Added for typical client dev server port
@@ -127,6 +130,8 @@ app.use("/profile", profileRoutes);
 app.use("/blogs", publicBlogRoutes); // New public blog routes
 // Public course routes
 app.use("/courses", publicCourseRoutes); // New public course routes
+// Enrollment routes
+app.use("/enrollment", enrollmentRoutes);
 // Contact form route
 app.use("/api/contact", contactRoutes);
 

@@ -36,6 +36,8 @@ import AdminRoutes from "./routes/AdminRoutes";
 // contexts
 import AuthContext from "./Contexts/authContext";
 import Dashboard from "./Admin/Dashboard";
+import UserDashboard from "./Components/Dashboard/Dashboard";
+import CertificateGenerator from "./Components/Certificate/CertificateGenerator";
 import { ThemeProvider } from "./Contexts/themeContext";
 
 
@@ -74,6 +76,8 @@ const App = () => {
         <Route path="/register" element={ <Register /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/auth/google/success" element={ <GoogleAuthCallback />} /> {/* Google OAuth Success Callback */}
+        <Route path="/dashboard" element={ <UserDashboard />} />
+        <Route path="/certificate/:courseId" element={ <CertificateGenerator />} />
         <Route path="/*" element={ <Main /> }></Route>
         <Route path="/" element={ <PrivateRoutes /> }>
           <Route path="/profile" element={ <Profile /> } />
