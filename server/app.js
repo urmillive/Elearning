@@ -16,6 +16,8 @@ const profileRoutes = require("./routes/profile");
 const publicBlogRoutes = require("./routes/blog");
 // Public course routes
 const publicCourseRoutes = require("./routes/course");
+// Enrollment routes
+const enrollmentRoutes = require("./routes/enrollment");
 // Admin blog Route
 const adminBlogRoutes = require("./routes/admin/blog");
 //user handler route
@@ -128,6 +130,8 @@ app.use("/profile", profileRoutes);
 app.use("/blogs", publicBlogRoutes); // New public blog routes
 // Public course routes
 app.use("/courses", publicCourseRoutes); // New public course routes
+// Enrollment routes
+app.use("/enrollment", enrollmentRoutes);
 // Contact form route
 app.use("/api/contact", contactRoutes);
 
